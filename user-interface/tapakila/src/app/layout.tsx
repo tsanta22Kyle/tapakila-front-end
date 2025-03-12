@@ -31,10 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body >
-        <Navbar></Navbar>
+      
         {children}
-      <footer className="footer">fooeter
-      </footer>
+      
       </body>
     </html>
   );
