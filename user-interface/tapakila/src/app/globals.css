@@ -134,25 +134,37 @@ a {
 }
 .event-container {
   color: #ededed;
-  width: 300px;
-  background: #675454;
-  height: 270px;
+  min-width: 300px;
+  /* background: #675454; */
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   /* border: #0a0a0a solid; */
   border-radius: 10px;
   overflow: auto;
+  position: relative;
 }
-.event-description{
+.event-container .event-description{
+  cursor: pointer;
   /* background: #000; */
-  width: 55%;
+  width: 100%;
+  height: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-around;
   flex-shrink: 0;
 
+}
+.event-container .event-description h2{
+  text-transform: uppercase;
+  font-size: medium;
+  color: #000;
+}
+.event-container .event-description p{
+  font-size: medium;
+  color: #7a7a7a;
 }
 .event-details{
   display: flex;
@@ -161,13 +173,64 @@ a {
   align-self: flex-start;
   justify-content: space-between;
 }
-.event-image {
+.event-container .event-image {
   
-  width: 276px;
+  width: 100%;
+  object-fit: cover;
   height: 198px;
+  border-radius: 10px;
+  position: relative;
+}
+.event-container .favorite-btn{
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 70px;
+  border-radius: 20px;
+  height: 30px;
+  z-index: 10;
+  justify-content: space-around;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+  color: var(---primary-color-);
+  transition: all .6s;
+  /* position: relative; */
+}
+.event-container .favorite-btn .follow{
+  color: var(---primary-color-);
+  opacity: 0;
+  /* visibility: collapse; */
+  font-size: smaller;
+  /* position: absolute; */
+  transition: all 1s;
+
+}
+
+.event-container .favorite-btn:hover{
+  cursor: pointer;
+  width: 90px;
+  .follow{
+    opacity: 1;
+    /* visibility: visible; */
+    color: #000;
+  }
+}
+
+.event-container:hover::after{
+  content: " ";
+  position: absolute;
+  background-image: linear-gradient(to top , rgba(0, 0, 0, 0.416) 40% , rgba(0, 0, 0, 0.312));
+ /* z-index: 2000; */
+  width: 100%;
+  height: 198px;
+  top: 0;
+  left: 0;
+  border-radius:10px ;
 }
 .category-wrapper{
-  width: 95%;
+  width: 84%;
   /* background: #fe9999; */
   height: auto;
   /* margin: auto; */
@@ -175,17 +238,48 @@ a {
   align-items: center;
   justify-content: space-around;
   /* flex-wrap: wrap; */
-  gap: 10px;
+  gap: 30px;
+  margin: auto;
+  overflow-x: scroll;
+  position: relative;
   
 }
+.decoration{
+  width: 90%;
+  height: 10px;
+  background: #e0e0e0;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
 .all-category .category-description h3{
-  color: #EE964B;
+  color: var(---primary-color-);
   font-weight: 600;
   font-size: large;
+  margin: auto;
+  font-size: x-large;
+  text-transform: uppercase;
+}
+.all-category .category-description{
+  /* background: #000; */
+  height: 10%;
+  width: 90%;
+  /* text-align: left; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .all-category{
   margin-top: 110dvh;
-  background: #000;
+  /* background: #ffa8a8; */
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 350px;
+  position: relative;
+  align-items: center;
+
+
   
 }
 
@@ -211,6 +305,34 @@ a {
 .hero-inactive{
   opacity: 0;
   /* z-index: 10; */
+}
+.next{
+  /* background: #000; */
+  position: absolute;
+ 
+  z-index: 10;
+  right: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 40%;
+  
+  background: var(--background);
+  border: none;
+  font-family: monospace;
+  width: 45px;
+  font-weight: bolder;
+  height: 45px;
+  border-radius: 55%;
+  font-size: xx-large;
+  color: rgb(130, 130, 130);
+  box-shadow: 0px 3px 10px ;
+  transition: .5s;
+  margin: 5px;
+  cursor: pointer;
+}
+.next:hover{
+  transform: scale(1.1);
 }
 .hero-item::after{
   content: " ";
@@ -262,6 +384,7 @@ a {
 .hero-item .hero-content p:nth-child(1){
   text-transform: uppercase;
   letter-spacing: 10px;
+
 }
 .hero-item .hero-content h2{
   font-size: 100px;
@@ -366,7 +489,7 @@ a {
   .event-container {
     flex-direction: row;
     width: 100%;
-    background: #000;
+    /* background: #000; */
     border-radius: 0px;
   }
   .category-container{

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faCircleUser, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faCaretDown, faCaretUp, faCircleUser, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const [isScroll, setScroll] = useState(false);
@@ -31,13 +31,14 @@ function Navbar() {
           <h1>TAPAKILA</h1>
         </li>
         <li className="nav-element">
-          <a href="" className="element-link">
+          <a href="#" className="element-link">
             catégories
           </a>
+    
         </li>
         <li className="nav-element">
-          <a href="" className="element-link">
-            lieu
+          <a href="#" className="element-link">
+            lieux
           </a>
         </li>
         <li className="nav-element">
