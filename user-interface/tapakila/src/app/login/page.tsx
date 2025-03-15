@@ -4,8 +4,14 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-const ipAddr = "192.168.88.89";
+const ipAddr = "192.168.0.102";
 const port = "3333";
+
+const apiTapakila = axios.create({
+  baseURL : `http://${ipAddr}:${port}/api/v1/`,
+  withCredentials : true
+})
+
 
 type LoginFormInputs = {
   email: string;
@@ -17,11 +23,11 @@ export default function Login() {
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormInputs) => {
-    const res = await axios.post(`${ipAddr}/${port}/api/v1/signin`,data,{withCredentials: true})
+    const res = await apiTapakila.post(`signin`,data,{withCredentials: true})
 
     alert("email = "+data.email +" \n "+data.password)
 
-    if (res?.ok) router.push("/");
+    if (res?.status.toString() != "404" ) router.push("/");
     else alert("Invalid credentials");
   };
 
