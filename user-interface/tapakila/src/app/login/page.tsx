@@ -21,8 +21,8 @@ export default function Login() {
 
     alert("email = "+data.email +" \n "+data.password)
 
-    //if (res?.ok) router.push("/dashboard");
-    //else alert("Invalid credentials");
+    if (res?.ok) router.push("/");
+    else alert("Invalid credentials");
   };
 
   return (
