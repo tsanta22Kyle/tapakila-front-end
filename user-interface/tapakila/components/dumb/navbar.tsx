@@ -12,7 +12,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar() {
+function Navbar({mode}:{mode : string}) {
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
   // const searchbar = document.querySelector(".searchbar")
@@ -33,7 +33,7 @@ function Navbar() {
     // console.log(scrollPosition);
   }, [window.scrollY]);
   return (
-    <nav className={`navbar ${isScroll ? "not-transparent" : "transparent"}`}>
+    <nav className={`navbar ${mode=="default"?(isScroll ? "not-transparent" : "transparent"):"not-transparent"}`}>
       <ul className="nav-list">
         <li className=" nav-element">
           <h1>
@@ -49,7 +49,6 @@ function Navbar() {
         </li>
         <li className="nav-element search-nav">
           <form
-            action=""
             className={`searchbar ${barIsVisible ? "full-width" : ""}  ${
               isScroll ? "dark-searchbar" : "light-searchbar"
             }`}

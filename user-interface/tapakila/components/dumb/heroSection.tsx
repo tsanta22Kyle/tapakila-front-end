@@ -37,7 +37,7 @@ function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
             className={`hero-item ${index == activeIndex ? "hero-active" : ""}`}
             
           >
-            <img src={event.img} alt="hero" className={`hero-image`} />
+            <img src={event.img == ""?"https://img.freepik.com/vecteurs-libre/personnes-celebrant-festival-holi_52683-56305.jpg?t=st=1742387701~exp=1742391301~hmac=269df3c6b8d74b0b46aaa668ba9a151c8943738c9ebb4af8f639b1fc4a654350&w=1380":event.img} alt="hero" className={`hero-image`} />
             <div className="hero-content" key={animationKey}>
               <p>ticket</p>
               <h2>{event.title}</h2>
@@ -66,7 +66,7 @@ function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
             onClick={() => thumbnailClick(index)}
             className={`thumbnail-item ${index == activeIndex ? "active" : ""}`}
           >
-            <img src={event.img} alt="thumb-img" />
+            <img src={event.img == ""?"https://img.freepik.com/vecteurs-libre/chef-orchestre-musiciens-debout-modele-flyer-plat-scene-theatre_74855-13485.jpg?t=st=1742387630~exp=1742391230~hmac=0714c3d3cf71f01223231b263310e04c62f1726bd57912c508323e99fe040d55&w=740":event.img} alt="thumb-img" />
             <div className="thumb-desc">desc - lieu - date</div>
           </div>
         ))}

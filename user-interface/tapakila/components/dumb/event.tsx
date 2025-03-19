@@ -1,9 +1,12 @@
+
+"use client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../src/app/globals.css";
 import { faHeart ,faFootball ,faRunning,faPalette,faBook,faLandmark,faGifts,faMicrophoneAlt,faGuitar,faMask} from "@fortawesome/free-solid-svg-icons";
 import { get } from "http";
+import { useRouter } from "next/navigation";
 
-function AnEvent({
+export function AnEvent({
   eventId,
   eventTitle,
   location,
@@ -20,6 +23,9 @@ function AnEvent({
   location: string;
   date: Date;
 }) {
+
+const router = useRouter();
+
   const days = [
     "dimanche",
     "lundi",
@@ -79,16 +85,23 @@ function AnEvent({
             
             return faMask ; 
         default:
-            return value;
+            return faGifts;
     }
   }
 
+
+
+  function showEventInfo() {
+    router.push(`/events/${eventId}`)
+  }
+
+
   return (
-    <div className="event-container">
+    <div onClick={showEventInfo} className="event-container">
       <div className="category-sticker">
         <FontAwesomeIcon icon={getIcon(category)} className=""></FontAwesomeIcon>
       </div>
-      <img src={image} alt="eventImg" className="event-image" />
+      <img src={image == ""?"https://img.freepik.com/vecteurs-libre/chef-orchestre-musiciens-debout-modele-flyer-plat-scene-theatre_74855-13485.jpg?t=st=1742387630~exp=1742391230~hmac=0714c3d3cf71f01223231b263310e04c62f1726bd57912c508323e99fe040d55&w=740":image} alt="eventImg" className="event-image" />
       <div className="event-description">
         <h2 className="event-title">{eventTitle}</h2>
         {/* <div className="event-details"><img src="" className="event-icons" alt="calendar" /><p>{days[date.getDay()]}</p></div> */}

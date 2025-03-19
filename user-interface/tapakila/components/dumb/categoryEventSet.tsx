@@ -46,6 +46,7 @@ function ByCategoryEvents({
 
         {eventList.map((event, index) => (
           <AnEvent
+        
             key={index}
             eventId={event.id}
             category={event.category}
