@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ticketLogo from "../../public/ticketlogo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,13 +35,16 @@ function Navbar() {
   return (
     <nav className={`navbar ${isScroll ? "not-transparent" : "transparent"}`}>
       <ul className="nav-list">
-        <li className="logo nav-element">
-          <h1>TAPAKILA</h1>
+        <li className=" nav-element">
+          <h1>
+            <span className="green">TAPA</span>
+            <span>KILA</span> 
+            <img src="../../ticketlogo.png" alt="logo" className="logo"/>
+          </h1>
         </li>
         <li className="nav-element dropdown-container">
           <a href="" className="element-link">
-
-          <p>catégories</p>
+            <p>catégories</p>
           </a>
         </li>
         <li className="nav-element search-nav">

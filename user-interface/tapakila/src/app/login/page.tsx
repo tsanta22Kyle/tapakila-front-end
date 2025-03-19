@@ -7,7 +7,7 @@ import axios from "axios";
 const ipAddr = "192.168.0.102";
 const port = "3333";
 
-const apiTapakila = axios.create({
+export const apiTapakila = axios.create({
   baseURL : `http://${ipAddr}:${port}/api/v1/`,
   withCredentials : true
 })
