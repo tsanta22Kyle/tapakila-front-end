@@ -3,6 +3,7 @@
 :root{
   ---primary-color- : #ffffff;
   --background: rgba(#121212);
+  ---secondary-- : #1DB954;
 }
 
 html,
@@ -152,7 +153,7 @@ a {
   background: #ffffff2a;
   cursor: pointer;
   .category-sticker{
-    color: #1DB954;
+    color: var(---secondary--);
     /* background: transparent; */
   }
 }
@@ -225,7 +226,7 @@ a {
 .event-container .category-sticker{
   position: absolute;
   background: #000000b7;
-  /* background: #1DB954; */
+  /* background: var(---secondary--); */
   color: #ffffff;
   z-index: 10;
   top: 10%;
@@ -246,7 +247,7 @@ a {
 .event-container .favorite-btn:hover{
   .green-icon{
   
-    color: #1DB954;
+    color: var(---secondary--);
   }
   cursor: pointer;
   /* transform: scale(1.1); */
@@ -452,7 +453,7 @@ a {
   justify-content: space-around;
 }
  .green{
-  color: #1DB954;
+  color: var(---secondary--);
 }
 .adds{
   width: 80%;

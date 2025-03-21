@@ -16,6 +16,19 @@ const poppins = Poppins({
   weight: ['400', '700'],  // Choisissez les graisses
   subsets: ['latin'],       // Choisissez les sous-ensembles
 });
+
+export enum Category{
+  VIP,
+  Standard,
+  EarlyBird
+}
+
+export type Ticket ={
+  id : string,
+  availability : boolean,
+  category : Category
+}
+
 export type Event = {
   id : string,
   title : string,
@@ -26,7 +39,8 @@ export type Event = {
   category : string,
   img : string,
   createdAt : Date,
-  updatedAt : Date
+  updatedAt : Date,
+  tickets : Ticket[]
 }
 
 
