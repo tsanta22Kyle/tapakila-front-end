@@ -142,7 +142,7 @@ a {
   color: #ededed;
   min-width: 300px;
   /* background: #ffffff; */
-  height: 390px;
+  height: 490px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -233,7 +233,7 @@ a {
   /* background: var(---secondary--); */
   color: #ffffff;
   z-index: 10;
-  top: 10%;
+  top: 20%;
   left: 10%;
   width: 5rem;
   font-weight: 600;
@@ -268,7 +268,7 @@ a {
  /* z-index: 2000; */
   width: 250px;
   height: 199px;
-  top: 52px;
+  top: 92px;
   left: 25px;
   border-radius:10px ;
   
@@ -288,7 +288,7 @@ a {
   position: relative;
   /* transform: translateX(); */
   scroll-behavior: smooth;
-  height: 400px;
+  height: 600px;
   
 }
 .no-scrollbar::-webkit-scrollbar {
@@ -341,7 +341,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 450px;
+  /* height: 450px; */
   position: relative;
   align-items: center;
   margin-bottom: 5dvh;
@@ -362,6 +362,7 @@ a {
   display: flex;
   flex-direction: column;
   object-fit: cover ;
+  object-position: top;
   /* filter: blur(1px); */
 }
 .hero-item{
@@ -432,7 +433,9 @@ a {
 }
 .hero-item::after{
   content: " ";
-  background-image: linear-gradient(to top , rgba(0, 0, 0, 0.925) 40% , rgba(0, 0, 0, 0.497) );
+  background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.9) 40%, rgba(0, 0, 0, 0.4));
+box-shadow: -30px 30px 60px rgba(0, 0, 0, 0.7);
+
   width: 100%;
   height: 100%;
   bottom: 0;
@@ -720,6 +723,7 @@ a {
     flex-direction: column;
     width: auto;
     margin: auto;
+    overflow: hidden;
   }
 
   .event-container{

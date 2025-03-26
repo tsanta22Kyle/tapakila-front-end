@@ -31,6 +31,9 @@ function Navbar({ mode }: { mode: string }) {
   function homePage() {
     router.push("/");
   }
+  function userPage(){
+    router.push('/user')
+  }
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
   // const searchbar = document.querySelector(".searchbar")
@@ -121,7 +124,7 @@ function Navbar({ mode }: { mode: string }) {
           <a href="" className="element-link">
             <FontAwesomeIcon icon={faBell} className="fas fa-2xl" />
           </a>
-          <a href="" className="element-link">
+          <a href="#" onClick={userPage} className="element-link">
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
           </a>
         </li>

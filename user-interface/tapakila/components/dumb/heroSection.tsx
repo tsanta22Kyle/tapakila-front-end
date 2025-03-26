@@ -37,7 +37,7 @@ function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
             className={`hero-item ${index == activeIndex ? "hero-active" : ""}`}
             
           >
-            <img src={event.img == ""?"https://img.freepik.com/vecteurs-libre/personnes-celebrant-festival-holi_52683-56305.jpg?t=st=1742387701~exp=1742391301~hmac=269df3c6b8d74b0b46aaa668ba9a151c8943738c9ebb4af8f639b1fc4a654350&w=1380":event.img} alt="hero" className={`hero-image`} />
+            <img src={"https://plus.unsplash.com/premium_vector-1722950274237-580f74ace94a?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="hero" className={`hero-image`} />
             <div className="hero-content" key={animationKey}>
               <p>ticket</p>
               <h2>{event.title}</h2>
