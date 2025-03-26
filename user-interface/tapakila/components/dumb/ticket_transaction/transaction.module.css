@@ -1,0 +1,101 @@
+.container{
+    margin-top: 28dvh;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+    display: grid;
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.632) 10%,
+      rgba(0, 0, 0, 0.078)
+    ),
+    url("../../../../tapakila/public/ticket-motif.png");
+  /* background-color: #fff; */
+  background-size: auto;
+  /* height: 100dvh; */
+  background-repeat: repeat;
+}
+.title{
+    /* background: #f47c7c; */
+}
+.title p:nth-child(1){
+    font-size: 2rem;
+    font-weight: 600;
+    /* font-family: monospace; */
+}
+.title .desc{
+    color: rgb(170, 170, 170);
+}
+.transaction{
+    /* background: #9c4a4a; */
+    border: solid gray 1px;
+    display: flex;
+    /* background: #afafaf; */
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    /* width: 600px; */
+    /* color: black; */
+    z-index: 70;
+}
+.quantity{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* padding: 10px; */
+    /* background: #d77f7f; */
+    width: 200px;
+    height: 60px;
+}
+.button{
+    background: #1db954;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    font-size: xx-large;
+    border: none;
+    outline: none;
+}
+.buy{
+    background: #1db954;
+    width: 140px;
+    /* text-align: center; */
+    display: grid;
+    place-content: center;
+    border-radius: 10px;
+    height: 50px;
+    color: black;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 678px) {
+    .container{
+        /* margin: auto; */
+        width: 100%;
+    }
+   
+    .buy p{
+        display: none;
+    }
+    .title{
+        padding: 10px;
+    }
+    .buy{
+        width: 60%;
+    }
+    .transaction{
+        flex-direction: column;
+        align-items: center;
+        height: 400px;
+        /* justify-content: space-around; */
+        gap: 50px;
+    }
+}

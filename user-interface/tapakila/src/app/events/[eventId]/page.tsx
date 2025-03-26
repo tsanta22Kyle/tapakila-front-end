@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { ReactNode } from "react";
+import { ReactNode, use } from "react";
 import "./../../globals.css";
 import EventDetail from "../../../../components/dumb/event_details/eventDetail";
 import Navbar from "../../../../components/dumb/navbar";
@@ -13,12 +13,12 @@ const poppins = Poppins({
   subsets: ['latin'],       // Choisissez les sous-ensembles
 });
 
-export default async function Home({
+export default function Home({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { eventId } = await params;
+  const { eventId } = use(params);
   
 
   return (
