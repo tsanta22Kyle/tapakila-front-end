@@ -126,6 +126,7 @@ function Navbar({ mode }: { mode: string }) {
           </a>
           <a href="#" onClick={userPage} className="element-link">
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
+              
           </a>
         </li>
         <li onClick={handleClick} className="nav-element burger-menu">
