@@ -88,6 +88,7 @@ function Navbar({mode}:{mode : string}) {
           </a>
           <a href="" className="element-link">
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
+              
           </a>
         </li>
       </ul>
