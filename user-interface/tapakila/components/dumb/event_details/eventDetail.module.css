@@ -12,11 +12,19 @@
   flex-direction: column;
 }
 
-.icon {
+.info .location {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 410px;
+  width: 390px;
+
+}
+.info .organizer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 70px;
+
 }
 .details .desc {
   z-index: 70;
@@ -47,6 +55,11 @@
 } */
 .desc .info {
   display: flex;
+  /* background: #a14545; */
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
 }
 .actions {
   display: flex;
@@ -274,4 +287,28 @@
   height: 30px;
   justify-content: space-around;
 
+}
+
+
+@media screen and (max-width: 678px) {
+  .tickets{
+    width: 90%;
+  }
+  .notificationEnable{
+    height: 100px  ;
+    padding: 10px;
+    gap: 10px;
+  }
+  .actions div:nth-child(1) p {
+    display: none;
+  }
+  .actions div:nth-child(1) {
+    width: 80px;
+  }
+  .info{
+    flex-direction: column;
+    gap: auto;
+  }
+  .details{ margin-top: 10dvh;}
+  
 }

@@ -4,15 +4,33 @@ import ticketLogo from "../../public/ticketlogo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faAngleUp,
+  faBars,
   faBell,
+  faBurger,
+  faCalendarDay,
   faCaretDown,
   faCaretUp,
   faCircleUser,
   faSearch,
+  faUpDown,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar({mode}:{mode : string}) {
+import { useRouter } from "next/navigation";
+import Dropdown from "./dropdown_nav/nav_dropdown";
+
+function Navbar({ mode }: { mode: string }) {
+  const router = useRouter();
+  const [isClicked, setisClicked] = useState(false);
+  const [isFocused,setIsFocused] = useState(false);
+  function handleClick() {
+    setisClicked(!isClicked);
+  }
+
+  function homePage() {
+    router.push("/");
+  }
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
   // const searchbar = document.querySelector(".searchbar")
@@ -20,7 +38,7 @@ function Navbar({mode}:{mode : string}) {
     setVisibleBar(!barIsVisible);
     // searchbar?.addEventListener('click',handleBarVisible)
   }
-  console.log(barIsVisible);
+  // console.log(barIsVisible);
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 50) {
@@ -32,14 +50,29 @@ function Navbar({mode}:{mode : string}) {
     window.addEventListener("scroll", handleScroll);
     // console.log(scrollPosition);
   }, [window.scrollY]);
+  function showSearchResult() {
+    setIsFocused(true)
+  }
+  function hideSearchResult(): void {
+    setIsFocused(false)
+  }
+
   return (
-    <nav className={`navbar ${mode=="default"?(isScroll ? "not-transparent" : "transparent"):"not-transparent"}`}>
-      <ul className="nav-list">
-        <li className=" nav-element">
+    <nav
+      className={`navbar  ${isClicked ? "navbar-dropped" : ""}   ${
+        mode == "default"
+          ? isScroll
+            ? "not-transparent"
+            : "transparent"
+          : "not-transparent"
+      }`}
+    >
+      <ul className={`nav-list ${isClicked ? "nav-list-dropped" : ""}`}>
+        <li onClick={homePage} className=" nav-element">
           <h1>
             <span className="green">TAPA</span>
-            <span>KILA</span> 
-            <img src="../../ticketlogo.png" alt="logo" className="logo"/>
+            <span>KILA</span>
+            <img src="../../ticketlogo.png" alt="logo" className="logo" />
           </h1>
         </li>
         <li className="nav-element dropdown-container">
@@ -47,7 +80,7 @@ function Navbar({mode}:{mode : string}) {
             <p>catégories</p>
           </a>
         </li>
-        <li className="nav-element search-nav">
+        <li className="nav-element search-nav ">
           <form
             className={`searchbar ${barIsVisible ? "full-width" : ""}  ${
               isScroll ? "dark-searchbar" : "light-searchbar"
@@ -55,6 +88,8 @@ function Navbar({mode}:{mode : string}) {
           >
             <input
               type="text"
+              onFocus={showSearchResult}
+              onBlur={hideSearchResult}
               placeholder="évènement , organisateur , lieu..."
               id="searchbar"
               className={`${barIsVisible ? "show-input" : "collapse-input"}  ${
@@ -91,7 +126,36 @@ function Navbar({mode}:{mode : string}) {
               
           </a>
         </li>
+        <li onClick={handleClick} className="nav-element burger-menu">
+          <FontAwesomeIcon
+            icon={faBars}
+            className={`fas fa-2xl ${isClicked ? "none" : ""}`}
+          />
+          <FontAwesomeIcon
+            icon={faAngleUp}
+            className={`fas fa-2xl ${isClicked ? "" : "none"}`}
+          />
+        </li>
       </ul>
+      <div className={` ${isScroll?"search-results":"transparent-results"}  ${isFocused?"search-reveal":"hide-search"}`}>
+        {/* <p className={`${isFocused?"reveal":"hide"}`}>résultats de la recherche</p> */}
+        <div className="result-wrapper no-scrollbar">
+          <div className="result low-index">
+            <FontAwesomeIcon
+              icon={faCalendarDay}
+              className="fas fa-xl green"
+            ></FontAwesomeIcon>
+            <div className="result-desc">
+              <h2>Event 1 </h2>
+              <p>desc</p>
+            </div>
+          </div>
+        
+         
+       
+        </div>
+      </div>
+      <Dropdown Array={[]}></Dropdown>
     </nav>
   );
 }

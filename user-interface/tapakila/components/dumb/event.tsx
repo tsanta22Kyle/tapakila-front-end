@@ -1,4 +1,5 @@
 
+
 "use client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../src/app/globals.css";
@@ -57,7 +58,8 @@ const router = useRouter();
       dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes()
     }`;
   }
-
+  
+  
   function getIcon(value : string){
     switch (value) {
         case "sport":
@@ -67,7 +69,7 @@ const router = useRouter();
             
             return faRunning ;
         case "arts":
-            
+          
             return faPalette ;
         case "littérature":
             
@@ -111,7 +113,7 @@ const router = useRouter();
         <div className="event-details">
           <p>{location}</p>
       <div className="favorite-btn">
-        <FontAwesomeIcon icon={faHeart} className="fas fa-md green-icon " />
+        <FontAwesomeIcon icon={faHeart} className="fas fa-xl green-icon " />
       </div>
         </div>
 

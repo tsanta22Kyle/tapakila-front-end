@@ -9,23 +9,13 @@ import {
   faMapMarked,
   faHeartCirclePlus,
   faBell,
+  faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Color,
-  getColor,
-  Palette,
-  getPalette,
-  useColor,
-} from "color-thief-react";
-import { useEffect, useState } from "react";
-import { ReducerState, ArrayRGB } from "color-thief-react/lib/types";
-import { Poppins } from "next/font/google";
+// import { useRouter } from "next/navigation";
 
-const poppins = Poppins({
-  weight: ["400", "700"], // Choisissez les graisses
-  subsets: ["latin"], // Choisissez les sous-ensembles
-});
+
+
 
 function EventDetail({ id }: { id: string }) {
   // Hook de récupération des données via SWR
@@ -44,12 +34,8 @@ function EventDetail({ id }: { id: string }) {
     "https://plus.unsplash.com/premium_photo-1669227514247-0c32960e1689?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const proxyUrl = `http://localhost:8080/` + imageUrl2;
 
-
-
-
-
   return (
-    <div className={style.container}>
+    <div  className={style.container}>
       <div className={style.details}>
         <img
           src={event.img === "" ? imageUrl2 : event.img}
@@ -64,19 +50,19 @@ function EventDetail({ id }: { id: string }) {
         <div className={style.desc}>
           <h2>{event.title}</h2>
           <div className={style.info}>
-            <div className={style.icon}>
+            <div className={style.location}>
               <FontAwesomeIcon
                 icon={faMapMarked}
                 className="fas green"
               ></FontAwesomeIcon>
               <p>{event.place}</p>
             </div>
-            <div className={style.icon}>
+            <div className={style.organizer}>
               <FontAwesomeIcon
-                icon={faMapMarked}
+                icon={faUserGroup}
                 className="fas green"
               ></FontAwesomeIcon>
-              <p>{event.place}</p>
+              <p>{event.user.fullName}</p>
             </div>
           </div>
           <div className={style.actions}>
@@ -95,7 +81,7 @@ function EventDetail({ id }: { id: string }) {
       </div>
 
       <div className={style.tickets}>
-        <div className={style.ticketsDesc} >
+        <div className={style.ticketsDesc}>
           <div className={style.title}>
             <h2>Billets</h2>
             <p>nombre de billets dispo</p>
@@ -127,12 +113,18 @@ function EventDetail({ id }: { id: string }) {
         </div>
         <div className={style.list}>
           <h2>Billets d'entrée</h2>
-          <ul>  
-            <TicketItem title={event.title}  stock={event.tickets.filter((ticket)=> ticket.category == Category.VIP).length}></TicketItem>
-            <TicketItem title={event.title}  stock={event.tickets.filter((ticket)=> ticket.category == Category.VIP).length}></TicketItem>
-            <TicketItem title={event.title}  stock={event.tickets.filter((ticket)=> ticket.category == Category.VIP).length}></TicketItem>
-            <TicketItem title={event.title}  stock={event.tickets.filter((ticket)=> ticket.category == Category.VIP).length}></TicketItem>
-            <TicketItem title={event.title}  stock={event.tickets.filter((ticket)=> ticket.category == Category.VIP).length}></TicketItem>           
+          <ul>
+            <TicketItem
+            id={event.tickets[0].id}
+              title={event.title}
+              stock={
+                event.tickets.filter(
+                  (ticket) => ticket.category == Category.VIP
+                ).length
+              }
+            ></TicketItem>
+            
+          
           </ul>
         </div>
       </div>

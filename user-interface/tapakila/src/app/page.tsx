@@ -9,7 +9,8 @@ import Navbar from "../../components/dumb/navbar";
 import { apiTapakila } from "./login/page";
 import { Poppins } from "next/font/google";
 import useSWR from "swr";
-
+import Backend_error from "../../components/dumb/backend_error/backend_error";
+import LoadingFetch from "../../components/dumb/backend_error/loading";
  const fetcher = (url : string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -26,7 +27,8 @@ export enum Category{
 export type Ticket ={
   id : string,
   availability : boolean,
-  category : Category
+  category : Category,
+  price : number
 }
 
 export type Event = {
@@ -43,14 +45,16 @@ export type Event = {
   tickets : Ticket[]
 }
 
+export const apiUrl = "http://localhost:3333/api/v1/"
+
 
 export default function Home() {
 
-  const {data,error,isLoading} = useSWR('http://localhost:3333/api/v1/events',fetcher,{
+  const {data,error,isLoading} = useSWR(apiUrl+'events',fetcher,{
     refreshInterval : 6000
   })
-  if (isLoading) return <div>Chargement...</div>;
-  if (error) return <div>Erreur de chargement</div>;
+  if (isLoading) return <LoadingFetch></LoadingFetch>;
+  if (error) return <Backend_error></Backend_error>;
 
   // const [events , setEvents] = useState(1)
   // const [events, setEvents] = useState([
@@ -128,8 +132,8 @@ export default function Home() {
      <HeroSection popularEvents={limitedEvents} ></HeroSection>
       <main className="main-page">
         <div className="adds"><p>publicité</p></div>
-        <ByCategoryEvents category={"sport"} eventList={limitedEvents}></ByCategoryEvents>
-        <ByCategoryEvents category={"concert"} eventList={limitedEvents}></ByCategoryEvents>
+        <ByCategoryEvents category={"populaire en ce moment"} eventList={limitedEvents}></ByCategoryEvents>
+        <ByCategoryEvents category={"découvrir"} eventList={limitedEvents}></ByCategoryEvents>
         {/* <ByCategoryEvents category={""} eventList={limitedEvents}></ByCategoryEvents> */}
       </main>
     </div>
