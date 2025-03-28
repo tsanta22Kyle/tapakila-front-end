@@ -25,9 +25,9 @@ function Dropdown({ Array }: { Array: string[] }) {
         <ul>
           
             {
-                eventCategory.map((category)=>
+                eventCategory.map((category,index)=>
 
-                    <li className={style.item}>
+                    <li key={index} className={style.item}>
                     <p>{category}</p>
                     <div className={style.content}>
                         <div className={style.event}>

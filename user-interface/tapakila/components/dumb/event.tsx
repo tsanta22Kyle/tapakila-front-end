@@ -6,7 +6,37 @@ import "../../src/app/globals.css";
 import { faHeart ,faFootball ,faRunning,faPalette,faBook,faLandmark,faGifts,faMicrophoneAlt,faGuitar,faMask} from "@fortawesome/free-solid-svg-icons";
 import { get } from "http";
 import { useRouter } from "next/navigation";
+const days = [
+  "dimanche",
+  "lundi",
+  "mardi",
+  "mercredi",
+  "jeudi",
+  "vendredi",
+  "samedi",
+];
+const months = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+];
 
+export function formatDate(dt: Date) {
+return ` ${days[dt.getDay()].slice(0, 3)}, ${dt.getDate()} ${months[
+    dt.getMonth()
+  ].slice(0, 3)}  ${dt.getHours()}:${
+    dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes()
+  }`;
+}
 export function AnEvent({
   eventId,
   eventTitle,
@@ -27,37 +57,7 @@ export function AnEvent({
 
 const router = useRouter();
 
-  const days = [
-    "dimanche",
-    "lundi",
-    "mardi",
-    "mercredi",
-    "jeudi",
-    "vendredi",
-    "samedi",
-  ];
-  const months = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
 
-  function formatDate(dt: Date) {
-    return ` ${days[dt.getDay()].slice(0, 3)}, ${dt.getDate()} ${months[
-      dt.getMonth()
-    ].slice(0, 3)}  ${dt.getHours()}:${
-      dt.getMinutes() < 10 ? "0" + dt.getMinutes() : dt.getMinutes()
-    }`;
-  }
   
   
   function getIcon(value : string){

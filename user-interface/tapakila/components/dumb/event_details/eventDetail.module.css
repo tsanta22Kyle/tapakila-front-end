@@ -15,15 +15,17 @@
 .info .location {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 390px;
-
+  justify-content: center;
+  gap: 10px;
+  /* width: 390px; */
+  /* background: rosybrown; */
 }
 .info .organizer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 70px;
+  justify-content: center;
+  gap: 10px;
+  /* width: 70px; */
 
 }
 .details .desc {
@@ -288,9 +290,41 @@
   justify-content: space-around;
 
 }
+.none{
+  display: none;
+  opacity: 0;
+}
+.display{
+  display: block;
+  opacity: 1;
+}
+.notFound{
+  display: block;
+  opacity: 1;
+  width: 100%;
+  height: 30dvh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+
+}
+.notFound p{
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #747474;
+}
+.big{
+  font-size: 6rem;
+  color: #747474;
+  opacity: .7;
+}
 
 
-@media screen and (max-width: 678px) {
+
+@media screen and (max-width: 768px) {
   .tickets{
     width: 90%;
   }

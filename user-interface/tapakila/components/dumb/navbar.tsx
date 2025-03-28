@@ -21,16 +21,20 @@ import { useRouter } from "next/navigation";
 import Dropdown from "./dropdown_nav/nav_dropdown";
 import { io } from "socket.io-client";
 import { title } from "process";
+import SocketTest from "./realtime_search/socket_test";
 
 function Navbar({ mode }: { mode: string }) {
-  
-  const socket = io("http://localhost:3333/");
- 
+  const socket = io("http://localhost:3333", {
+    transports: ["websocket"],
+    withCredentials: true,
+  });
+
   const router = useRouter();
   const [isClicked, setisClicked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
+  const [scrollY,setScrollY] = useState(0);
 
   function handleClick() {
     setisClicked(!isClicked);
@@ -44,6 +48,16 @@ function Navbar({ mode }: { mode: string }) {
   }
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+
+  function handleMouseEnter() {
+    setIsHover(true);
+    setIsFocused(true);
+    // alert('hover')
+  }
+  function handleMouseLeave() {
+    setIsHover(false);
+  }
   // const searchbar = document.querySelector(".searchbar")
   function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
     let value = event.target.value;
@@ -55,6 +69,16 @@ function Navbar({ mode }: { mode: string }) {
     // searchbar?.addEventListener('click',handleBarVisible)
   }
   // console.log(barIsVisible);
+
+  useEffect(()=>{
+
+    function handleSrollY(){
+      setScrollY(window.scrollY)
+    }
+    handleSrollY()
+
+  },[])
+
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 50) {
@@ -65,25 +89,43 @@ function Navbar({ mode }: { mode: string }) {
     }
     window.addEventListener("scroll", handleScroll);
     // console.log(scrollPosition);
-  }, [window.scrollY]);
+  }, [scrollY]);
 
+  socket.on("connection", () => {
+    console.log("Connecté au serveur");
+  });
   useEffect(() => {
     socket.on("events:index", (data) => {
-      // console.log("data",data);
-      setResult(data);
+      console.log("data", data.data);
+      setResult(data.data);
     });
     socket.emit("events:index", { title: search });
-    console.log(result);
+    // console.log(result);
     // alert(search)
     return () => {
       socket.off("events:index");
     };
   }, [search]);
+
+  useEffect(() => {
+    if (isHover == true) {
+      setIsFocused(true);
+      // console.log(isFocused);
+    }
+  }, [isHover, isFocused]);
+
   function showSearchResult() {
     setIsFocused(true);
   }
   function hideSearchResult(): void {
+    if (isHover) {
+      setIsFocused(true);
+    }
     setIsFocused(false);
+  }
+
+  function changePage(id: string): void {
+    router.push("/events/" + id);
   }
 
   return (
@@ -111,14 +153,14 @@ function Navbar({ mode }: { mode: string }) {
         </li>
         <li className="nav-element search-nav ">
           <form
+            onFocus={showSearchResult}
+            onBlur={hideSearchResult}
             className={`searchbar ${barIsVisible ? "full-width" : ""}  ${
               isScroll ? "dark-searchbar" : "light-searchbar"
             }`}
           >
             <input
               type="text"
-              onFocus={showSearchResult}
-              onBlur={hideSearchResult}
               onChange={handleSearch}
               placeholder="évènement , organisateur , lieu..."
               id="searchbar"
@@ -173,8 +215,18 @@ function Navbar({ mode }: { mode: string }) {
       >
         {/* <p className={`${isFocused?"reveal":"hide"}`}>résultats de la recherche</p> */}
         <div className="result-wrapper no-scrollbar">
-          {result.map((result) => (
-            <div className="result low-index">
+          {result.map((result, index) => (
+            <div
+              key={index}
+              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+              onClick={() => {
+                changePage(result.id);
+
+                alert("touché : " + result.id);
+              }}
+              className="result low-index"
+            >
               <FontAwesomeIcon
                 icon={faCalendarDay}
                 className="fas fa-xl green"

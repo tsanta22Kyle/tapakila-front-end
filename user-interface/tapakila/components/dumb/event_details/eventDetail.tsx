@@ -1,6 +1,8 @@
+"use client"
 import { Category, Event } from "@/app/page";
 import style from "./eventDetail.module.css";
 import useSWR from "swr";
+import { formatDate } from "../event";
 // import "../../../public/ticketlogo.png"
 // import { Vibrant } from "node-vibrant/worker";
 import "../../../src/app/globals.css";
@@ -10,32 +12,38 @@ import {
   faHeartCirclePlus,
   faBell,
   faUserGroup,
+  faFaceSadTear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter ,usePathname} from "next/navigation";
 // import { useRouter } from "next/navigation";
 
 
 
-
 function EventDetail({ id }: { id: string }) {
+  const pathname = usePathname();
+  const router = useRouter();
   // Hook de récupération des données via SWR
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "http://localhost:3333/api/v1/events",
+    "http://localhost:3333/api/v1/events/"+id,
     fetcher
   );
   if (isLoading) return <div>Chargement...</div>;
   if (error) return <div>Erreur de chargement</div>;
-  const event: Event = data.data.data[0];
+  const event: Event = data.data[0];
+  const tickets = event.tickets;
+  console.log("events : ",event);
+  
+  console.log("tickets : ",tickets)
 
   const imageUrl =
     "https://img.freepik.com/vecteurs-libre/chef-orchestre-musiciens-debout-modele-flyer-plat-scene-theatre_74855-13485.jpg?t=st=1742387630~exp=1742391230~hmac=0714c3d3cf71f01223231b263310e04c62f1726bd57912c508323e99fe040d55&w=740";
   const imageUrl2 =
     "https://plus.unsplash.com/premium_photo-1669227514247-0c32960e1689?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const proxyUrl = `http://localhost:8080/` + imageUrl2;
-
   return (
-    <div  className={style.container}>
+    <div key={pathname} className={style.container}>
       <div className={style.details}>
         <img
           src={event.img === "" ? imageUrl2 : event.img}
@@ -113,19 +121,29 @@ function EventDetail({ id }: { id: string }) {
         </div>
         <div className={style.list}>
           <h2>Billets d'entrée</h2>
-          <ul>
+          <ul className={ `${tickets.length == 0 ?style.none:style.display}`} >
+            {
+              
+              tickets.map((ticket,index)=>
             <TicketItem
-            id={event.tickets[0].id}
-              title={event.title}
+            key={index}
+              id={ticket.id}
+              title={ticket.category}
               stock={
-                event.tickets.filter(
-                  (ticket) => ticket.category == Category.VIP
-                ).length
+                ticket.quantity
               }
-            ></TicketItem>
+              date={formatDate(new Date(ticket.date.slice(0,4),ticket.date.slice(5,7),ticket.date.slice(8,10),ticket.date.slice(11,13),ticket.date.slice(14,16),ticket.date.slice(17,19)))}
+              ></TicketItem>
+            )
+          }
             
           
           </ul>
+          <div className={`${tickets.length == 0 ?style.notFound:style.none}`} >
+            <p>pas de tickets disponibles</p>
+            <FontAwesomeIcon icon={faFaceSadTear} className={`fas ${style.big}`}></FontAwesomeIcon>
+
+          </div>
         </div>
       </div>
     </div>
