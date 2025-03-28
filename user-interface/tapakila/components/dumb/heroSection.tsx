@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Event } from "@/app/page";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTicket, faTicketSimple } from "@fortawesome/free-solid-svg-icons";
 
 function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
  
@@ -58,6 +60,13 @@ function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
           {" "}
           {">"}{" "}
         </button>
+      </div>
+      <div className="hero-logo">
+      <svg width="150px" height="150px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 1 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 1 0 0-6Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 6v12M14 6v12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+
       </div>
       <div className="thumbnails-container">
         {popularEvents.map((event, index) => (

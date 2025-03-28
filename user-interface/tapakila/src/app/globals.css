@@ -441,6 +441,28 @@ box-shadow: -30px 30px 60px rgba(0, 0, 0, 0.7);
   left: 0;
   position: absolute;
 }
+
+.hero-logo{
+  z-index: 70;
+  right: 25dvw;
+  font-size: 8rem;
+  rotate: -70deg;
+  position: absolute;
+  top: 10%;
+  color: white;
+  /* background: #fff0f0; */
+  animation: heroAnimation 1s infinite alternate-reverse;
+  
+}
+@keyframes heroAnimation {
+  from{
+    top: 20%;
+  }
+  to{
+   top: 22%;
+  }
+}
+
 .transparent{
   background: transparent;
   color: var(--background);
@@ -450,7 +472,6 @@ box-shadow: -30px 30px 60px rgba(0, 0, 0, 0.7);
   background: black;
   color: var(---primary-color-);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-
 }
 .nav-list{
   display: flex;

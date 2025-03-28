@@ -49,7 +49,7 @@ function ByCategoryEvents({
         
             key={index}
             eventId={event.id}
-            category={event.category}
+            category={event.category.name}
             date={new Date()}
             eventTitle={event.title}
             image={event.img}
@@ -57,18 +57,7 @@ function ByCategoryEvents({
             price={0}
           ></AnEvent>
         ))}
-        {eventList.map((event, index) => (
-          <AnEvent
-            key={index}
-            eventId={event.id}
-            category={event.category}
-            date={new Date()}
-            eventTitle={event.title}
-            image={event.img}
-            location={event.place}
-            price={0}
-          ></AnEvent>
-        ))}
+       
       </div>
     </div>
   );

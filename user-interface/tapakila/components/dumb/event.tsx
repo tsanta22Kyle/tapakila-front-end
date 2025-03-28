@@ -62,28 +62,28 @@ const router = useRouter();
   
   function getIcon(value : string){
     switch (value) {
-        case "sport":
+        case "Sports":
             
             return faFootball ;
-        case "loisirs":
+        case "Loisirs":
             
             return faRunning ;
-        case "arts":
+        case "Arts":
           
             return faPalette ;
-        case "littérature":
+        case "Littérature":
             
             return faBook ;
-        case "foires":
+        case "Foires":
             
             return faGifts ;
-        case "séminaires":
+        case "Séminaires":
             
             return faMicrophoneAlt ;
-        case "concerts":
+        case "Concert":
             
             return faGuitar ;
-        case "spectacles":
+        case "Spéctacles":
             
             return faMask ; 
         default:

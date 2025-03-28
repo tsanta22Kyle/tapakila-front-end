@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import ticketLogo from "../../public/ticketlogo.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,11 +19,19 @@ import {
 
 import { useRouter } from "next/navigation";
 import Dropdown from "./dropdown_nav/nav_dropdown";
+import { io } from "socket.io-client";
+import { title } from "process";
 
 function Navbar({ mode }: { mode: string }) {
+  
+  const socket = io("http://localhost:3333/");
+ 
   const router = useRouter();
   const [isClicked, setisClicked] = useState(false);
-  const [isFocused,setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [search, setSearch] = useState("");
+  const [result, setResult] = useState([]);
+
   function handleClick() {
     setisClicked(!isClicked);
   }
@@ -31,12 +39,17 @@ function Navbar({ mode }: { mode: string }) {
   function homePage() {
     router.push("/");
   }
-  function userPage(){
-    router.push('/user')
+  function userPage() {
+    router.push("/user");
   }
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
   // const searchbar = document.querySelector(".searchbar")
+  function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
+    let value = event.target.value;
+    setSearch(value);
+    socket.emit("events:index", { title: search });
+  }
   function handleBarVisible() {
     setVisibleBar(!barIsVisible);
     // searchbar?.addEventListener('click',handleBarVisible)
@@ -53,11 +66,24 @@ function Navbar({ mode }: { mode: string }) {
     window.addEventListener("scroll", handleScroll);
     // console.log(scrollPosition);
   }, [window.scrollY]);
+
+  useEffect(() => {
+    socket.on("events:index", (data) => {
+      // console.log("data",data);
+      setResult(data);
+    });
+    socket.emit("events:index", { title: search });
+    console.log(result);
+    // alert(search)
+    return () => {
+      socket.off("events:index");
+    };
+  }, [search]);
   function showSearchResult() {
-    setIsFocused(true)
+    setIsFocused(true);
   }
   function hideSearchResult(): void {
-    setIsFocused(false)
+    setIsFocused(false);
   }
 
   return (
@@ -93,6 +119,7 @@ function Navbar({ mode }: { mode: string }) {
               type="text"
               onFocus={showSearchResult}
               onBlur={hideSearchResult}
+              onChange={handleSearch}
               placeholder="évènement , organisateur , lieu..."
               id="searchbar"
               className={`${barIsVisible ? "show-input" : "collapse-input"}  ${
@@ -126,7 +153,6 @@ function Navbar({ mode }: { mode: string }) {
           </a>
           <a href="#" onClick={userPage} className="element-link">
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
-              
           </a>
         </li>
         <li onClick={handleClick} className="nav-element burger-menu">
@@ -140,22 +166,25 @@ function Navbar({ mode }: { mode: string }) {
           />
         </li>
       </ul>
-      <div className={` ${isScroll?"search-results":"transparent-results"}  ${isFocused?"search-reveal":"hide-search"}`}>
+      <div
+        className={` ${isScroll ? "search-results" : "transparent-results"}  ${
+          isFocused ? "search-reveal" : "hide-search"
+        }`}
+      >
         {/* <p className={`${isFocused?"reveal":"hide"}`}>résultats de la recherche</p> */}
         <div className="result-wrapper no-scrollbar">
-          <div className="result low-index">
-            <FontAwesomeIcon
-              icon={faCalendarDay}
-              className="fas fa-xl green"
-            ></FontAwesomeIcon>
-            <div className="result-desc">
-              <h2>Event 1 </h2>
-              <p>desc</p>
+          {result.map((result) => (
+            <div className="result low-index">
+              <FontAwesomeIcon
+                icon={faCalendarDay}
+                className="fas fa-xl green"
+              ></FontAwesomeIcon>
+              <div className="result-desc">
+                <h2>{result.title}</h2>
+                <p>{result.date}</p>
+              </div>
             </div>
-          </div>
-        
-         
-       
+          ))}
         </div>
       </div>
       <Dropdown Array={[]}></Dropdown>
