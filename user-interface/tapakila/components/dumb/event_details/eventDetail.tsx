@@ -33,14 +33,14 @@ function EventDetail({ id }: { id: string }) {
   if (error) return <div>Erreur de chargement</div>;
   const event: Event = data.data[0];
   const tickets = event.tickets;
-  console.log("events : ",event);
+  // console.log("events : ",event);
   
-  console.log("tickets : ",tickets)
+  // console.log("tickets : ",tickets)
 
   const imageUrl =
     "https://img.freepik.com/vecteurs-libre/chef-orchestre-musiciens-debout-modele-flyer-plat-scene-theatre_74855-13485.jpg?t=st=1742387630~exp=1742391230~hmac=0714c3d3cf71f01223231b263310e04c62f1726bd57912c508323e99fe040d55&w=740";
   const imageUrl2 =
-    "https://plus.unsplash.com/premium_photo-1669227514247-0c32960e1689?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    "https://img.freepik.com/vecteurs-premium/foule-fete-cocktail-buvant-martini-vacances-boite-nuit-affiche-bar-restaurant-celebration_353502-742.jpg?w=996";
   const proxyUrl = `http://localhost:8080/` + imageUrl2;
   return (
     <div key={pathname} className={style.container}>
@@ -129,6 +129,7 @@ function EventDetail({ id }: { id: string }) {
             key={index}
               id={ticket.id}
               title={ticket.category}
+              eventId={event.id}
               stock={
                 ticket.quantity
               }

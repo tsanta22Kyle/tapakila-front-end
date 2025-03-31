@@ -223,7 +223,7 @@ function Navbar({ mode }: { mode: string }) {
               onClick={() => {
                 changePage(result.id);
 
-                alert("touché : " + result.id);
+                // alert("touché : " + result.id);
               }}
               className="result low-index"
             >

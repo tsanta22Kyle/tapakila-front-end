@@ -1,0 +1,234 @@
+.cartButton{
+    position: fixed;
+    background: #1db954;
+    bottom: 10dvh;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    right: 10dvh;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0px 0px 20px rgb(68, 68, 68);
+    opacity: 1;
+    transition: all 1s ease-in-out;
+}
+.cartButton button{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.cartButton p{
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: #ffffff;
+    color: #000;
+    width: 50%;
+    height: 50%;
+    display: grid;
+    font-weight: 550;
+    place-content: center;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    padding: 5px;
+    border-radius: 50%;
+}
+.none{
+    display: none;
+    opacity: 0;
+    transition: all 1.5s;
+}
+.container{
+    /* margin: auto; */
+
+    width: 100%;
+    /* background: #747474; */
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.492) 40%,
+      rgb(0, 0, 0)
+    ),
+    url("../../../public/ticket-motif.png");
+    padding-top: 5dvh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+.container h2{
+    /* background: #7eb7e6; */
+    width: 50%;
+    height: 10dvh;
+    /* border: gray 1px solid; */
+    border-bottom: #fefefe solid 1px;
+    letter-spacing: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: grid;
+    place-content: center;
+    font-size: 1rem;
+    /* justify-self: start; */
+}
+.empty{
+    width: 50%;
+    /* background: #653333; */
+    height: 40dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+}
+.empty *{
+    font-size: 5rem;
+    color: gray;
+}
+.empty p {
+    font-size: 2rem;
+}
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 15px;
+    height: 59.5dvh;
+    overflow-y: scroll;
+   /* padding-top: 90px; */
+   /* padding-bottom: 100px; */
+    /* background: #925353; */
+    /* z-index: 99; */
+    padding: 20px;
+}
+
+.ticket{
+    /* background: #ff7272; */
+    width: 75%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    border: solid 1px rgb(202, 202, 202);
+}
+.count{
+    display: flex;
+    align-items: center;
+    width: 100px;
+    justify-content: space-around;
+}
+.count button{
+    width: 40px;
+    height: 60px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: x-large;
+}
+.count button:hover{
+
+background: #ffffff1e;
+border-radius: 10px;
+
+}
+.desc{
+    color: gray;
+    font-size: smaller;
+}
+.back{
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: x-large;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    color: #1db954;
+}
+.back:hover{
+    background-color: rgba(255, 255, 255, 0.253);
+}
+.delete{
+    /* background: #eeeeee3c; */
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.delete:hover{
+    background: #eeeeee3c;
+   
+}
+.transaction{
+    position: fixed;
+    bottom: 0;
+    height: 25dvh;
+    width: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment{
+    width: 30%;
+    background: #ffffff98;
+    height: 100%;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: 0px 0px 20px rgba(245, 245, 245, 0.39);
+    cursor: pointer;
+}
+
+.payment:hover{
+    background: white;
+}
+
+.buy{
+    width: 15dvw;
+    background: #000;
+    height: 60px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+
+.container h2{
+    width: 90%;
+    letter-spacing: 5px;
+}
+
+.payment{
+    width: 100%;
+}
+.buy{
+    width: 70%;
+}
+
+}

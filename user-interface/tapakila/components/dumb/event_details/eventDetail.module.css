@@ -131,6 +131,7 @@
   width: 400px;
   height: 250px;
   object-fit: cover;
+  object-position: top;
   z-index: 70;
   background: linear-gradient(180deg, #e0c685 0%, #b08a4a 100%);
 }

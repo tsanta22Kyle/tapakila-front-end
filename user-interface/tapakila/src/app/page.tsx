@@ -11,6 +11,7 @@ import { Poppins } from "next/font/google";
 import useSWR from "swr";
 import Backend_error from "../../components/dumb/backend_error/backend_error";
 import LoadingFetch from "../../components/dumb/backend_error/loading";
+import CartButton from "../../components/dumb/cart/cartButton";
  const fetcher = (url : string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -32,6 +33,7 @@ export type Ticket ={
 }
 
 export type Event = {
+  user: any;
   id : string,
   title : string,
   description : string,
@@ -122,12 +124,13 @@ export default function Home() {
  
 
   // const events = await fetch("https://jsonplaceholder.typicode.com/posts",{method : 'GET',next : {revalidate : 3600}}).then((res)=> res.json())
-  const limitedEvents = data.data.data
+  const limitedEvents = data.data.data.slice(0,5)
   console.log(data.data.data)
 
   return (
     <div className={poppins.className}>
         <Navbar mode="default"></Navbar>
+        <CartButton></CartButton>
     <div >
      <HeroSection popularEvents={limitedEvents} ></HeroSection>
       <main className="main-page">
