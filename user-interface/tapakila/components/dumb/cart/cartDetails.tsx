@@ -12,6 +12,8 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { apiUrl } from "@/app/page";
 
 const formatter = new Intl.NumberFormat("en-GB", {
   style: "currency",
@@ -28,6 +30,10 @@ function CartDetails() {
     router.push("/");
   }
   const cartItems = useStore((state) => state.cartItems);
+  function buy(): void {
+    // axios(apiUrl+"")
+  }
+
   return (
     <div className={style.container}>
       <button onClick={changePage} className={style.back}>
@@ -43,7 +49,7 @@ function CartDetails() {
         {cartItems.map((ticket, index) => (
           <div key={index} className={style.ticket}>
             <div>
-              <p>{ticket.category}</p>
+              <p> {` ${ticket.event.title} - ${ticket.category}`}</p>
               <p className={style.desc}>
                 {formatDate(
                   new Date(
@@ -96,7 +102,7 @@ function CartDetails() {
               )
             )}
           </div>
-          <button className={style.buy}>achat</button>
+          <button onClick={buy} className={style.buy}>achat</button>
         </div>
       </div>
     </div>
