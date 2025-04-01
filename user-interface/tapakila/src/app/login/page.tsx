@@ -74,7 +74,7 @@ export default function Login() {
                 <i className="bx bsx-lock-alt"></i>
               </div>
               <div className="forgot-link">
-                <a href="#">besoin de créer un compte?</a>
+                <a onClick={()=>{router.push('/register')}} href="#">besoin de créer un compte?</a>
               </div>
               <button type="submit" className="btn">
                 Login
@@ -88,9 +88,9 @@ export default function Login() {
           </div>
 
           <div className="toggle-box">
-            <div className="toggle-panel toggle-left">
+            <div className="toggle-panel toggle-left bg-image">
               <h2>Hello, Welcome to tapakila!</h2>
-              <p>Don't have an account?Click on "besoin de créer un compte"</p>
+              {/* <p>Don't have an account?Click on "besoin de créer un compte"</p> */}
             </div>
           </div>
         </div>

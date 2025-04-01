@@ -10,6 +10,7 @@ export default function useAuth() {
       try {
         const res = await apiTapakila.get("/me");
         setUser(res.data.user);
+        console.log(res.data.user)
       } catch (err) {
         setUser(null);
       }

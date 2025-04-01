@@ -1,6 +1,9 @@
 "use client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./signUp.css"
-import 'boxicons'
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+
+// import 'boxicons'
 
 export default function Registration() {
   
@@ -13,15 +16,19 @@ export default function Registration() {
           <h1>Registration</h1>
           <div className="input-box">
             <input type="text" placeholder="Username" required />
-            <i className="bx bxs-user"></i>
+            <FontAwesomeIcon icon={faUser} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
+            {/* <i className="bx bxs-user"></i> */}
           </div>
           <div className="input-box">
             <input type="email" placeholder="Email" required />
             <i className="bx bxs-envelope"></i>
+            <FontAwesomeIcon icon={faEnvelope} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
           </div>
           <div className="input-box">
             <input type="password" placeholder="Password" required />
             <i className="bx bsx-lock-alt"></i>
+            <FontAwesomeIcon icon={faLock} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
+
           </div>
           <div className="forgot-link">
             <a href="#">besoin de créer un compte?</a>
@@ -29,7 +36,8 @@ export default function Registration() {
           <button type="submit" className="btn">Register</button>
           <p>ou s'enregistrer avec</p>
           <div className="social-icons">
-            <a href="" className="bx bxl-google"></a>
+            {/* <a href="" className="bx bxl-google"></a> */}
+            {/* <FontAwesomeIcon icon={} /> */}
             <a href="" className="bx bxl-facebook"></a>
           </div>
         </form>

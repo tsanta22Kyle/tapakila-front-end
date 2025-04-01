@@ -15,6 +15,7 @@ import {
   faChevronDown,
   faCircle,
   faCircleUser,
+  faGear,
   faSearch,
   faUpDown,
   faUserGear,
@@ -142,7 +143,7 @@ function Navbar({ mode }: { mode: string }) {
     router.push("/events/" + id);
   }
   const handleLogout = async () => {
-    await apiTapakila.post("/logout");
+    await apiTapakila.post("signout");
 
     localStorage.removeItem("user");
     router.push("/login");
@@ -210,22 +211,26 @@ function Navbar({ mode }: { mode: string }) {
           </a>
         </li>
         <li className="nav-element user-nav">
-          <a onClick={()=>{router.push("/login")}} className={`${user==null?"none":""}`}>
+          <a onClick={()=>{router.push("/login")}} className={`${user==null?"":"none"}`}>
             <button className="connexion" >connexion</button>
           </a>
-          <a onClick={showInfo} className={`${user==null?"element-link user-icon":"element-link user-icon none"}`}>
+          <a onClick={showInfo} className={`${user==null?"element-link user-icon none":"element-link user-icon "}`}>
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
             <FontAwesomeIcon icon={faChevronDown} className="fa-sm fas" />
           </a>
           <div className={`${showUserInfo?"user-actions":" user-actions actions-none"}`}>
             <ul>
-              <li>
+              <li onClick={()=>{router.push('/user')}} >
                 <FontAwesomeIcon icon={faUserGear} className="fa-xl" ></FontAwesomeIcon>
-                <p>compte</p>
+                <p>profile</p>
               </li>
               <li>
                 <FontAwesomeIcon icon={faCircle} className="fa-xl green" ></FontAwesomeIcon>
                 <p>notification</p>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faGear} className="fa-xl green" ></FontAwesomeIcon>
+                <p>paramètres</p>
               </li>
               <li onClick={handleLogout}>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} className="fa-xl" ></FontAwesomeIcon>
