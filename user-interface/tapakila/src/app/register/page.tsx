@@ -1,93 +1,52 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import axios from "axios";
+import "./signUp.css"
+import 'boxicons'
 
-const ipAddr = "192.168.88.89";
-const port = "3333";
-
-type RegisterFormInputs = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-export default function Register() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterFormInputs>();
-  const router = useRouter();
-
-  const onSubmit = async (data: RegisterFormInputs) => {
-    if (data.password !== data.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    try {
-      const response = await axios.post(`http://${ipAddr}:${port}/api/v1/signup`, {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      });
-
-      if (response.status === 201) {
-        alert("Registration successful!");
-        router.push("/login"); // Redirect to login page
-      }
-    } catch (error: any) {
-      alert(error.response?.data?.message || "Registration failed!");
-    }
-  };
+export default function Registration() {
+  
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit(onSubmit)} className="p-6 border rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Register</h2>
+    <>
+    <div className="container">
+      <div className="form-box register">
+        <form action="">
+          <h1>Registration</h1>
+          <div className="input-box">
+            <input type="text" placeholder="Username" required />
+            <i className="bx bxs-user"></i>
+          </div>
+          <div className="input-box">
+            <input type="email" placeholder="Email" required />
+            <i className="bx bxs-envelope"></i>
+          </div>
+          <div className="input-box">
+            <input type="password" placeholder="Password" required />
+            <i className="bx bsx-lock-alt"></i>
+          </div>
+          <div className="forgot-link">
+            <a href="#">besoin de créer un compte?</a>
+          </div>
+          <button type="submit" className="btn">Register</button>
+          <p>ou s'enregistrer avec</p>
+          <div className="social-icons">
+            <a href="" className="bx bxl-google"></a>
+            <a href="" className="bx bxl-facebook"></a>
+          </div>
+        </form>
+      </div>
 
-        <div className="mb-3">
-          <label>Name:</label>
-          <input
-            type="text"
-            {...register("name", { required: "Name is required" })}
-            className="border p-2 w-full"
-          />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-        </div>
-
-        <div className="mb-3">
-          <label>Email:</label>
-          <input
-            type="email"
-            {...register("email", { required: "Email is required" })}
-            className="border p-2 w-full"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-        </div>
-
-        <div className="mb-3">
-          <label>Password:</label>
-          <input
-            type="password"
-            {...register("password", { required: "Password is required", minLength: 8 })}
-            className="border p-2 w-full"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-        </div>
-
-        <div className="mb-3">
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            {...register("confirmPassword", { required: "Please confirm your password" })}
-            className="border p-2 w-full"
-          />
-          {watch("password") !== watch("confirmPassword") && <p className="text-red-500 text-sm">Passwords do not match</p>}
-        </div>
-
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
-          Register
-        </button>
-      </form>
+    <div className="toggle-box">
+      <div className="toggle-panel toggle-left">
+        <h2>Hello, Welcome to tapakila!</h2>
+        <p>Don't have an account?Click on "besoin de créer un compte"</p>
+      </div>
     </div>
+    </div>
+
+    
+     
+
+    
+    </>
   );
 }

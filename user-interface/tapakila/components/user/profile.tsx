@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import style from "./profile.module.css";
+import MyReservation from "./reservation/myReservation";
+import useSWR from "swr";
+import { apiUrl } from "@/app/page";
+import LoadingFetch from "../dumb/backend_error/loading";
+import Backend_error from "../dumb/backend_error/backend_error";
+import UserInfo from "./userInfo/userInfo";
 
 const ipAddr = "192.168.88.89";
 const port = "3333";
@@ -23,12 +29,17 @@ type Reservation = {
 
 export default function Profile() {
   const [user, setUser] = useState<User | null>(null);
-  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [reservations, setReservations] = useState([]);
   const [filteredReservations, setFilteredReservations] = useState<Reservation[]>([]);
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
   const [activeTab, setActiveTab] = useState("profile");
 
   const router = useRouter();
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const {data,error,isLoading} = useSWR(apiUrl+'tickets',fetcher)
+  if (isLoading) return <LoadingFetch></LoadingFetch>;
+  if (error) return <Backend_error></Backend_error>;
+  const tickets = data.data.data
 
   /*useEffect(() => {
     const fetchUserData = async () => {
@@ -54,15 +65,15 @@ export default function Profile() {
     fetchReservations();
   }, []);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (filter === "all") {
       setFilteredReservations(reservations);
     } else if (filter === "upcoming") {
-      setFilteredReservations(reservations.filter((res) => res.isUpcoming));
+      setFilteredReservations(reservations.filter((res) => res));
     } else {
       setFilteredReservations(reservations.filter((res) => !res.isUpcoming));
     }
-  }, [filter, reservations]);
+  }, [filter, reservations]);*/
 
   const handleCancel = async (id: string) => {
     try {
@@ -75,27 +86,13 @@ export default function Profile() {
 
   return (
     <div className={style.container}>
-      <aside className={style.sidebar}>
-        <h2>Mon Profil</h2>
-        <ul>
-          <li className={activeTab === "profile" ? style.active : ""} onClick={() => setActiveTab("profile")}>Aperçu du Profil</li>
-          <li className={activeTab === "reservations" ? style.active : ""} onClick={() => setActiveTab("reservations")}>Mes Réservations</li>
-          <li className={activeTab === "settings" ? style.active : ""} onClick={() => setActiveTab("settings")}>Paramètres du Compte</li>
-        </ul>
-      </aside>
 
       <main className={style.mainContent}>
-        {activeTab === "profile" && (
-          <div>
-          <div>
-            <h2>Aperçu du Profil</h2>
-            <p>Name: Kiku-no-Jo</p>
-            <p>Email: knj@example.com</p>
-          </div>
-          </div>
-        )}
+        <div><UserInfo></UserInfo></div>
+          
+        
 
-        {activeTab === "reservations" && (
+        
           <div>
             <h2>Mes Réservations</h2>
             <div className={style.filterButtons}>
@@ -103,29 +100,9 @@ export default function Profile() {
               <button className={`${style.filterButton} ${style.upcoming}`} onClick={() => setFilter("upcoming")}>À Venir</button>
               <button className={`${style.filterButton} ${style.past}`} onClick={() => setFilter("past")}>Passés</button>
             </div>
-            <ul className={style.reservationList}>
-              {filteredReservations.map((res) => (
-                <li key={res.id} className={style.reservationItem}>
-                  <div>
-                    <h3>{res.eventName}</h3>
-                    <p>Type de billet: {res.ticketType}</p>
-                    <p>Date: {res.eventDate}</p>
-                  </div>
-                  {res.isUpcoming && (
-                    <button className={style.cancelButton} onClick={() => handleCancel(res.id)}>Annuler</button>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <MyReservation eventList={tickets} category={""}></MyReservation>
           </div>
-        )}
-
-        {activeTab === "settings" && (
-          <div>
-            <h2>Paramètres du Compte</h2>
-            <p>Ici, vous pourrez gérer les paramètres de votre compte.</p>
-          </div>
-        )}
+      
       </main>
     </div>
   );

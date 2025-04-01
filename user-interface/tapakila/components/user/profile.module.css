@@ -3,33 +3,7 @@
     display: flex;
     min-height: 100vh;
   }
-  
-  .sidebar {
-    width: 16rem;
-    background-color: #2d3748;
-    color: white;
-    padding: 1rem;
-  }
-  
-  .sidebar h2 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    padding: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .sidebar li.active {
-    background-color: #4a5568;
-  }
+
   
   .main-content {
     flex: 1;
@@ -89,4 +63,6 @@
     border: none;
     cursor: pointer;
   }
+
+    
   

@@ -2,7 +2,9 @@
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import "./login.css";
 
 const ipAddr = "localhost";
 const port = "3333";
@@ -46,34 +48,39 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <form onSubmit={handleSubmit(onSubmit)} className="p-6 border rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Login</h2>
+    <>
+    <div className="container">
+      <div className="form-box register">
+        <form action="">
+          <h1>Login</h1>
+          <div className="input-box">
+            <input type="email" placeholder="Email" required />
+            <i className="bx bxs-envelope"></i>
+          </div>
+          <div className="input-box">
+            <input type="password" placeholder="Password" required />
+            <i className="bx bsx-lock-alt"></i>
+          </div>
+          <div className="forgot-link">
+            <a href="#">besoin de créer un compte?</a>
+          </div>
+          <button type="submit" className="btn">Login</button>
+          <p>ou se connecter avec</p>
+          <div className="social-icons">
+            <a href="" className="bx bxl-google"></a>
+            <a href="" className="bx bxl-facebook"></a>
+          </div>
+        </form>
+      </div>
 
-        <div className="mb-3">
-          <label>Email:</label>
-          <input
-            type="email"
-            {...register("email", { required: "Email is required" })}
-            className="border p-2 w-full"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-        </div>
-
-        <div className="mb-3">
-          <label>Password:</label>
-          <input
-            type="password"
-            {...register("password", { required: "Password is required" ,minLength : 8})}
-            className="border p-2 w-full"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Login
-        </button>
-      </form>
+    <div className="toggle-box">
+      <div className="toggle-panel toggle-left">
+        <h2>Hello, Welcome to tapakila!</h2>
+        <p>Don't have an account?Click on "besoin de créer un compte"</p>
+      </div>
     </div>
+    </div>
+    
+    </>
   );
 }
