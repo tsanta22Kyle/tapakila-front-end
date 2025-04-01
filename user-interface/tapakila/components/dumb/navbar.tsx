@@ -210,10 +210,10 @@ function Navbar({ mode }: { mode: string }) {
           </a>
         </li>
         <li className="nav-element user-nav">
-          <a onClick={()=>{router.push("/login")}} className={`${user==null?"":"none"}`}>
+          <a onClick={()=>{router.push("/login")}} className={`${user==null?"none":""}`}>
             <button className="connexion" >connexion</button>
           </a>
-          <a onClick={showInfo} className={`${user==null?"none":"element-link user-icon"}`}>
+          <a onClick={showInfo} className={`${user==null?"element-link user-icon":"element-link user-icon none"}`}>
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
             <FontAwesomeIcon icon={faChevronDown} className="fa-sm fas" />
           </a>
