@@ -520,6 +520,80 @@ a {
   align-items: center;
   justify-content: space-around;
 }
+.user-icon{
+  width: 8dvw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.user-icon:hover{
+  
+  background: #ffffff23;
+}
+.user-actions{
+  background: rgba(255, 255, 255, 0.784);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.219);
+  position: absolute;
+  top: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  color: #000;
+  transition: all .6s  ;
+  height: 210px;
+  
+}
+.user-actions ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  animation: userShow 3s  ;
+  animation-delay: 0s;
+}
+@keyframes userShow {
+  from{
+    opacity: 0;
+  }to{
+    opacity: 1;
+  }
+}
+.actions-none{
+  width: 0;
+  height: 0;
+  opacity: 0;
+  /* display: none; */
+}
+.actions-none ul {
+  display: none;
+}
+
+.user-actions ul li{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+
+  /* height: 5dvh; */
+  padding: 15px;
+
+  
+}
+.user-actions ul li:hover{
+  background: #c3c3c3;
+  cursor: pointer;
+
+}
+
 .nav-list .nav-element a {
   text-transform: uppercase;
 }
@@ -721,7 +795,20 @@ a {
   font-size: 1rem;
   color: #7a7a7a;
 }
-
+.connexion{
+  background: var(---secondary--);
+  outline: none;
+  color: black;
+  width: 120px;
+  height: 40px;
+  border-radius: 7px;
+  border: var(---secondary--) solid 3px;
+  cursor: pointer;
+}
+.connexion:hover{
+  background-color: #000;
+  color: var(---secondary--);
+}
 @media screen and (max-width: 768px) {
   .thumbnails-container {
     justify-content: start;

@@ -4,12 +4,15 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-const ipAddr = "192.168.0.102";
+const ipAddr = "localhost";
 const port = "3333";
 
 export const apiTapakila = axios.create({
   baseURL : `http://${ipAddr}:${port}/api/v1/`,
-  withCredentials : true
+  withCredentials : true,
+  headers : {
+    "Content-Type" : "application/json"
+  }
 })
 
 
@@ -19,16 +22,27 @@ type LoginFormInputs = {
 };
 
 export default function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>();
+  const { register, handleSubmit,setError, formState: { errors } } = useForm<LoginFormInputs>();
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormInputs) => {
-    const res = await apiTapakila.post(`signin`,data,{withCredentials: true})
+    try{
 
-    alert("email = "+data.email +" \n "+data.password)
+      const res = await apiTapakila.post(`signin`,data)
+      
+    // alert("email = "+res.data.user.email +" \n "+data.password)
 
+
+    localStorage.setItem("user",JSON.stringify(res.data.user))
+    // const data = res.data.json()
+    console.log(res);
+    
+    
     if (res?.status.toString() != "404" ) router.push("/");
     else alert("Invalid credentials");
+  }catch(err){
+    setError("root", { message: "Email ou mot de passe incorrect" });
+  }
   };
 
   return (

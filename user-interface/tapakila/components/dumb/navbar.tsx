@@ -5,15 +5,19 @@ import ticketLogo from "../../public/ticketlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleUp,
+  faArrowRightFromBracket,
   faBars,
   faBell,
   faBurger,
   faCalendarDay,
   faCaretDown,
   faCaretUp,
+  faChevronDown,
+  faCircle,
   faCircleUser,
   faSearch,
   faUpDown,
+  faUserGear,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,12 +26,15 @@ import Dropdown from "./dropdown_nav/nav_dropdown";
 import { io } from "socket.io-client";
 import { title } from "process";
 import SocketTest from "./realtime_search/socket_test";
+import useAuth from "../../globalStores/useAuth";
+import { apiTapakila } from "@/app/login/page";
 
 function Navbar({ mode }: { mode: string }) {
   const socket = io("http://localhost:3333", {
     transports: ["websocket"],
     withCredentials: true,
   });
+  const {isLoading,user} = useAuth()
 
   const router = useRouter();
   const [isClicked, setisClicked] = useState(false);
@@ -35,6 +42,7 @@ function Navbar({ mode }: { mode: string }) {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
   const [scrollY,setScrollY] = useState(0);
+  const [showUserInfo,setShowUserInfo] = useState(false);
 
   function handleClick() {
     setisClicked(!isClicked);
@@ -43,8 +51,12 @@ function Navbar({ mode }: { mode: string }) {
   function homePage() {
     router.push("/");
   }
-  function userPage() {
-    router.push("/user");
+  function showInfo() {
+    // router.push("/user");
+    setTimeout(()=>{
+
+      setShowUserInfo(!showUserInfo)
+    },200)
   }
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
@@ -79,6 +91,7 @@ function Navbar({ mode }: { mode: string }) {
 
   },[])
 
+
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY > 50) {
@@ -88,6 +101,7 @@ function Navbar({ mode }: { mode: string }) {
       }
     }
     window.addEventListener("scroll", handleScroll);
+    console.log(user)
     // console.log(scrollPosition);
   }, [scrollY]);
 
@@ -127,6 +141,12 @@ function Navbar({ mode }: { mode: string }) {
   function changePage(id: string): void {
     router.push("/events/" + id);
   }
+  const handleLogout = async () => {
+    await apiTapakila.post("/logout");
+
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
 
   return (
     <nav
@@ -190,12 +210,29 @@ function Navbar({ mode }: { mode: string }) {
           </a>
         </li>
         <li className="nav-element user-nav">
-          <a href="" className="element-link">
-            <FontAwesomeIcon icon={faBell} className="fas fa-2xl" />
+          <a onClick={()=>{router.push("/login")}} className={`${user==null?"":"none"}`}>
+            <button className="connexion" >connexion</button>
           </a>
-          <a href="#" onClick={userPage} className="element-link">
+          <a onClick={showInfo} className={`${user==null?"none":"element-link user-icon"}`}>
             <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
+            <FontAwesomeIcon icon={faChevronDown} className="fa-sm fas" />
           </a>
+          <div className={`${showUserInfo?"user-actions":" user-actions actions-none"}`}>
+            <ul>
+              <li>
+                <FontAwesomeIcon icon={faUserGear} className="fa-xl" ></FontAwesomeIcon>
+                <p>compte</p>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faCircle} className="fa-xl green" ></FontAwesomeIcon>
+                <p>notification</p>
+              </li>
+              <li onClick={handleLogout}>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} className="fa-xl" ></FontAwesomeIcon>
+                <p>se déconnecter</p>
+              </li>
+            </ul>
+          </div>
         </li>
         <li onClick={handleClick} className="nav-element burger-menu">
           <FontAwesomeIcon
