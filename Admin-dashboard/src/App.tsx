@@ -15,9 +15,12 @@ import { eventDataProviders } from "./providers/eventDataProvider";
 //   }
 // };
 import { TicketList } from "./components/tickets/TicketList";
+import { TicketCreate } from "./components/tickets/TicketCreate";
+import { AppDataprovider } from "./providers/App_DataProvider";
+import { ticketShow } from "./components/tickets/Ticket_show";
 
 const App = () => (
-  <Admin dataProvider={eventDataProviders}>
+  <Admin dataProvider={AppDataprovider}>
     <Resource
       name="events"
       list={EventList}
@@ -31,6 +34,7 @@ const App = () => (
       create={TicketCreate}
       edit={EventForm}
       icon={EventIcon}
+      show={ticketShow}
     />
   </Admin>
 );
