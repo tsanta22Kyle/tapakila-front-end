@@ -1,4 +1,4 @@
-# tableau-dashboard
+# admin-dashboard
 
 ## Installation
 
