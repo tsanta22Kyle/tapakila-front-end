@@ -1,26 +1,56 @@
 "use client";
 import "./signUp.css"
 import 'boxicons'
+import { useRouter } from "next/navigation";
+import {useForm} from "react-hook-form"
+import { apiTapakila } from "../login/page";
+
+type RegisterFormInputs = {
+  fullName: string;
+  email : string;
+  password: string;
+}
+
 
 export default function Registration() {
-  
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: {errors},
+  } = useForm<RegisterFormInputs>();
+  const router = useRouter();
+
+  const onSubmit = async (data: RegisterFormInputs) => {
+    try {
+      const res = await apiTapakila.post(`signup`, data,{
+        withCredentials: false
+      });
+      console.log(res);
+      router.push("/login");
+    }
+    catch (err) {
+      setError("root", { message: "informations non valides veuillez réessayez"})
+    }
+  }
 
   return (
     <>
+    <div className="background">
     <div className="container">
       <div className="form-box register">
-        <form action="">
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <h1>Registration</h1>
           <div className="input-box">
-            <input type="text" placeholder="Username" required />
+            <input type="text" placeholder="Username" required {...register("fullName", {required: true})} />
             <i className="bx bxs-user"></i>
           </div>
           <div className="input-box">
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" required {...register("email", {required: true})} />
             <i className="bx bxs-envelope"></i>
           </div>
           <div className="input-box">
-            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Password" required {...register("password", {required: true})} />
             <i className="bx bsx-lock-alt"></i>
           </div>
           <div className="forgot-link">
@@ -46,7 +76,7 @@ export default function Registration() {
     
      
 
-    
+    </div>
     </>
   );
 }

@@ -1,0 +1,13 @@
+.main{
+    margin-top: 20dvh;
+    background-color: rgb(82, 126, 37);
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+.user-container{
+    background: yellow;
+    display: flex;
+    flex-direction: column;
+}
