@@ -154,3 +154,17 @@ form {
     background: transparent;
     border: 2px solid #fff;
 }
+.bg-image{
+ 
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.405) 100%,
+      rgba(0, 0, 0, 0.366)
+    ),
+     url('https://plus.unsplash.com/premium_photo-1718674393884-4cf2e1acddbb?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  transition: transform 0.1s ease-out;
+}
+.toggle-box:hover bg-image{
+  transform: translate(var(--mouse-x), var(--mouse-y));
+}
