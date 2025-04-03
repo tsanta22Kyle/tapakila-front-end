@@ -1,15 +1,15 @@
 // src/components/events/types.ts
 export interface IEvent {
-    id: string;
+  id: string;
+  title: string;
+  description: string;
+  date: Date;
+  location: string;
+  status: "draft" | "published" | "cancelled";
+  image?: {
+    src: string;
     title: string;
-    description: string;
-    date: Date;
-    location: string;
-    status: 'draft' | 'published' | 'cancelled';
-    image?: {
-      src: string;
-      title: string;
-    };
-  }
-  
-  export type EventStatus = IEvent['status'];
+  };
+}
+
+export type EventStatus = IEvent["status"];

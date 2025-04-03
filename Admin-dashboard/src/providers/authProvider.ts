@@ -1,33 +1,38 @@
 // src/providers/authProvider.ts
-import { AuthProvider } from 'react-admin';
-import { apiFetch } from '../axios.config';
+import { AuthProvider } from "react-admin";
+import { apiFetch } from "../axios.config";
 export const authProvider: AuthProvider = {
-    login: async ({ username, password }) => {
-        // Hardcoded credentials for testing
-        // if (username === "admin" && password === "password123") {
-          //   return Promise.resolve();
-          // }
-          try {
-            console.log(username,password)
-            const {data:res} = await apiFetch.post("signin",{
-              email : username,
-              password : password
-            })
-            console.log("res",res);
-            
-            // if (!res.ok) {
-            //   throw new Error('Email ou mot de passe incorrect');
-            // }
-            localStorage.setItem("token", res.token);
-            localStorage.setItem('auth', 'true');
-          } catch (error) {
-            throw new Error("email ou mot de passe invalides");
-          }
-    },
-  
-  logout: () => {
-    localStorage.removeItem('token');
-    return fetch('/api/logout').then(() => Promise.resolve());
+  login: async ({ email, password }) => {
+    // Hardcoded credentials for testing
+    // if (username === "admin" && password === "password123") {
+    //   return Promise.resolve();
+    // }
+    try {
+      console.log(email, password);
+      const { data: res } = await apiFetch.post("signin", {
+        email: email,
+        password: password,
+      });
+      console.log("res", res?.user);
+
+      // if (!res.ok) {
+      //   throw new Error('Email ou mot de passe incorrect');
+      // }
+      // localStorage.setItem("token", res.token);
+      localStorage.setItem("user", JSON.stringify(res?.user));
+      localStorage.setItem("auth", "true");
+    } catch (error) {
+      throw new Error("email ou mot de passe invalides");
+    }
+  },
+
+  logout: async () => {
+    localStorage.removeItem("user");
+    const { data: res } = await apiFetch.post("signout");
+    console.log(res);
+    if (res?.status === 200) {
+      return Promise.resolve();
+    } else return Promise.reject();
   },
 
   checkError: (error) => {
@@ -38,8 +43,18 @@ export const authProvider: AuthProvider = {
   },
 
   checkAuth: () => {
-    return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
+    return localStorage.getItem("user") ? Promise.resolve() : Promise.reject();
+  },
+  getIdentity: async () => {
+    const { data: res } = await apiFetch.get("me");
+    return res?.user;
   },
 
-  getPermissions: () => Promise.resolve(),
+  getPermissions: async () => {
+    const { data: res } = await apiFetch.get("me");
+    if (!res?.user) {
+      return Promise.reject();
+    }
+    return Promise.resolve([res?.user?.role]);
+  },
 };

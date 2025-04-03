@@ -1,38 +1,35 @@
-import { Admin, Resource } from "react-admin";
+import { Admin, LoginWithEmail, Resource } from "react-admin";
 import EventIcon from "@mui/icons-material/Event";
 import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
-import { EventForm } from "./components/events/EventForm";
-import { eventDataProviders } from "./providers/eventDataProvider";
 
-// const dataProvider = async (type: string, resource: string, params: any) => {
-//   // console.log('Type:', type); // Cela vous montrera la valeur réelle de `type`.
-//   switch (resource) {
-//     case 'users':
-//       return eventDataProviders[type](params);
-//     default:
-//       throw new Error(`Unsupported resource: ${resource}`);
-//   }
-// };
+import { EventShow } from "./components/events/EventShow";
+
+import { UserList } from "./components/user/UserList";
+import { UserEdit } from "./components/user/UserEdit";
+
 import { TicketList } from "./components/tickets/TicketList";
 import { TicketCreate } from "./components/tickets/TicketCreate";
 import { AppDataprovider } from "./providers/App_DataProvider";
 import { ticketShow } from "./components/tickets/Ticket_show";
 import { TicketEdit } from "./components/tickets/TicketUpdate";
 import { authProvider } from "./providers/authProvider";
-import MyLoginPage from "./MyLoginPage";
+import { UserCreate } from "./components/user/UserCreate";
+import { EventEdit } from "./components/events/EventEdit";
 
 const App = () => (
-  <Admin dataProvider={AppDataprovider}
-  authProvider={authProvider}  // Add auth provider
-  loginPage={MyLoginPage} 
-         >
+  <Admin
+    dataProvider={AppDataprovider}
+    authProvider={authProvider} // Add auth provider
+    loginPage={LoginWithEmail}
+  >
     <Resource
       name="events"
       list={EventList}
       create={EventCreate}
-      edit={EventForm}
+      edit={EventEdit}
       icon={EventIcon}
+      show={EventShow}
     />
     <Resource
       name="tickets"
@@ -41,6 +38,12 @@ const App = () => (
       edit={TicketEdit}
       icon={EventIcon}
       show={ticketShow}
+    />
+    <Resource
+      name="users"
+      list={UserList}
+      edit={UserEdit}
+      create={UserCreate}
     />
   </Admin>
 );
