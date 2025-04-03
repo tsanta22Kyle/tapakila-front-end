@@ -4,6 +4,8 @@ import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
 import { EventForm } from "./components/events/EventForm";
 import { eventDataProviders } from "./providers/eventDataProvider";
+import { UserList } from "./components/user/UserList";
+import { UserEdit } from "./components/user/UserEdit";
 
 // const dataProvider = async (type: string, resource: string, params: any) => {
 //   // console.log('Type:', type); // Cela vous montrera la valeur réelle de `type`.
@@ -24,7 +26,7 @@ import MyLoginPage from "./MyLoginPage";
 
 const App = () => (
   <Admin dataProvider={AppDataprovider}
-  authProvider={authProvider}  // Add auth provider
+  authProvider={authProvider}  
   loginPage={MyLoginPage} 
          >
     <Resource
@@ -41,6 +43,13 @@ const App = () => (
       edit={TicketEdit}
       icon={EventIcon}
       show={ticketShow}
+      
+    />
+    <Resource
+      name="users"
+      list={UserList}
+      edit={UserEdit}
+    
     />
   </Admin>
 );
