@@ -2,8 +2,11 @@ import { Admin, LoginWithEmail, Resource } from "react-admin";
 import EventIcon from "@mui/icons-material/Event";
 import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
+
 import { EventShow } from "./components/events/EventShow";
-// import { EventEdit } from "./components/events/EventEdit";
+
+import { UserList } from "./components/user/UserList";
+import { UserEdit } from "./components/user/UserEdit";
 
 import { TicketList } from "./components/tickets/TicketList";
 import { TicketCreate } from "./components/tickets/TicketCreate";
@@ -18,6 +21,7 @@ const App = () => (
     authProvider={authProvider} // Add auth provider
     loginPage={LoginWithEmail}
   >
+
     <Resource
       name="events"
       list={EventList}
@@ -33,6 +37,13 @@ const App = () => (
       edit={TicketEdit}
       icon={EventIcon}
       show={ticketShow}
+
+    />
+    <Resource
+      name="users"
+      list={UserList}
+      edit={UserEdit}
+
     />
   </Admin>
 );
