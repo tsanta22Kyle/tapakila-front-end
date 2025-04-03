@@ -43,7 +43,6 @@ export const authProvider: AuthProvider = {
   },
   getIdentity: async () => {
     const { data: res } = await apiFetch.get("me");
-    console.log(res?.user);
     return res?.user;
   },
 

@@ -14,6 +14,7 @@ import { StatusField } from './StatusField';
 export const EventList: React.FC = () => (
   <List>
     <Datagrid>
+      <TextField source="id" label="Identifiant" />
       <TextField source="title" label="Titre" />
       <DateField source="date" label="Date" />
       <TextField source="place" label="Lieu" />
