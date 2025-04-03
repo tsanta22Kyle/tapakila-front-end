@@ -1,4 +1,4 @@
-import { Admin, Resource } from "react-admin";
+import { Admin, LoginWithEmail, Resource } from "react-admin";
 import EventIcon from "@mui/icons-material/Event";
 import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
@@ -25,7 +25,7 @@ import MyLoginPage from "./MyLoginPage";
 const App = () => (
   <Admin dataProvider={AppDataprovider}
   authProvider={authProvider}  // Add auth provider
-  loginPage={MyLoginPage} 
+  loginPage={LoginWithEmail}
          >
     <Resource
       name="events"
