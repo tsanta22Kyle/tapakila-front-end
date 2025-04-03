@@ -31,7 +31,7 @@ function EventDetail({ id }: { id: string }) {
   );
   if (isLoading) return <div>Chargement...</div>;
   if (error) return <div>Erreur de chargement</div>;
-  const event: Event = data.data[0];
+  const event: Event = data.data;
   const tickets = event.tickets;
   // console.log("events : ",event);
   

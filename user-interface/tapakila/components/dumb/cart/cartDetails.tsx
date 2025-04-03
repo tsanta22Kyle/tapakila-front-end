@@ -14,6 +14,8 @@ import {
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/app/page";
+import { apiTapakila } from "@/app/login/page";
+import toast from "react-hot-toast";
 
 const formatter = new Intl.NumberFormat("en-GB", {
   style: "currency",
@@ -25,13 +27,36 @@ function CartDetails() {
   const router = useRouter();
   const increment = useStore((state) => state.QuantityIncrement);
   const discrement = useStore((state) => state.QuantityDiscrement);
+  const clearCart = useStore((state) => state.clearCart);
 
   function changePage() {
     router.push("/");
   }
   const cartItems = useStore((state) => state.cartItems);
-  function buy(): void {
+  async function buy(): Promise<void> {
+    
     // axios(apiUrl+"")
+    console.log(cartItems);
+    const userTickets = {
+      userTickets: [
+        ...cartItems.map(
+          (item) =>
+            (item = {
+              ticketId: item.id,
+              quantity: item.quantity,
+            })
+        ),
+      ],
+    };
+    const res = await apiTapakila.post("userTickets/buy", userTickets);
+    // console.log("status",res.status);
+    if (res.status == 200) {
+      router.push("/");
+      clearCart();
+      toast.success("achat effectué !")
+    }else{
+      toast.error("echec de la transaction")
+    }
   }
 
   return (
@@ -102,7 +127,9 @@ function CartDetails() {
               )
             )}
           </div>
-          <button onClick={buy} className={style.buy}>achat</button>
+          <button onClick={buy} className={style.buy}>
+            achat
+          </button>
         </div>
       </div>
     </div>

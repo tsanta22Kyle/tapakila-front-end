@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../../components/dumb/navbar";
-
+import {Toaster} from "react-hot-toast";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
@@ -29,8 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Toaster/>
       <body>{children}</body>
-      
     </html>
   );
 }
