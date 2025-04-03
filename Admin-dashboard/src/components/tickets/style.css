@@ -1,0 +1,17 @@
+.none{
+    /* display: none; */
+    background: #9b1616;
+}
+.inactive{
+    background: #000;
+}
+.wrapper{
+    background: #000;
+    border-radius: 10px;
+    /* border: #9b1616 solid 20px; */
+    /* height: ; */
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+    
+}

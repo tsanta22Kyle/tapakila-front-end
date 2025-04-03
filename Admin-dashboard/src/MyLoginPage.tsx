@@ -6,7 +6,7 @@ import React from 'react';
 const MyLoginPage = () => (
   <Login>
     <LoginForm 
-      noValidate
+      
       defaultValues={{ email: '', password: '' }}
     />
   </Login>

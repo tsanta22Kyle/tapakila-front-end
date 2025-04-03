@@ -8,7 +8,7 @@ import {
   ShowButton,
   DeleteButton,
   ImageField
-} from 'react-admin';
+} from "react-admin"
 import { StatusField } from './StatusField';
 
 export const EventList: React.FC = () => (
@@ -16,9 +16,9 @@ export const EventList: React.FC = () => (
     <Datagrid>
       <TextField source="title" label="Titre" />
       <DateField source="date" label="Date" />
-      <TextField source="location" label="Lieu" />
-      <StatusField source="status" label="Statut" />
-      <ImageField source="image.src" label="Image" />
+      <TextField source="place" label="Lieu" />
+      {/* <StatusField source="status" label="Statut" /> */}
+      <ImageField source="img" label="Image" />
       <EditButton />
       <ShowButton />
       <DeleteButton />
