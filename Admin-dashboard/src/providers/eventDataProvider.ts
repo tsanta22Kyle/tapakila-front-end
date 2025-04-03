@@ -51,7 +51,7 @@ export const eventDataProviders: DataProvider = {
   ): Promise<GetListResult<RecordType>> {
     const { data: res }: { data: { data: { data: any[] } } } =
       await apiFetch.get(`${resource.toLowerCase()}`);
-    console.log(res.data.data);
+    // console.log(res.data.data);
     const data: GetListResult = {
       data: res.data.data,
       total: res.data.data.length,
@@ -80,8 +80,10 @@ export const eventDataProviders: DataProvider = {
     const { ids } = params;
     const promises = ids.map((id) => this.getOne(resource, { id }));
     const results = await Promise.all(promises);
-
-    return { data: results.map((r) => r.data.data[0]) };
+    results.forEach((r)=>{
+      console.log(r.data.data)
+    })
+    return { data: results.map((r) => r.data.data) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource = "events",

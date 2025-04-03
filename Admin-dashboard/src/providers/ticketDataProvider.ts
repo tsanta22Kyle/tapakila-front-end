@@ -52,7 +52,7 @@ export const TicketDataProvider: DataProvider = {
       const url = `${resource.toLowerCase()}/` + id;
       const { data: res } = await apiFetch.get(url);
       const data: GetOneResult = {
-        data: res.data[0],
+        data: res.data,
       };
       return Promise.resolve(data);
     } catch (error) {
@@ -66,7 +66,8 @@ export const TicketDataProvider: DataProvider = {
     const { ids } = params;
     const promises = ids.map((id) => this.getOne(resource, { id }));
     const results = await Promise.all(promises);
-    return { data: results.map((r) => r.data.data[0]) };
+
+    return { data: results.map((r) => r.data.data) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource: string,
@@ -95,9 +96,13 @@ export const TicketDataProvider: DataProvider = {
   ): Promise<CreateResult<ResultRecordType>> {
     
     const {data : newTicket} = params;
+    console.log(newTicket);
+    
     const {data:res}= await apiFetch.post(`${resource.toLowerCase()}`,{...newTicket,availability : true,createdAt : new Date(),updatedAt : new Date()})
+    
+    console.log(res)
     const data : CreateResult = {
-      data : res,
+      data : res.data,
     }
     return Promise.resolve(data);
     

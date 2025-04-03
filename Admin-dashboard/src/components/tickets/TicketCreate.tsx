@@ -4,7 +4,7 @@ export const TicketCreate : React.FC = ()=>(
     <Create>
     <SimpleForm>
         <ReferenceInput 
-        source="event_id" 
+        source="eventId" 
         reference="events" 
         label="Événement"
         >
@@ -25,6 +25,7 @@ export const TicketCreate : React.FC = ()=>(
             "VIP","EARLY BIRD","STANDARD"
         ]} />
 
+        <NumberInput source="price"></NumberInput>
 
     </SimpleForm>
 </Create>
