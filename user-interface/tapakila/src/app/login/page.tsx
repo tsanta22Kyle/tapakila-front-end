@@ -51,7 +51,7 @@ export default function Login() {
   return (
     <>
       <div className="background">
-        <div className="container">
+        <div className="containerL">
           <div className="form-box register">
             <form onSubmit={handleSubmit(onSubmit)} action="">
               <h1>Login</h1>
@@ -74,7 +74,7 @@ export default function Login() {
                 <i className="bx bsx-lock-alt"></i>
               </div>
               <div className="forgot-link">
-                <a onClick={()=>{router.push('/register')}} href="#">besoin de créer un compte?</a>
+                <a onClick={()=>{router.push('/register')}} href="#">Besoin de créer un compte? Cliquez ici</a>
               </div>
               <button type="submit" className="btn">
                 Login

@@ -1,88 +1,178 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import useSWR from "swr";
+import axios from "axios";
+import { useMemo, useState } from "react";
 
-import { apiUrl } from "@/app/page";
+import { apiTapakila } from "@/app/login/page"; // Your configured API client
 import LoadingFetch from "../dumb/backend_error/loading";
 import BackendError from "../dumb/backend_error/backend_error";
 import "./profile.css";
+import useAuth from "../../globalStores/useAuth";
 
-const ipAddr = "192.168.88.89";
-const port = "3333";
-
-// Type Definitions
 type User = {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
+  avatar?: string;
 };
 
-type Reservation = {
+type Ticket = {
   id: string;
   eventName: string;
   eventDate: string;
   ticketType: string;
   isUpcoming: boolean;
+  location?: string;
+  reservationDate?: string;
 };
 
 export default function Profile() {
-  const [user, setUser] = useState<User | null>(null);
-  const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [filteredReservations, setFilteredReservations] = useState<Reservation[]>([]);
-  const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
-
   const router = useRouter();
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const { user: authUser, isLoading: isAuthLoading } = useAuth();
+  const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
   
-  const { data, error, isLoading } = useSWR(`${apiUrl}tickets`, fetcher);
-  
-  if (isLoading) return <LoadingFetch />;
-  if (error) return <BackendError />;
-  
-  const tickets = data?.data?.data || [];
+  // Fetch tickets using SWR with your apiTapakila client
+  const { 
+    data: ticketsData, 
+    error: ticketsError, 
+    isLoading: isTicketsLoading,
+    mutate 
+  } = useSWR<Ticket[]>(
+    'userTickets/all',
+    async () => {
+      const res = await apiTapakila.get('http://localhost:3333/api/v1/userTickets/all');
+      return res.data;
+    }
+  );
+
+  const tickets = ticketsData || [];
+  const filteredTickets = useMemo(() => {
+    if (filter === "all") return tickets;
+    return tickets.filter(ticket => 
+      filter === "upcoming" ? ticket.isUpcoming : !ticket.isUpcoming
+    );
+  }, [tickets, filter]);
 
   const handleCancel = async (id: string) => {
     try {
-      await axios.delete(`http://${ipAddr}:${port}/api/v1/reservation/${id}`, { withCredentials: true });
-      setReservations((prevReservations) => prevReservations.filter((res) => res.id !== id));
+      await apiTapakila.delete(`me/tickets/${id}`);
+      // Optimistic UI update
+      mutate(tickets.filter(ticket => ticket.id !== id), false);
     } catch (error) {
-      console.error("Failed to cancel reservation", error);
+      console.error("Failed to cancel ticket", error);
+      // Optionally show error to user
     }
   };
 
-  const dummyUser = {
-    avatar: "https://via.placeholder.com/150",
-    fullName: "John Doe",
-    email: "johndoe@example.com",
-  };
+  if (isAuthLoading || isTicketsLoading) return <LoadingFetch />;
+  if (ticketsError) return <BackendError />;
+  if (!authUser) {
+    router.push("/");
+    return null;
+  }
 
   return (
-    <>
-    <div className="main">
-      <div className="user-container">
-        <main className="mainContent">
-          <div className="container-in">
-            <img src={dummyUser.avatar} alt="User Avatar" className="user-avatar" />
-            <div className="user-details">
-              <h2 className="user-name">{dummyUser.fullName}</h2>
-              <p className="user-email">{dummyUser.email}</p>
+    <div className="profile-component">
+      <div className="exterior">
+        <div className="dashboard-container">
+          <header className="dashboard-header">
+            <h1>Tableau de Bord</h1>
+            <div className="user-profile">
+              <img 
+                src={authUser.avatar || "https://via.placeholder.com/50"} 
+                alt="Photo de profil" 
+                className="profile-pic" 
+              />
+              <span>Bonjour, {authUser.name}</span>
             </div>
-          </div>
+          </header>
 
-          <div>
-            <h2>Mes Réservations</h2>
-            <div className="filterButtons">
-              <button className="filterButton all" onClick={() => setFilter("all")}>Tous</button>
-              <button className="filterButton upcoming" onClick={() => setFilter("upcoming")}>À Venir</button>
-              <button className="filterButton past" onClick={() => setFilter("past")}>Passés</button>
-            </div>
-          </div>
-        </main>
+          <main className="dashboard-main">
+            <section className="profile-overview">
+              <h2>Aperçu du Profil</h2>
+              <div className="profile-details">
+                <div className="detail-item">
+                  <span className="detail-label">Nom:</span>
+                  <span className="detail-value">{authUser.fullName}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Email:</span>
+                  <span className="detail-value">{authUser.email}</span>
+                </div>
+                <button className="btn btn-edit">Modifier le profil</button>
+              </div>
+            </section>
+
+            <section className="bookings-section">
+              <h2>Mes Billets</h2>
+              <div className="filters">
+                {(["all", "upcoming", "past"] as const).map((filterType) => (
+                  <button 
+                    key={filterType}
+                    className={`filter-btn ${filter === filterType ? "active" : ""}`}
+                    onClick={() => setFilter(filterType)}
+                  >
+                    {filterType === "all" && "Tous"}
+                    {filterType === "upcoming" && "À venir"}
+                    {filterType === "past" && "Passés"}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="bookings-list">
+                {filteredTickets.length > 0 ? (
+                  filteredTickets.map((ticket) => (
+                    <TicketCard
+                      key={ticket.id}
+                      ticket={ticket}
+                      onCancel={handleCancel}
+                    />
+                  ))
+                ) : (
+                  <p className="no-tickets">Aucun billet trouvé</p>
+                )}
+              </div>
+            </section>
+          </main>
+        </div>
       </div>
     </div>
-    </>
+  );
+}
+
+// Extracted TicketCard component
+function TicketCard({ 
+  ticket,
+  onCancel
+}: {
+  ticket: Ticket;
+  onCancel: (id: string) => void;
+}) {
+  return (
+    <div className={`ticket-card ${ticket.isUpcoming ? "upcoming" : "past"}`}>
+      <div className="ticket-header">
+        <h3>{ticket.eventName}</h3>
+        <span className="ticket-date">{ticket.eventDate}</span>
+      </div>
+      <div className="ticket-details">
+        <p><strong>Type de billet:</strong> {ticket.ticketType}</p>
+        {ticket.location && (
+          <p><strong>Lieu:</strong> {ticket.location}</p>
+        )}
+        {ticket.reservationDate && (
+          <p><strong>Réservé le:</strong> {ticket.reservationDate}</p>
+        )}
+      </div>
+      {ticket.isUpcoming && (
+        <button 
+          className="btn btn-cancel"
+          onClick={() => onCancel(ticket.id)}
+        >
+          Annuler
+        </button>
+      )}
+    </div>
   );
 }
