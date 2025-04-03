@@ -27,7 +27,15 @@ export const  AppDataprovider :DataProvider = {
         }
     },
     getMany: function <RecordType extends RaRecord = any>(resource: string, params: GetManyParams<RecordType> & QueryFunctionContext): Promise<GetManyResult<RecordType>> {
-        throw new Error("Function not implemented.");
+        switch (resource) {
+            case 'events':
+                return eventDataProviders.getMany(resource, params);
+            case 'tickets':
+                return TicketDataProvider.getMany(resource, params);
+            default:
+                return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
+        }
+        // throw new Error("Function not implemented.");
     },
     getManyReference: function <RecordType extends RaRecord = any>(resource: string, params: GetManyReferenceParams & QueryFunctionContext): Promise<GetManyReferenceResult<RecordType>> {
         throw new Error("Function not implemented.");
@@ -63,7 +71,15 @@ export const  AppDataprovider :DataProvider = {
         }
     },
     delete: function <RecordType extends RaRecord = any>(resource: string, params: DeleteParams<RecordType>): Promise<DeleteResult<RecordType>> {
-        throw new Error("Function not implemented.");
+        switch (resource) {
+            case 'events':
+                return eventDataProviders.delete(resource, params);
+            case 'tickets':
+                return TicketDataProvider.delete(resource, params);
+            default:
+                return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
+        }
+     
     },
     deleteMany: function <RecordType extends RaRecord = any>(resource: string, params: DeleteManyParams<RecordType>): Promise<DeleteManyResult<RecordType>> {
         throw new Error("Function not implemented.");

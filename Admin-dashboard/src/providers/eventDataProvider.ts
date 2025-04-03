@@ -72,11 +72,16 @@ export const eventDataProviders: DataProvider = {
     return Promise.resolve(data);
     //  throw new Error('Function not implemented.');
   },
-  getMany: function <RecordType extends RaRecord = any>(
+  getMany: async function <RecordType extends RaRecord = any>(
+    //nasiko getMany temporaire
     resource = "events",
     params: GetManyParams<RecordType> & QueryFunctionContext,
   ): Promise<GetManyResult<RecordType>> {
-    throw new Error("Function not implemented.");
+    const { ids } = params;
+    const promises = ids.map((id) => this.getOne(resource, { id }));
+    const results = await Promise.all(promises);
+
+    return { data: results.map((r) => r.data.data[0]) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource = "events",

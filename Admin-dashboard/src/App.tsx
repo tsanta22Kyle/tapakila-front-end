@@ -18,6 +18,7 @@ import { TicketList } from "./components/tickets/TicketList";
 import { TicketCreate } from "./components/tickets/TicketCreate";
 import { AppDataprovider } from "./providers/App_DataProvider";
 import { ticketShow } from "./components/tickets/Ticket_show";
+import { TicketEdit } from "./components/tickets/TicketUpdate";
 
 const App = () => (
   <Admin dataProvider={AppDataprovider}>
@@ -32,7 +33,7 @@ const App = () => (
       name="tickets"
       list={TicketList}
       create={TicketCreate}
-      edit={EventForm}
+      edit={TicketEdit}
       icon={EventIcon}
       show={ticketShow}
     />

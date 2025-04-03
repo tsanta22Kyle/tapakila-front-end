@@ -29,12 +29,9 @@ export const TicketDataProvider: DataProvider = {
     resource: string,
     params: GetListParams & QueryFunctionContext,
   ): Promise<GetListResult<RecordType>> {
-    
-    
-
     try {
-        const {page,perPage} = params.pagination;
-const url = `${resource.toLowerCase()}?page=${page}&pageSize=${perPage}`;
+      const { page, perPage } = params.pagination;
+      const url = `${resource.toLowerCase()}?page=${page}&pageSize=${perPage}`;
       const { data: res }: { data: { data: { data: any[] } } } =
         await apiFetch.get(url);
       const data: GetListResult = {
@@ -51,23 +48,25 @@ const url = `${resource.toLowerCase()}?page=${page}&pageSize=${perPage}`;
     params: GetOneParams<RecordType> & QueryFunctionContext,
   ): Promise<GetOneResult<RecordType>> {
     try {
-        const {id} = params;
-        const url = `${resource.toLowerCase()}/`+id;
-        const {data:res} = await apiFetch.get(url);  
-        const data : GetOneResult = {
-            data : res.data[0]
-        }
-        return Promise.resolve(data);
+      const { id } = params;
+      const url = `${resource.toLowerCase()}/` + id;
+      const { data: res } = await apiFetch.get(url);
+      const data: GetOneResult = {
+        data: res.data[0],
+      };
+      return Promise.resolve(data);
     } catch (error) {
-        return Promise.reject(error)
+      return Promise.reject(error);
     }
-    
   },
-  getMany: function <RecordType extends RaRecord = any>(
+  getMany: async function <RecordType extends RaRecord = any>(
     resource: string,
     params: GetManyParams<RecordType> & QueryFunctionContext,
   ): Promise<GetManyResult<RecordType>> {
-    throw new Error("Function not implemented.");
+    const { ids } = params;
+    const promises = ids.map((id) => this.getOne(resource, { id }));
+    const results = await Promise.all(promises);
+    return { data: results.map((r) => r.data.data[0]) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource: string,
@@ -87,20 +86,32 @@ const url = `${resource.toLowerCase()}?page=${page}&pageSize=${perPage}`;
   ): Promise<UpdateManyResult<RecordType>> {
     throw new Error("Function not implemented.");
   },
-  create: function <
+  create: async function <
     RecordType extends Omit<RaRecord, "id"> = any,
     ResultRecordType extends RaRecord = RecordType & { id: Identifier },
   >(
     resource: string,
     params: CreateParams,
   ): Promise<CreateResult<ResultRecordType>> {
-    throw new Error("Function not implemented.");
+    
+    const {data : newTicket} = params;
+    const {data:res}= await apiFetch.post(`${resource.toLowerCase()}`,{...newTicket,availability : true,createdAt : new Date(),updatedAt : new Date()})
+    const data : CreateResult = {
+      data : res,
+    }
+    return Promise.resolve(data);
+    
   },
-  delete: function <RecordType extends RaRecord = any>(
+  delete:async function <RecordType extends RaRecord = any>(
     resource: string,
     params: DeleteParams<RecordType>,
   ): Promise<DeleteResult<RecordType>> {
-    throw new Error("Function not implemented.");
+    const{id}= params;
+    const {data:res}= await apiFetch.delete(`${resource.toLowerCase()}/${id}`);
+    const data : DeleteResult={
+      data : res
+    }
+    return Promise.resolve(data)
   },
   deleteMany: function <RecordType extends RaRecord = any>(
     resource: string,
