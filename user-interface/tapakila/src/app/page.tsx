@@ -13,6 +13,7 @@ import Backend_error from "../../components/dumb/backend_error/backend_error";
 import LoadingFetch from "../../components/dumb/backend_error/loading";
 import CartButton from "../../components/dumb/cart/cartButton";
 import useAuth from "../../globalStores/useAuth";
+import Footer from "../../components/dumb/footer/footer";
  const fetcher = (url : string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -65,6 +66,7 @@ export default function Home() {
   if (loading) return <LoadingFetch></LoadingFetch>;
   
   const limitedEvents = data.data.data.slice(0,5)
+  const popular = data.data.data.slice(5,10)
   console.log(data.data.data)
 
   return (
@@ -75,11 +77,12 @@ export default function Home() {
      <HeroSection popularEvents={limitedEvents} ></HeroSection>
       <main className="main-page">
         <div className="adds"><p>publicité</p></div>
-        <ByCategoryEvents category={"populaire en ce moment"} eventList={limitedEvents}></ByCategoryEvents>
+        <ByCategoryEvents category={"populaire en ce moment"} eventList={popular}></ByCategoryEvents>
         <ByCategoryEvents category={"découvrir"} eventList={limitedEvents}></ByCategoryEvents>
-        {/* <ByCategoryEvents category={""} eventList={limitedEvents}></ByCategoryEvents> */}
+       
       </main>
     </div>
+    <Footer></Footer>
     </div>
   );
 }
