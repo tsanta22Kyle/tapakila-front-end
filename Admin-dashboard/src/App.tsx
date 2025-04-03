@@ -1,4 +1,4 @@
-import { Admin, Resource } from "react-admin";
+import { Admin, LoginWithEmail, Resource } from "react-admin";
 import EventIcon from "@mui/icons-material/Event";
 import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
