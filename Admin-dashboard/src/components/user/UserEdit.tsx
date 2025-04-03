@@ -4,7 +4,7 @@ export const UserEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="username" validate={required()} />
+      <TextInput source="fullName" validate={required()} />
       <TextInput source="email" validate={required()} />
       <SelectInput
         source="role"
