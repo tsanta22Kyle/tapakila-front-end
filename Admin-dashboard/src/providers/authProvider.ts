@@ -26,9 +26,13 @@ export const authProvider: AuthProvider = {
     }
   },
 
-  logout: () => {
+  logout: async () => {
     localStorage.removeItem("user");
-    return fetch("/api/logout").then(() => Promise.resolve());
+    const { data: res } = await apiFetch.post("signout");
+    console.log(res);
+    if (res?.status === 200) {
+      return Promise.resolve()
+    } else return Promise.reject()
   },
 
   checkError: (error) => {
