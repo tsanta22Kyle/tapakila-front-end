@@ -1,10 +1,10 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./signUp.css"
-import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { apiTapakila } from "../login/page";
-import { useForm } from "react-hook-form";
+// import 'boxicons'
 import { useRouter } from "next/navigation";
+import {useForm} from "react-hook-form"
+import { apiTapakila } from "../login/page";
 
 // import 'boxicons'
 
@@ -13,6 +13,11 @@ type RegisterFormInputs = {
   email: string;
   password: string;
 }
+
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+
+// import 'boxicons'
 
 export default function Registration() {
   const {
@@ -44,9 +49,9 @@ export default function Registration() {
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <h1>Registration</h1>
           <div className="input-box">
-            <input type="text" placeholder="Fullname" required {...register("fullName", {required: true})} />
-            <i className="bx bxs-user"></i>
-            <FontAwesomeIcon icon={faUser} className="bx bxs-user font-icon"></FontAwesomeIcon>
+            <input type="text" placeholder="Username" required {...register("fullName",{required : true})} />
+            <FontAwesomeIcon icon={faUser} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
+            {/* <i className="bx bxs-user"></i> */}
           </div>
           <div className="input-box">
             <input type="email" placeholder="Email" required {...register("email", {required: true})} />

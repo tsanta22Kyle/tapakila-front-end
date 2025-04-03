@@ -1,10 +1,11 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "./login.css";
+import toast from "react-hot-toast";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const ipAddr = "localhost";
 const port = "3333";
@@ -27,24 +28,44 @@ export default function Login() {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormInputs>();
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const res = await apiTapakila.post(`signin`, data);
-
-      alert("email = " + res.data.user.email + " \n " + data.password);
-
+      
+      // Si succès (200-299)
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      // const data = res.data.json()
-      console.log(res);
-
-      if (res?.status.toString() != "404") router.push("/");
-      else alert("Invalid credentials");
-    } catch (err) {
-      setError("root", { message: "Email ou mot de passe incorrect" });
+      router.push("/");
+      toast.success("Bienvenue", { className: "dark" });
+      
+    } catch (error: any) {
+     
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+         
+          if (error.response.status === 422) {
+            toast.error("Email ou mot de passe incorrect");
+            setError("password", { message: "Combinaison email/mot de passe invalide" });
+          } 
+         
+          else if (error.response.status === 401) {
+            toast.error("Accès non autorisé");
+          }
+         
+          else {
+            toast.error(`Erreur serveur (${error.response.status})`);
+          }
+        } else {
+       
+          toast.error("Problème de connexion au serveur");
+        }
+      } else {
+       
+        toast.error("Une erreur inattendue est survenue");
+      }
     }
   };
 
@@ -60,24 +81,54 @@ export default function Login() {
                   type="email"
                   placeholder="Email"
                   required
-                  {...register("email", { required: true })}
+                  {...register("email", { 
+                    required: "L'email est requis",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Email invalide"
+                    }
+                  })}
                 />
-                <i className="bx bxs-envelope"></i>
+                {/* <i className="bx bxs-envelope"></i> */}
+                {/* <FontAwesomeIcon icon={faEnvelope} className="font-icon "></FontAwesomeIcon> */}
+                {errors.email && (
+                  <span className="error-message">{errors.email.message}</span>
+                )}
               </div>
               <div className="input-box">
                 <input
                   type="password"
                   placeholder="Password"
                   required
-                  {...register("password", { required: true })}
+                  {...register("password", { 
+                    required: "Le mot de passe est requis",
+                    minLength: {
+                      value: 6,
+                      message: "Minimum 6 caractères"
+                    }
+                  })}
                 />
-                <i className="bx bsx-lock-alt"></i>
+                {/* <i className="bx bsx-lock-alt"></i> */}
+                {errors.password && (
+                  <span className="error-message">{errors.password.message}</span>
+                )}
               </div>
               <div className="forgot-link">
-                <a onClick={()=>{router.push('/register')}} href="#">Besoin de créer un compte? Cliquez ici</a>
+                <a
+                  onClick={() => {
+                    router.push("/register");
+                  }}
+                  href="#"
+                >
+                  besoin de créer un compte?
+                </a>
               </div>
-              <button type="submit" className="btn">
-                Login
+              <button 
+                type="submit" 
+                className="btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Connexion en cours..." : "Login"}
               </button>
               <p>ou se connecter avec</p>
               <div className="social-icons">
@@ -90,7 +141,6 @@ export default function Login() {
           <div className="toggle-box">
             <div className="toggle-panel toggle-left bg-image">
               <h2>Hello, Welcome to tapakila!</h2>
-              {/* <p>Don't have an account?Click on "besoin de créer un compte"</p> */}
             </div>
           </div>
         </div>
