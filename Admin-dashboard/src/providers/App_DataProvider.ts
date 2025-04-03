@@ -144,6 +144,15 @@ export const AppDataprovider: DataProvider = {
     resource: string,
     params: DeleteManyParams<RecordType>,
   ): Promise<DeleteManyResult<RecordType>> {
-    throw new Error("Function not implemented.");
+    switch (resource) {
+      case "events":
+        return eventDataProviders.deleteMany(resource, params);
+      case "tickets":
+        return TicketDataProvider.deleteMany(resource, params);
+      case "users":
+        return userDataProviders.deleteMany(resource, params);
+      default:
+        return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
+    }
   },
 };

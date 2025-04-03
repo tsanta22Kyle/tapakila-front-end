@@ -17,18 +17,18 @@ export const UserList = () => {
       <Datagrid>
         <TextField source="id" />
         <TextField source="fullName" />
-        <TextField source="role" />
         <EmailField source="email" />
-        {permissions === "admin" && (
+        {permissions.includes("admin") && (
           <SelectField
             source="role"
             choices={[
               { id: "user", name: "User" },
               { id: "admin", name: "Admin" },
+              { id: "organizer", name: "Organizer" },
             ]}
           />
         )}
-        {permissions === "admin" && <EditButton />}
+        {permissions.includes("admin") && <EditButton />}
       </Datagrid>
     </List>
   );

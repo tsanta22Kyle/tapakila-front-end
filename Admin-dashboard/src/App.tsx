@@ -14,6 +14,8 @@ import { AppDataprovider } from "./providers/App_DataProvider";
 import { ticketShow } from "./components/tickets/Ticket_show";
 import { TicketEdit } from "./components/tickets/TicketUpdate";
 import { authProvider } from "./providers/authProvider";
+import { UserCreate } from "./components/user/UserCreate";
+import { EventEdit } from "./components/events/EventEdit";
 
 const App = () => (
   <Admin
@@ -21,12 +23,11 @@ const App = () => (
     authProvider={authProvider} // Add auth provider
     loginPage={LoginWithEmail}
   >
-
     <Resource
       name="events"
       list={EventList}
       create={EventCreate}
-      // edit={EventEdit}
+      edit={EventEdit}
       icon={EventIcon}
       show={EventShow}
     />
@@ -37,13 +38,12 @@ const App = () => (
       edit={TicketEdit}
       icon={EventIcon}
       show={ticketShow}
-
     />
     <Resource
       name="users"
       list={UserList}
       edit={UserEdit}
-
+      create={UserCreate}
     />
   </Admin>
 );

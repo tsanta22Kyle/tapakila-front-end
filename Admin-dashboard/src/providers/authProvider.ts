@@ -31,8 +31,8 @@ export const authProvider: AuthProvider = {
     const { data: res } = await apiFetch.post("signout");
     console.log(res);
     if (res?.status === 200) {
-      return Promise.resolve()
-    } else return Promise.reject()
+      return Promise.resolve();
+    } else return Promise.reject();
   },
 
   checkError: (error) => {
@@ -50,5 +50,11 @@ export const authProvider: AuthProvider = {
     return res?.user;
   },
 
-  getPermissions: () => Promise.resolve(),
+  getPermissions: async () => {
+    const { data: res } = await apiFetch.get("me");
+    if (!res?.user) {
+      return Promise.reject();
+    }
+    return Promise.resolve([res?.user?.role]);
+  },
 };

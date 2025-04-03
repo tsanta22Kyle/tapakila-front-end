@@ -100,7 +100,7 @@ export const eventDataProviders: DataProvider = {
       payload,
     );
     const data: UpdateResult = {
-      data: resM,dqtq,w
+      data: res.data
     };
     return Promise.resolve(data);
   },
@@ -151,7 +151,7 @@ export const eventDataProviders: DataProvider = {
     params: DeleteManyParams<RecordType>,
   ): Promise<DeleteManyResult<RecordType>> {
     const { ids } = params;
-    console.log(ids);
+    console.log("hello");
     const { data: res }: DeleteResult = await apiFetch.delete(
       `${resource.toLowerCase()}`,
       {

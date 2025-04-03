@@ -45,8 +45,9 @@ export const userDataProviders: DataProvider = {
     params: GetOneParams<RecordType> & QueryFunctionContext,
   ): Promise<GetOneResult<RecordType>> {
     const { id }: GetOneParams<RecordType> & QueryFunctionContext = params;
-    const { data: res }: { data: { data: any[] } } =
-      await apiFetch.get(`${resource.toLowerCase()}/${id}`);
+    const { data: res }: { data: { data: any[] } } = await apiFetch.get(
+      `${resource.toLowerCase()}/${id}`,
+    );
     // console.log(res.data[0])
     const data: GetOneResult = {
       data: res.data[0],
