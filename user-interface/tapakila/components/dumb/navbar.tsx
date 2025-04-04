@@ -228,7 +228,7 @@ function Navbar({ mode }: { mode: string }) {
                 <FontAwesomeIcon icon={faCircle} className="fa-xl green" ></FontAwesomeIcon>
                 <p>notification</p>
               </li>
-              <li>
+              <li onClick={()=>{router.push('/userSettings')}}>
                 <FontAwesomeIcon icon={faGear} className="fa-xl green" ></FontAwesomeIcon>
                 <p>paramètres</p>
               </li>

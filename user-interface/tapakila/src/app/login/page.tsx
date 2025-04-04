@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "./login.css";
 import toast from "react-hot-toast";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const ipAddr = "localhost";
 const port = "3333";
@@ -90,7 +91,7 @@ export default function Login() {
                   })}
                 />
                 {/* <i className="bx bxs-envelope"></i> */}
-                {/* <FontAwesomeIcon icon={faEnvelope} className="font-icon "></FontAwesomeIcon> */}
+                <FontAwesomeIcon icon={faEnvelope} className="font-icon "></FontAwesomeIcon> 
                 {errors.email && (
                   <span className="error-message">{errors.email.message}</span>
                 )}
@@ -109,6 +110,7 @@ export default function Login() {
                   })}
                 />
                 {/* <i className="bx bsx-lock-alt"></i> */}
+                <FontAwesomeIcon icon={faLock} className="font-icon "></FontAwesomeIcon> 
                 {errors.password && (
                   <span className="error-message">{errors.password.message}</span>
                 )}
@@ -132,8 +134,8 @@ export default function Login() {
               </button>
               <p>ou se connecter avec</p>
               <div className="social-icons">
-                <a href="" className="bx bxl-google"></a>
-                <a href="" className="bx bxl-facebook"></a>
+                <FontAwesomeIcon icon={faGoogle} className="sIcon"></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faFacebook}></FontAwesomeIcon>
               </div>
             </form>
           </div>

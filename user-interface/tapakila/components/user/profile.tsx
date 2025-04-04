@@ -120,7 +120,7 @@ export default function Profile() {
                   <span className="detail-label">Email:</span>
                   <span className="detail-value">{authUser.email}</span>
                 </div>
-                <button className="btn btn-edit">Modifier le profil</button>
+                <button className="btn btn-edit" onClick={()=>{router.push('/userSettings')}}>Modifier le profil</button>
               </div>
             </section>
 

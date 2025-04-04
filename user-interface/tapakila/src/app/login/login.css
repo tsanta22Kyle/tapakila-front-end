@@ -66,7 +66,7 @@ form {
   font-weight: 400;
 }
 
-.input-box i{
+.input-box .font-icon{
   position: absolute;
   right: 20px;
   top: 50%;
@@ -104,14 +104,21 @@ form {
 }
 
 .social-icons {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  border: 2px solid #ccc;
+  border: none;
   border-radius: 8px;
   font-size: 24px;
   color: #333;
   text-decoration: none;
   margin: 0 8px;
+}
+
+.sIcon {
+  margin-right: 15px;
 }
 
 .toggle-box{
