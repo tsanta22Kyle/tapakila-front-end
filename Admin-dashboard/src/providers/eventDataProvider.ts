@@ -50,13 +50,14 @@ export const eventDataProviders: DataProvider = {
     resource = "events",
     params: GetListParams & QueryFunctionContext,
   ): Promise<GetListResult<RecordType>> {
-    const { data: res }: { data: { data: { data: any[] } } } =
+    const { data: res }: { data: { data: { data: any[]; meta: any } } } =
       await apiFetch.get(`${resource.toLowerCase()}`);
 
     // console.log(res.data.data);
     const data: GetListResult = {
       data: res.data.data,
       total: res.data.data.length,
+      meta: res.data.meta,
     };
     return Promise.resolve(data);
   },
@@ -103,8 +104,9 @@ export const eventDataProviders: DataProvider = {
       payload,
     );
     const data: UpdateResult = {
-      data: res.data
+      data: res?.data,
     };
+    console.log(data);
     return Promise.resolve(data);
   },
   updateMany: function <RecordType extends RaRecord = any>(

@@ -14,6 +14,7 @@ import LoadingFetch from "../../components/dumb/backend_error/loading";
 import CartButton from "../../components/dumb/cart/cartButton";
 import useAuth from "../../globalStores/useAuth";
 import Footer from "../../components/dumb/footer/footer";
+import EventFilter from "../../components/dumb/eventFilter/eventFilter";
  const fetcher = (url : string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -78,6 +79,7 @@ export default function Home() {
       <main className="main-page">
         <div className="adds"><p>publicité</p></div>
         <ByCategoryEvents category={"populaire en ce moment"} eventList={popular}></ByCategoryEvents>
+        <EventFilter></EventFilter>
         <ByCategoryEvents category={"découvrir"} eventList={limitedEvents}></ByCategoryEvents>
        
       </main>

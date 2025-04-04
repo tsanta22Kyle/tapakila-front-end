@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Create,
+  Edit,
   DateInput,
   required,
   SelectInput,
@@ -12,7 +12,7 @@ import {
 export const EventEdit: React.FC = () => {
   const { identity } = useGetIdentity();
   return (
-    <Create>
+    <Edit>
       <SimpleForm>
         <TextInput
           source="title"
@@ -99,6 +99,6 @@ export const EventEdit: React.FC = () => {
           validate={[required()]}
         />
       </SimpleForm>
-    </Create>
+    </Edit>
   );
 };

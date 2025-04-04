@@ -13,7 +13,6 @@ export const authProvider: AuthProvider = {
         email: email,
         password: password,
       });
-      console.log("res", res?.user);
 
       // if (!res.ok) {
       //   throw new Error('Email ou mot de passe incorrect');
@@ -21,6 +20,7 @@ export const authProvider: AuthProvider = {
       // localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res?.user));
       localStorage.setItem("auth", "true");
+      return { redirectTo: "/events" };
     } catch (error) {
       throw new Error("email ou mot de passe invalides");
     }
@@ -29,7 +29,6 @@ export const authProvider: AuthProvider = {
   logout: async () => {
     localStorage.removeItem("user");
     const { data: res } = await apiFetch.post("signout");
-    console.log(res);
     if (res?.status === 200) {
       return Promise.resolve();
     } else return Promise.reject();

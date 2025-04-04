@@ -13,16 +13,19 @@
     padding-bottom: 20px;
   }
   
-  .logoSection h2 {
+  /* .logoSection h2 {
     font-size: 24px;
     margin: 0;
-  }
+  } */
   
   .logoSection p {
     font-size: 14px;
     color: #aaa;
   }
-  
+  .logoSection h1{
+    display: flex;
+    align-items: center;
+  }
   .links {
     display: flex;
     justify-content: center;
