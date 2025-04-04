@@ -82,9 +82,9 @@ export const eventDataProviders: DataProvider = {
     const promises = ids.map((id) => this.getOne(resource, { id }));
     const results = await Promise.all(promises);
     results.forEach((r)=>{
-      console.log(r.data.data)
+      console.log(r.data)
     })
-    return { data: results.map((r) => r.data.data) };
+    return { data: results.map((r) => r.data == undefined || r.data == null?r.data.data:r.data) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource = "events",

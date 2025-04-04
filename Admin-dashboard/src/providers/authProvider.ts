@@ -3,58 +3,58 @@ import { AuthProvider } from "react-admin";
 import { apiFetch } from "../axios.config";
 export const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
-    // Hardcoded credentials for testing
-    // if (username === "admin" && password === "password123") {
-    //   return Promise.resolve();
-    // }
     try {
-      console.log(email, password);
-      const { data: res } = await apiFetch.post("signin", {
-        email: email,
-        password: password,
-      });
-      console.log("res", res?.user);
-
-      // if (!res.ok) {
-      //   throw new Error('Email ou mot de passe incorrect');
-      // }
-      // localStorage.setItem("token", res.token);
-      localStorage.setItem("user", JSON.stringify(res?.user));
-      localStorage.setItem("auth", "true");
+      const { data: res } = await apiFetch.post("signin", { email, password });
+      localStorage.setItem("user", JSON.stringify(res.user));
+      return Promise.resolve();
     } catch (error) {
-      throw new Error("email ou mot de passe invalides");
+      throw new Error("Échec de la connexion");
     }
   },
 
   logout: async () => {
-    localStorage.removeItem("user");
-    const { data: res } = await apiFetch.post("signout");
-    console.log(res);
-    if (res?.status === 200) {
+    try {
+      await apiFetch.post("signout");
+    } finally {
+      localStorage.removeItem("user");
       return Promise.resolve();
-    } else return Promise.reject();
+    }
   },
 
   checkError: (error) => {
-    if (error.status === 401 || error.status === 403) {
+    if (error.status === 401) {
+      localStorage.removeItem("user");
       return Promise.reject();
     }
     return Promise.resolve();
   },
 
   checkAuth: () => {
-    return localStorage.getItem("user") ? Promise.resolve() : Promise.reject();
-  },
-  getIdentity: async () => {
-    const { data: res } = await apiFetch.get("me");
-    return res?.user;
-  },
-
-  getPermissions: async () => {
-    const { data: res } = await apiFetch.get("me");
-    if (!res?.user) {
+    const user = localStorage.getItem("user");
+    if (!user) return Promise.reject();
+    
+    try {
+      const parsed = JSON.parse(user);
+      if (!parsed.id) throw new Error("Invalid user data");
+      return Promise.resolve();
+    } catch {
+      localStorage.removeItem("user");
       return Promise.reject();
     }
-    return Promise.resolve([res?.user?.role]);
+  },
+  getIdentity: async () => {
+    try {
+      const { data: res } = await apiFetch.get("me");
+      console.log(res.user)
+      const user = res.user;
+      return { id: user.id, fullName: user.fullName || user.email };
+    } catch (error) {
+      return Promise.reject();
+    }
+  },
+  
+  getPermissions: () => {
+    const user = localStorage.getItem("user");
+    return user ? Promise.resolve(["user"]) : Promise.reject(); // Rôle par défaut
   },
 };

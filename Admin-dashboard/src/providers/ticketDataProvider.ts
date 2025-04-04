@@ -75,11 +75,23 @@ export const TicketDataProvider: DataProvider = {
   ): Promise<GetManyReferenceResult<RecordType>> {
     throw new Error("Function not implemented.");
   },
-  update: function <RecordType extends RaRecord = any>(
+  update: async function <RecordType extends RaRecord = any>(
     resource: string,
     params: UpdateParams,
   ): Promise<UpdateResult<RecordType>> {
-    throw new Error("Function not implemented.");
+    // throw new Error("Function not implemented.");
+    const {data: updateTicketData , id} = params;
+    console.log("update",updateTicketData)
+    const {data : res} : UpdateResult = await apiFetch.put(
+      `${resource.toLowerCase()}/${id}`,
+      updateTicketData,
+    );
+    console.log("response",res)
+
+    const data : UpdateResult = {
+      data : res.data
+    }
+    return Promise.resolve(data);
   },
   updateMany: function <RecordType extends RaRecord = any>(
     resource: string,
@@ -96,13 +108,14 @@ export const TicketDataProvider: DataProvider = {
   ): Promise<CreateResult<ResultRecordType>> {
     
     const {data : newTicket} = params;
-    console.log(newTicket);
+    // console.log(newTicket);
+    const createdTickets = {...newTicket,availability : true,createdAt : new Date(),updatedAt : new Date()};
     
-    const {data:res}= await apiFetch.post(`${resource.toLowerCase()}`,{...newTicket,availability : true,createdAt : new Date(),updatedAt : new Date()})
+    // console.log(createdTickets)
+    const {data:res} : CreateResult= await apiFetch.post(`${resource.toLowerCase()}`,createdTickets)
     
-    console.log(res)
     const data : CreateResult = {
-      data : res.data,
+      data : res?.data,
     }
     return Promise.resolve(data);
     
@@ -113,6 +126,7 @@ export const TicketDataProvider: DataProvider = {
   ): Promise<DeleteResult<RecordType>> {
     const{id}= params;
     const {data:res}= await apiFetch.delete(`${resource.toLowerCase()}/${id}`);
+
     const data : DeleteResult={
       data : res
     }

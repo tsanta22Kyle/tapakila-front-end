@@ -43,7 +43,7 @@ const App = () => (
       name="users"
       list={UserList}
       edit={UserEdit}
-      create={UserCreate}
+      // create={UserCreate}
     />
   </Admin>
 );
