@@ -1,21 +1,3 @@
-// import { DataProvider, fetchUtils } from 'react-admin';
-// import simpleRestProvider from 'ra-data-simple-rest';
-
-// const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333/api/v1';
-
-// const httpClient = fetchUtils.fetchJson;
-
-// const baseDataProvider = simpleRestProvider(apiUrl, httpClient);
-
-// export const dataProvider: DataProvider = {
-//   ...baseDataProvider,
-//   getList: baseDataProvider.getList,
-//   getOne: baseDataProvider.getOne,
-//   getMany: baseDataProvider.getMany,
-//   getManyReference: baseDataProvider.getManyReference,
-//   updateMany: baseDataProvider.updateMany,
-//   deleteMany: baseDataProvider.deleteMany,
-// };
 
 import {
   CreateParams,
@@ -83,9 +65,9 @@ export const eventDataProviders: DataProvider = {
     const promises = ids.map((id) => this.getOne(resource, { id }));
     const results = await Promise.all(promises);
     results.forEach((r)=>{
-      console.log(r.data.data)
+      console.log(r.data)
     })
-    return { data: results.map((r) => r.data.data) };
+    return { data: results.map((r) => r.data == undefined || r.data == null?r.data.data:r.data) };
   },
   getManyReference: function <RecordType extends RaRecord = any>(
     resource = "events",

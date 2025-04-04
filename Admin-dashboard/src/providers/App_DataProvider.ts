@@ -77,20 +77,20 @@ export const AppDataprovider: DataProvider = {
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
     // throw new Error("Function not implemented.");
-  },
-  getManyReference: function <RecordType extends RaRecord = any>(
+},
+getManyReference: function <RecordType extends RaRecord = any>(
     resource: string,
     params: GetManyReferenceParams & QueryFunctionContext,
-  ): Promise<GetManyReferenceResult<RecordType>> {
+): Promise<GetManyReferenceResult<RecordType>> {
     throw new Error("Function not implemented.");
   },
   update: function <RecordType extends RaRecord = any>(
     resource: string,
     params: UpdateParams,
-  ): Promise<UpdateResult<RecordType>> {
+): Promise<UpdateResult<RecordType>> {
     switch (resource) {
-      case "events":
-        return eventDataProviders.update(resource, params);
+        case "events":
+            return eventDataProviders.update(resource, params);
       case "tickets":
         return TicketDataProvider.update(resource, params);
       case "users":

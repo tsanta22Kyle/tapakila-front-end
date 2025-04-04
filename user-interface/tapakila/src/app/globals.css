@@ -809,6 +809,12 @@ a {
   background-color: #000;
   color: var(---secondary--);
 }
+.avatar{
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
 @media screen and (max-width: 768px) {
   .thumbnails-container {
     justify-content: start;

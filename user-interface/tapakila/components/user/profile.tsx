@@ -10,6 +10,10 @@ import LoadingFetch from "../dumb/backend_error/loading";
 import BackendError from "../dumb/backend_error/backend_error";
 import "./profile.css";
 import useAuth from "../../globalStores/useAuth";
+import { apiUrl } from "@/app/page";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 type User = {
   id: string;
@@ -19,6 +23,8 @@ type User = {
 };
 
 type Ticket = {
+  ticket: any;
+  category: any;
   id: string;
   eventName: string;
   eventDate: string;
@@ -69,12 +75,25 @@ export default function Profile() {
   }, [tickets, filter]);
   // console.log(tickets[0].ticket.date < new Date())
 
-  const handleCancel = async (id: string) => {
+  const handleCancel = async (ticketDeleted) => {
     try {
-      await apiTapakila.delete(`userTickets/all/${id}`);
+      console.log("id : "+ticketDeleted.id);
+      const deletedId = ticketDeleted.id;
+      // console.log(ticket.quantity);
+      
+    //  const  canceledTicket = (tickets.filter((t)=> t.id == id));
+    const res =   await apiTapakila.delete(`userTickets/cancel/${ticketDeleted.id}`,{data : {
+      ticketId : ticketDeleted.ticketId,
+      quantity : ticketDeleted.quantity
+    }});
+      if(res.status == 404){
+        // router.refresh()
+        toast.error("error")
+      }
       // Optimistic UI update
+      
       mutate(
-        tickets.filter((ticket) => ticket.id !== id),
+        tickets.filter((ticket) => ticket.id !== deletedId),
         false
       );
     } catch (error) {
@@ -99,7 +118,7 @@ export default function Profile() {
           <header className="dashboard-header">
             <h1>Tableau de Bord</h1>
             <div className="user-profile">
-              <img
+              {/* <img
                 src={authUser.avatar || "https://via.placeholder.com/50"}
                 alt="Photo de profil"
                 className="profile-pic"
@@ -144,13 +163,15 @@ export default function Profile() {
 
               <div className="bookings-list">
                 {filteredTickets.length > 0 ? (
-                  filteredTickets.map((ticket) => (
+                  filteredTickets.map((ticket) => 
                     <TicketCard
                       key={ticket.id}
                       ticket={ticket}
-                      onCancel={handleCancel}
+                      onCancel={()=>{
+                        handleCancel(ticket)
+                      }}
                     />
-                  ))
+                  )
                 ) : (
                   <p className="no-tickets">Aucun billet trouvé</p>
                 )}
@@ -163,6 +184,8 @@ export default function Profile() {
   );
 }
 
+
+
 // Extracted TicketCard component
 function TicketCard({
   ticket,
@@ -171,30 +194,52 @@ function TicketCard({
   ticket: Ticket;
   onCancel: (id: string) => void;
 }) {
+
+  const eventId = ticket?.ticket?.eventId;
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+
+  const { data: eventData, error: eventError } = useSWR(
+    eventId ? `${apiUrl}events/${eventId}` : null, 
+    fetcher
+  );
+  if (!eventData && eventId) return <div>Chargement de l'événement...</div>;
+  if (eventError) return <div>Erreur événement</div>;
+
+  console.log("ticket",eventData);
+  
   return (
-    <div className={`ticket-card ${ticket.isUpcoming ? "upcoming" : "past"}`}>
+    <div className={`ticket-card ${ new Date(
+      ticket.ticket.date.slice(0, 4),
+      ticket.ticket.date.slice(5, 7),
+      ticket.ticket.date.slice(8, 10)
+    ) > new Date() ? "upcoming" : "past"}`}>
       <div className="ticket-header">
         <h3>{ticket.eventName}</h3>
-        <span className="ticket-date">{ticket.eventDate}</span>
+        <span className="ticket-date">{eventData.data.date.slice(0,10)}</span>
       </div>
       <div className="ticket-details">
         <p>
-          <strong>Type de billet:</strong> {ticket.ticketType}
+          <strong> {eventData.data.title} - {ticket.ticket.category}</strong> 
         </p>
-        {ticket.location && (
-          <p>
-            <strong>Lieu:</strong> {ticket.location}
+        {eventData.data.place && (
+          <p className="desc">
+            <strong>{eventData.data.place}</strong> 
           </p>
         )}
         {ticket.reservationDate && (
           <p>
-            <strong>Réservé le:</strong> {ticket.reservationDate}
+            <strong>Réservé le:</strong> {ticket.ticket.date}
           </p>
         )}
       </div>
-      {ticket.isUpcoming && (
+      {new Date(
+      ticket.ticket.date.slice(0, 4),
+      ticket.ticket.date.slice(5, 7),
+      ticket.ticket.date.slice(8, 10)
+    ) > new Date() && (
         <button className="btn btn-cancel" onClick={() => onCancel(ticket.id)}>
-          Annuler
+          <FontAwesomeIcon icon={faXmark} className="fa-xl"></FontAwesomeIcon>
         </button>
       )}
     </div>

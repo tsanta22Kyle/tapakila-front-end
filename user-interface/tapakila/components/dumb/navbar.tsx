@@ -1,7 +1,6 @@
 "use client";
 import { ChangeEvent, useEffect, useState } from "react";
 import ticketLogo from "../../public/ticketlogo.png";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleUp,
@@ -21,7 +20,6 @@ import {
   faUserGear,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { useRouter } from "next/navigation";
 import Dropdown from "./dropdown_nav/nav_dropdown";
 import { io } from "socket.io-client";
@@ -35,15 +33,18 @@ function Navbar({ mode }: { mode: string }) {
     transports: ["websocket"],
     withCredentials: true,
   });
-  const {isLoading,user} = useAuth()
-
+  const { isLoading, user } = useAuth();
+  
   const router = useRouter();
   const [isClicked, setisClicked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
-  const [scrollY,setScrollY] = useState(0);
-  const [showUserInfo,setShowUserInfo] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [showUserInfo, setShowUserInfo] = useState(false);
+
+  // Supprimez l'état avatarUrl séparé et utilisez directement user
+  // const [avatarUrl, setAvatarUrl] = useState(null)
 
   function handleClick() {
     setisClicked(!isClicked);
@@ -52,13 +53,13 @@ function Navbar({ mode }: { mode: string }) {
   function homePage() {
     router.push("/");
   }
-  function showInfo() {
-    // router.push("/user");
-    setTimeout(()=>{
 
-      setShowUserInfo(!showUserInfo)
-    },200)
+  function showInfo() {
+    setTimeout(() => {
+      setShowUserInfo(!showUserInfo);
+    }, 200);
   }
+
   const [isScroll, setScroll] = useState(false);
   const [barIsVisible, setVisibleBar] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -66,32 +67,36 @@ function Navbar({ mode }: { mode: string }) {
   function handleMouseEnter() {
     setIsHover(true);
     setIsFocused(true);
-    // alert('hover')
   }
+
   function handleMouseLeave() {
     setIsHover(false);
   }
-  // const searchbar = document.querySelector(".searchbar")
+
   function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
     let value = event.target.value;
     setSearch(value);
     socket.emit("events:index", { title: search });
   }
+
   function handleBarVisible() {
     setVisibleBar(!barIsVisible);
-    // searchbar?.addEventListener('click',handleBarVisible)
   }
-  // console.log(barIsVisible);
 
-  useEffect(()=>{
-
-    function handleSrollY(){
-      setScrollY(window.scrollY)
+  useEffect(() => {
+    function handleSrollY() {
+      setScrollY(window.scrollY);
     }
-    handleSrollY()
+    handleSrollY();
+  }, []);
 
-  },[])
-
+  // Supprimez cet useEffect car nous utilisons directement user
+  // useEffect(() => {
+  //   function handleAvatar() {
+  //     setAvatarUrl(user);
+  //   }
+  //   handleAvatar();
+  // }, [user]);
 
   useEffect(() => {
     function handleScroll() {
@@ -102,21 +107,20 @@ function Navbar({ mode }: { mode: string }) {
       }
     }
     window.addEventListener("scroll", handleScroll);
-    console.log(user)
-    // console.log(scrollPosition);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollY]);
 
   socket.on("connection", () => {
     console.log("Connecté au serveur");
   });
+
   useEffect(() => {
     socket.on("events:index", (data) => {
       console.log("data", data.data);
       setResult(data.data);
     });
     socket.emit("events:index", { title: search });
-    // console.log(result);
-    // alert(search)
+
     return () => {
       socket.off("events:index");
     };
@@ -125,13 +129,13 @@ function Navbar({ mode }: { mode: string }) {
   useEffect(() => {
     if (isHover == true) {
       setIsFocused(true);
-      // console.log(isFocused);
     }
   }, [isHover, isFocused]);
 
   function showSearchResult() {
     setIsFocused(true);
   }
+
   function hideSearchResult(): void {
     if (isHover) {
       setIsFocused(true);
@@ -142,9 +146,9 @@ function Navbar({ mode }: { mode: string }) {
   function changePage(id: string): void {
     router.push("/events/" + id);
   }
+
   const handleLogout = async () => {
     await apiTapakila.post("signout");
-
     localStorage.removeItem("user");
     router.push("/login");
   };
@@ -211,21 +215,55 @@ function Navbar({ mode }: { mode: string }) {
           </a>
         </li>
         <li className="nav-element user-nav">
-          <a onClick={()=>{router.push("/login")}} className={`${user==null?"":"none"}`}>
-            <button className="connexion" >connexion</button>
+          <a
+            onClick={() => {
+              router.push("/login");
+            }}
+            className={`${user == null ? "" : "none"}`}
+          >
+            <button className="connexion">connexion</button>
           </a>
-          <a onClick={showInfo} className={`${user==null?"element-link user-icon none":"element-link user-icon "}`}>
-            <FontAwesomeIcon icon={faCircleUser} className="fa-2xl fas" />
+          <a
+            onClick={showInfo}
+            className={`${
+              user == null ? "element-link user-icon none" : "element-link user-icon "
+            }`}
+          >
+            {/* Utilisation directe de user au lieu de avatarUrl */}
+            <FontAwesomeIcon
+              icon={faCircleUser}
+              className={`fa-2xl fas ${
+                !user?.avatarUrl ? "" : "none"
+              }`}
+            />
+            {user?.avatarUrl && (
+              <img
+                src={user.avatarUrl}
+                className="avatar"
+                alt=""
+              />
+            )}
             <FontAwesomeIcon icon={faChevronDown} className="fa-sm fas" />
           </a>
-          <div className={`${showUserInfo?"user-actions":" user-actions actions-none"}`}>
+          <div
+            className={`${
+              showUserInfo ? "user-actions" : " user-actions actions-none"
+            }`}
+          >
             <ul>
-              <li onClick={()=>{router.push('/user')}} >
-                <FontAwesomeIcon icon={faUserGear} className="fa-xl" ></FontAwesomeIcon>
+              <li
+                onClick={() => {
+                  router.push("/user");
+                }}
+              >
+                <FontAwesomeIcon icon={faUserGear} className="fa-xl"></FontAwesomeIcon>
                 <p>profile</p>
               </li>
               <li>
-                <FontAwesomeIcon icon={faCircle} className="fa-xl green" ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  className="fa-xl green"
+                ></FontAwesomeIcon>
                 <p>notification</p>
               </li>
               <li onClick={()=>{router.push('/userSettings')}}>
@@ -233,7 +271,10 @@ function Navbar({ mode }: { mode: string }) {
                 <p>paramètres</p>
               </li>
               <li onClick={handleLogout}>
-                <FontAwesomeIcon icon={faArrowRightFromBracket} className="fa-xl" ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  className="fa-xl"
+                ></FontAwesomeIcon>
                 <p>se déconnecter</p>
               </li>
             </ul>
@@ -255,7 +296,6 @@ function Navbar({ mode }: { mode: string }) {
           isFocused ? "search-reveal" : "hide-search"
         }`}
       >
-        {/* <p className={`${isFocused?"reveal":"hide"}`}>résultats de la recherche</p> */}
         <div className="result-wrapper no-scrollbar">
           {result.map((result, index) => (
             <div
@@ -264,8 +304,6 @@ function Navbar({ mode }: { mode: string }) {
               onMouseEnter={handleMouseEnter}
               onClick={() => {
                 changePage(result.id);
-
-                // alert("touché : " + result.id);
               }}
               className="result low-index"
             >

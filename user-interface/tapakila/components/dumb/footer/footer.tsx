@@ -32,7 +32,7 @@ export default function Footer() {
           <div>
             <h4>FONCTIONNALITES</h4>
             <ul>
-              <li><a href="#">Devenez organisateurs</a></li>
+              <li><a href="http://localhost:3001/organizerRegistration">Devenez organisateurs</a></li>
               {/* <li><a href="#">Support</a></li> */}
             </ul>
           </div>

@@ -5,12 +5,10 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100%;
   background: linear-gradient(90deg, #eee, #afc0af);
 }
 
-
-.containerL{
+.containerR{
   position: relative;
   width: 900px;
   height: 550px;
@@ -18,7 +16,6 @@
   border-radius: 30px;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   overflow: hidden;
-  /* margin-top: 100dvh; */
 }
 
 .form-box {
@@ -44,12 +41,12 @@ form {
   margin: -10px 0;
 }
 
-.input-box{
+.input-boxx{
   position: relative;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
-.input-box input {
+.input-boxx input {
   width: 100%;
   padding: 13px;
   background: #eee;
@@ -61,12 +58,12 @@ form {
   font-weight: 500;
 }
 
-.input-box input::placeholder{
+.input-boxx input::placeholder{
   color: #888;
   font-weight: 400;
 }
 
-.input-box .font-icon{
+.input-boxx .font-icon{
   position: absolute;
   right: 20px;
   top: 50%;
@@ -103,20 +100,10 @@ form {
   margin: 15px 0;
 }
 
-.social-icons p {
-  font-size: 1rem;
-  color: #888;
-}
 .social-icons {
-  margin-top: 2dvh;
-  /* background: #000; */
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  display: inline-flex;
   padding: 10px;
-  border: none;
+  border: 2px solid #ccc;
   border-radius: 8px;
   font-size: 24px;
   color: #333;
@@ -124,14 +111,11 @@ form {
   margin: 0 8px;
 }
 
-.sIcon {
-  margin-right: 15px;
-}
-
 .toggle-box{
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 .toggle-box::before{
@@ -158,16 +142,6 @@ form {
     z-index: 2;
 }
 
-.toggle-panel p{
-    margin-bottom: 20px;
-}
-
-.toggle-panel .btn{
-    width: 160px;
-    height: 46px;
-    background: transparent;
-    border: 2px solid #fff;
-}
 .bg-image{
  
   background-image: linear-gradient(
@@ -179,19 +153,14 @@ form {
   background-size: cover;
   transition: transform 0.1s ease-out;
 }
-.toggle-box:hover bg-image{
-  transform: translate(var(--mouse-x), var(--mouse-y));
+
+.toggle-panel p{
+    margin-bottom: 20px;
 }
 
-.dark{
-  background: #000;
-}
-@media screen and (max-width: 768px){
-  .containerL{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    border-radius: 0;
-  }
+.toggle-panel .btn{
+    width: 160px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
 }

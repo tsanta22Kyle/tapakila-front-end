@@ -14,6 +14,7 @@ import {
   BooleanField,
   NumberField,
   useRecordContext,
+  ReferenceField,
 } from "react-admin";
 import { styled } from "@mui/material";
 // import { StatusField } from '';
@@ -21,7 +22,10 @@ import { styled } from "@mui/material";
 export const TicketList: React.FC = () => (
   <List>
     <Datagrid  className="wrapper" >
-      <TextField source="title" />
+      <ReferenceField reference="events" source="eventId" link={false}>
+      <TextField source="title"  />
+        
+      </ReferenceField>
       <TextField source="category" />
       <NumberField source="price" />
       <NumberField source="quantity" />
