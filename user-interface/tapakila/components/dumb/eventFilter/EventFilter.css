@@ -1,0 +1,289 @@
+.filter-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+ 
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Augmente l’espace entre les dropdowns */
+    justify-content: center; /* Centre les éléments */
+    padding-bottom: 15px; /* Espace sous les filtres */
+  }
+  
+
+  
+  .filter-input:hover, .filter-input:focus {
+    background: #1DB954;
+    color: black;
+  }
+  
+  .filter-input.selected {
+    background: #C8F7C5;
+    color: #144D14;
+    border: 2px solid #144D14;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les événements */
+    padding-top: 10px;
+  }
+  
+  .event-card {
+    padding: 12px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    border-left: 4px solid #1DB954;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+    color: #bbb;
+  }
+  
+  .category {
+    background: #1DB954;
+    color: black;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  
+  .no-result {
+    text-align: center;
+    font-style: italic;
+    color: #bbb;
+  }
+  
+ .filter-container h2 {
+    text-align: center;
+    color: #1DB954; /* Vert Spotify */
+    border-top: 3px solid #1DB954;
+    padding-top: 10px;
+    /* background: #ffeaea; */
+    margin-bottom: 20px;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  .filter-input:focus {
+    border-color: #1DB954;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .event-card {
+    padding: 10px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    border-left: 4px solid #1DB954;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+    color: #bbb;
+  }
+  
+  .category {
+    background: #1DB954;
+    color: black;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  
+  .no-result {
+    text-align: center;
+    font-style: italic;
+    color: #bbb;
+  }
+  .filter-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+ 
+  
+  .filter-input:hover, .filter-input:focus {
+    background: #1DB954;
+    color: black;
+  }
+  
+  .filter-input option {
+    background: black;
+    color: white;
+  }
+  
+  /* Style spécifique pour un dropdown sélectionné */
+  .filter-input.selected {
+    background: #C8F7C5;
+    color: #144D14;
+    border: 2px solid #144D14;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .event-card {
+    padding: 10px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    border-left: 4px solid #1DB954;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+    color: #bbb;
+  }
+  
+  .category {
+    background: #1DB954;
+    color: black;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  
+  .no-result {
+    text-align: center;
+    font-style: italic;
+    color: #bbb;
+  }
+  .filter-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #000000;
+    color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-input {
+    flex: 1;
+    padding: 20px 15px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #efefef;
+    background: black;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    appearance: none; /* Désactive le style par défaut */
+    text-align: center;
+  }
+  
+  .filter-input:hover, .filter-input:focus {
+    background: #ffffff20;
+    border: none;
+    color: rgb(255, 254, 254);
+  }
+  
+  .filter-input option {
+    background: black;
+    color: white;
+  }
+  
+  /* Style spécifique pour un dropdown sélectionné */
+  .filter-input.selected {
+    background: #C8F7C5;
+    color: #144D14;
+    border: 2px solid #144D14;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .event-card {
+    padding: 10px;
+    border-radius: 5px;
+    background: #1e1e1e;
+    border-left: 4px solid #1DB954;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+    color: #bbb;
+  }
+  
+  .category {
+    background: #1DB954;
+    color: black;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  
+  .no-result {
+    text-align: center;
+    font-style: italic;
+    color: #bbb;
+  }
+  
