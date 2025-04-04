@@ -24,6 +24,7 @@ import {
 import { eventDataProviders } from "./eventDataProvider";
 import { TicketDataProvider } from "./ticketDataProvider";
 import { userDataProviders } from "./userDataProvider";
+import { reservationDataProviders } from "./reservationDataProvider";
 
 export const AppDataprovider: DataProvider = {
   getList: (resource, params) => {
@@ -36,6 +37,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.getList(resource, params);
       case "users":
         return userDataProviders.getList(resource, params);
+      case "reservations":
+        return reservationDataProviders.getList("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -51,6 +54,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.getOne(resource, params);
       case "users":
         return userDataProviders.getOne(resource, params);
+      case "reservations":
+        return reservationDataProviders.getOne("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -66,6 +71,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.getMany(resource, params);
       case "users":
         return userDataProviders.getMany(resource, params);
+      case "reservations":
+        return reservationDataProviders.getMany("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -88,6 +95,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.update(resource, params);
       case "users":
         return userDataProviders.update(resource, params);
+      case "reservations":
+        return reservationDataProviders.update("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -103,6 +112,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.updateMany(resource, params);
       case "users":
         return userDataProviders.updateMany(resource, params);
+      case "reservations":
+        return reservationDataProviders.updateMany("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -121,6 +132,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.create(resource, params);
       case "users":
         return userDataProviders.create(resource, params);
+      case "reservations":
+        return reservationDataProviders.create("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -136,6 +149,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.delete(resource, params);
       case "users":
         return userDataProviders.delete(resource, params);
+      case "reservations":
+        return reservationDataProviders.delete("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
@@ -151,6 +166,8 @@ export const AppDataprovider: DataProvider = {
         return TicketDataProvider.deleteMany(resource, params);
       case "users":
         return userDataProviders.deleteMany(resource, params);
+      case "reservations":
+        return reservationDataProviders.deleteMany("reservations", params);
       default:
         return Promise.reject(new Error(`Ressource inconnue : ${resource}`));
     }
