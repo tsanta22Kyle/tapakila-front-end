@@ -16,5 +16,8 @@ export const useStore = create((set)=>({
     }) ),
     updateItemQuantity : (id,quantity) => set((state)=>({
         cartItems : state.cartItems.map((item)=> item.id == id?{...item,quantity : item.quantity+quantity}:item)
+    })),
+    clearCart : ()=> set((state)=>({
+        cartItems : []
     }))
 }))

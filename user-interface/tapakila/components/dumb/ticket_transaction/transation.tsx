@@ -40,7 +40,7 @@ function TransactionDetail({ ticketId }) {
   );
 
   // Correction 1: Extraction robuste du ticket
-  const ticket = ticketData?.data?.[0] || ticketData; // ✅ Supporte les deux formats
+  const ticket = ticketData?.data || ticketData; // ✅ Supporte les deux formats
   const eventId = ticket?.eventId;
 
   const { data: eventData, error: eventError } = useSWR(
@@ -58,7 +58,7 @@ function TransactionDetail({ ticketId }) {
   if (eventError) return <div>Erreur événement</div>;
 
   // Correction 4: Extraction robuste de l'événement
-  const event = eventData?.data?.[0] || eventData;
+  const event = eventData?.data || eventData;
 
   // Debug
   // console.log("Ticket:", ticket);

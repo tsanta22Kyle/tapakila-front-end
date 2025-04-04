@@ -1,0 +1,86 @@
+.footer {
+    background: #11111100;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+  }
+  
+  /* .logoSection h2 {
+    font-size: 24px;
+    margin: 0;
+  } */
+  
+  .logoSection p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  .logoSection h1{
+    display: flex;
+    align-items: center;
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .links div {
+    margin: 0 15px;
+    text-align: left;
+  }
+  
+  .links h4 {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .links ul li {
+    margin-bottom: 5px;
+  }
+  
+  .links ul li a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  
+  .links ul li a:hover {
+    color: white;
+  }
+  
+  .socials {
+    margin-top: 20px;
+  }
+  
+  .socials svg {
+    font-size: 18px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #aaa;
+  }
+  
+  .socials svg:hover {
+    color: white;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+  }
+  

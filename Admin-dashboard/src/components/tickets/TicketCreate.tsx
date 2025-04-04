@@ -13,7 +13,11 @@ import {
 export const TicketCreate: React.FC = () => (
   <Create>
     <SimpleForm>
-      <ReferenceInput source="event_id" reference="events" label="Événement">
+        <ReferenceInput
+        source="eventId"
+        reference="events"
+        label="Événement"
+        >
         <SelectInput
           optionText="title"
           optionValue="id"
@@ -25,14 +29,14 @@ export const TicketCreate: React.FC = () => (
       <NumberInput source="quantity"></NumberInput>
       <NumberInput source="limit"></NumberInput>
 
-      <DateInput label="ticket date" source="date" defaultValue={new Date()} />
+        <DateInput label="ticket date" source="date" defaultValue={new Date()} />
 
-      <SelectInput
-        label="catégorie"
-        source="category"
-        validate={[required()]}
-        choices={["VIP", "EARLY BIRD", "STANDARD"]}
-      />
+        <SelectInput label="catégorie" source="category" validate={[required()]} choices={[
+            "VIP","EARLY BIRD","STANDARD"
+        ]} />
+
+        <NumberInput source="price"></NumberInput>
+
     </SimpleForm>
   </Create>
 );

@@ -10,7 +10,7 @@
 }
 
 
-.container{
+.containerL{
   position: relative;
   width: 900px;
   height: 550px;
@@ -167,4 +167,8 @@ form {
 }
 .toggle-box:hover bg-image{
   transform: translate(var(--mouse-x), var(--mouse-y));
+}
+
+.dark{
+  background: #000;
 }

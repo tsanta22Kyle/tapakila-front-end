@@ -1,13 +1,191 @@
-.main{
-    margin-top: 20dvh;
-    background-color: rgb(82, 126, 37);
-    width: 100%;
-    height: 100dvh;
+/* Component-scoped styles */
+.profile-component {
+    --profile-primary-color: #1db954;
+    --profile-secondary-color: #1db954;
+    --profile-light-color: #000000;
+    --profile-dark-color: #343a40;
+    --profile-success-color: #28a745;
+    --profile-danger-color: #dc3545;
+    --profile-border-radius: 5px;
+  }
+  
+  .profile-component .exterior {
+    /* background-color: #f5f5f5; */
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.005) 40%,
+      rgb(0, 0, 0)
+    ),
+    url("../../public/ticket-motif.png");
+  background-size: auto;
+  background-repeat: repeat;
+    min-height: 100vh;
+    color: var(--profile-dark-color);
+    line-height: 1.6;
+  }
+  
+  .profile-component .dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .profile-component .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .profile-component .dashboard-header h1 {
+    color: var(--profile-primary-color);
+  }
+  
+  .profile-component .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--profile-dark-color);
+  }
+  
+  .profile-component .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-component .dashboard-main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+  }
+  
+  .profile-component .profile-overview {
+    /* background: rgba(255, 255, 255, 0.855); */
+    border-top: #1db954 solid;
+    padding: 20px;
+    border-radius: var(--profile-border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .profile-component .profile-overview h2 {
+    margin-bottom: 20px;
+    color: var(--profile-primary-color);
+  }
+  
+  .profile-component .profile-details {
     display: flex;
     flex-direction: column;
-}
-.user-container{
-    background: yellow;
+    gap: 15px;
+    color: #e9ecef;
+  }
+  
+  .profile-component .detail-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-component .detail-label {
+    font-weight: bold;
+  }
+  
+  .profile-component .bookings-section {
+    /* background: white; */
+    border-top: #1db954 solid;
+    padding: 20px;
+    border-radius: var(--profile-border-radius);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .profile-component .bookings-section h2 {
+    margin-bottom: 20px;
+    color: var(--profile-primary-color);
+  }
+  
+  .profile-component .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-component .filter-btn {
+    padding: 8px 15px;
+    border: none;
+    background: #e9ecef;
+    border-radius: var(--profile-border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #000000;
+  }
+  
+  .profile-component .filter-btn.active {
+    background: var(--profile-primary-color);
+    color: white;
+  }
+  
+  .profile-component .bookings-list {
     display: flex;
     flex-direction: column;
-}
+    gap: 15px;
+  }
+  
+  .profile-component .booking-card {
+    padding: 15px;
+    border-radius: var(--profile-border-radius);
+    border: 1px solid #ddd;
+  }
+  
+  .profile-component .booking-card.upcoming {
+    border-left: 4px solid var(--profile-success-color);
+  }
+  
+  .profile-component .booking-card.past {
+    border-left: 4px solid #6c757d;
+    opacity: 0.8;
+  }
+  
+  .profile-component .booking-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .profile-component .booking-header h3 {
+    color: var(--profile-primary-color);
+  }
+  
+  .profile-component .booking-date {
+    font-weight: bold;
+  }
+  
+  .profile-component .booking-details {
+    margin-bottom: 15px;
+  }
+  
+  .profile-component .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: var(--profile-border-radius);
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .profile-component .btn-edit {
+    background: var(--profile-secondary-color);
+    color: white;
+    align-self: flex-end;
+  }
+  
+  .profile-component .btn-cancel {
+    background: var(--profile-danger-color);
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .profile-component .dashboard-main {
+      grid-template-columns: 1fr;
+    }
+  }
