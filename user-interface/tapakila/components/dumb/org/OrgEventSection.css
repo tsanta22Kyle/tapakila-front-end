@@ -17,9 +17,10 @@
 }
 
 .org-title {
-    font-size: 22px;
+    font-size: 2rem;
     font-weight: bold;
     color: #1db954;
+    margin-bottom: 4dvh;
 }
 
 .org-description {

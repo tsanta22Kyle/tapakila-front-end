@@ -73,7 +73,7 @@ export default function Registration() {
             <a href="http://localhost:5173/#/login">Avez-vous déjà un compte? cliquez ici</a>
           </div>
           <button type="submit" className="btn">Register</button>
-          <p>ou s'enregistrer avec</p>
+          
           <div className="social-icons">
             {/* <a href="" className="bx bxl-google"></a> */}
             {/* <FontAwesomeIcon icon={} /> */}
