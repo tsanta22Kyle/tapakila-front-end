@@ -1,5 +1,19 @@
+.bodyS{
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.005) 40%,
+      rgb(0, 0, 0)
+    ),
+    url("../../../public/ticket-motif.png");
+  background-size: auto;
+  background-repeat: repeat;
+  display: flex;
+}
+
 .containerS {
-  max-width: 600px;
+  padding-top: 10dvh;
+  width: 650px;
+  height: 550px;
   margin: 2rem auto;
   padding: 2rem;
   background: #fff;
@@ -50,6 +64,7 @@
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+  width: 100%;
   font-size: 1rem;
   transition: border-color 0.2s;
 }

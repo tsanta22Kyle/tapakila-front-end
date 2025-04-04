@@ -53,6 +53,7 @@ export default function UserSettings() {
   }
 
   return (
+  <div className={styles.bodyS}>  
     <div className={styles.containerS}>
       <h1 className={styles.title}>User Settings</h1>
       
@@ -84,7 +85,7 @@ export default function UserSettings() {
             value={formData.email}
             onChange={handleChange}
             className={styles.input}
-            disabled // Often emails shouldn't be changed directly
+            // Often emails shouldn't be changed directly
           />
         </div>
         
@@ -121,5 +122,6 @@ export default function UserSettings() {
         </div>
       </form>
     </div>
+  </div>  
   );
 }
