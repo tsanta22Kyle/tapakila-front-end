@@ -104,7 +104,7 @@ export default function Profile() {
                 alt="Photo de profil"
                 className="profile-pic"
               />
-              <span>Bonjour, {authUser.name}</span>
+              <span>Bonjour, {authUser.fullName}</span>
             </div>
           </header>
 
