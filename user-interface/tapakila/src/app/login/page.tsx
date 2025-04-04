@@ -99,7 +99,7 @@ export default function Login() {
               <div className="input-box">
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mot de passe"
                   required
                   {...register("password", { 
                     required: "Le mot de passe est requis",
@@ -142,7 +142,7 @@ export default function Login() {
 
           <div className="toggle-box">
             <div className="toggle-panel toggle-left bg-image">
-              <h2>Hello, Welcome to tapakila!</h2>
+              <h2>Bienvenue sur Tapakila!</h2>
             </div>
           </div>
         </div>

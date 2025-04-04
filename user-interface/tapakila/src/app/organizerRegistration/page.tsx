@@ -84,7 +84,7 @@ export default function Registration() {
 
     <div className="toggle-box">
       <div className="toggle-panel toggle-left bg-image">
-              <h2>Hello, Welcome to tapakila!</h2>
+              <h2>Bienvenue sur Tapakila!</h2>
               {/* <p>Don't have an account?Click on "besoin de créer un compte"</p> */}
       </div>
     </div>
