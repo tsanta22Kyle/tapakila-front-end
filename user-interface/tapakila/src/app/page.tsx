@@ -17,6 +17,7 @@ import Footer from "../../components/dumb/footer/footer";
 import EventFilter from "../../components/dumb/eventFilter/eventFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import OrgEventSection from "../../components/dumb/org/org_section";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -91,7 +92,7 @@ export default function Home() {
           ></ByCategoryEvents>
         </main>
       </div>
-      
+      <OrgEventSection></OrgEventSection>
       <Footer></Footer>
     </div>
   );

@@ -1,0 +1,66 @@
+
+
+.org-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.org-content {
+    width: 50%;
+}
+
+.org-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1db954;
+}
+
+.org-description {
+    font-size: 16px;
+    color: #bababa;
+    line-height: 1.5;
+}
+
+.org-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #1db954;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.org-button:hover {
+    background-color: #1e8442;
+}
+
+.org-image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    /* background: #ffffff; */
+    height: 40dvh;
+    align-items: center;
+    justify-content: center;
+}
+.org-image * {
+    font-size: 5rem;
+    color: #1db954;
+}
+
+.org-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}

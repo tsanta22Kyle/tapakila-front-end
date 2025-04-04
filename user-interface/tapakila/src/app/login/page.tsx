@@ -6,7 +6,7 @@ import axios from "axios";
 import "./login.css";
 import toast from "react-hot-toast";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+// import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const ipAddr = "localhost";
