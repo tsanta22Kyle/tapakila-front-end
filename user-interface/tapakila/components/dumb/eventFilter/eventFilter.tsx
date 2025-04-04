@@ -5,6 +5,7 @@ import { apiUrl } from "@/app/page";
 import useSWR from "swr";
 import LoadingFetch from "../backend_error/loading";
 import Backend_error from "../backend_error/backend_error";
+import { useRouter } from "next/navigation";
 interface Event {
   id: number;
   title: string;
@@ -24,7 +25,7 @@ interface Event {
 const fetcher = (url : string) => fetch(url).then((res) => res.json());
 export default function EventFilter() {
   const [filters, setFilters] = useState({ date: "", place: "", category: "" });
-  
+  const router = useRouter()
   
   const {data:eventsData,error,isLoading} = useSWR(apiUrl+'events',fetcher);
   const events = eventsData.data.data;
@@ -77,7 +78,9 @@ export default function EventFilter() {
       <div className="event-list">
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
-            <div key={event.id} className="event-card">
+            <div onClick={()=>{
+              router.push("/events/"+event.id)
+            }} key={event.id} className="event-card">
               <h3>{event.title}</h3>
               <p>{event.date} - {event.place}</p>
               <span className="category">{event.category.name}</span>

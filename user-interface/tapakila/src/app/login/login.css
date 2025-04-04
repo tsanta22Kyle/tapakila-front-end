@@ -103,15 +103,23 @@ form {
   margin: 15px 0;
 }
 
+.social-icons p {
+  font-size: 1rem;
+  color: #888;
+}
 .social-icons {
+  margin-top: 2dvh;
+  /* background: #000; */
   display: inline-flex;
+  gap: 10px;
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 8px;
   font-size: 24px;
   color: #333;
   text-decoration: none;
-  margin: 0 8px;
+  cursor: pointer;
+  /* margin: 0 8px; */
 }
 
 .toggle-box{
@@ -171,4 +179,13 @@ form {
 
 .dark{
   background: #000;
+}
+@media screen and (max-width: 768px){
+  .containerL{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
 }

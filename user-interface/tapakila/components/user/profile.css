@@ -26,7 +26,10 @@
   
   .profile-component .dashboard-container {
     max-width: 1200px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin-top: 15dvh;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
   }
   
@@ -36,7 +39,7 @@
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
   }
   
   .profile-component .dashboard-header h1 {
@@ -48,6 +51,9 @@
     align-items: center;
     gap: 10px;
     color: var(--profile-dark-color);
+  }
+  .profile-component .user-profile {
+    color: #e9ecef;
   }
   
   .profile-component .profile-pic {
@@ -180,12 +186,55 @@
   }
   
   .profile-component .btn-cancel {
-    background: var(--profile-danger-color);
+    background: transparent;
     color: white;
+    width: 20%;
+    /* align-self: end; */
+    place-self: right;
   }
   
+  .profile-component .btn-cancel:hover {
+    color: #1DB954;
+  }
   @media (max-width: 768px) {
     .profile-component .dashboard-main {
       grid-template-columns: 1fr;
     }
+    .ticket-card{
+      margin-bottom: 25px;
+    }
+  }
+  .desc{
+    color: #6c757d;
+    font-size: small;
+  }
+  .ticket-card{
+    display: flex;
+    align-items: center;
+    background: #000000;
+
+    
+  background-size: auto;
+  background-repeat: repeat;
+    justify-content: space-between;
+    gap: 30px;
+    border-radius: 5px;
+    height: 13dvh;
+    padding: 15px;
+    /* border-left: #1db954 solid; */
+    border-left: 4px solid #1DB954;
+  }
+  .ticket-details{
+    align-self: center;
+    left: auto;
+    /* background: #000; */
+    width: 55%;
+    color: white;
+  }
+  .ticket-date{
+    color: #28a745;
+  }
+  .ticket-card:hover{
+    background: #ffffff30;
+    cursor: pointer;
   }

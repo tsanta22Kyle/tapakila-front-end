@@ -44,6 +44,7 @@
     border-radius: 5px;
     background: #1e1e1e;
     border-left: 4px solid #1DB954;
+    cursor: pointer;
   }
   
   .event-card h3 {
@@ -281,9 +282,79 @@
     border-radius: 3px;
   }
   
+  .become-o{
+    width: 100%;
+    height: 40dvh;
+    background: #144D14;
+  }
+
   .no-result {
     text-align: center;
     font-style: italic;
     color: #bbb;
   }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.org-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.org-content {
+    width: 50%;
+}
+
+.org-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2d2f3a;
+}
+
+.org-description {
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.5;
+}
+
+.org-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #004a99;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.org-button:hover {
+    background-color: #003b7a;
+}
+
+.org-image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.org-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
   

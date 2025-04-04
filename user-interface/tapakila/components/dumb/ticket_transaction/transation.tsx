@@ -7,6 +7,7 @@ import { useState } from "react";
 import { formatDate } from "../event";
 import { useStore } from "../../../globalStores/globalStores";
 import { useRouter } from "next/navigation";
+import useAuth from "../../../globalStores/useAuth";
 // import { fetchEvent,  } from "../../../globalStores/ticketStore";
 
 function TransactionDetail({ ticketId }) {
@@ -14,7 +15,7 @@ function TransactionDetail({ ticketId }) {
     const cartItems : Array<Ticket> = useStore((state)=> state.cartItems)
     const addTicket = useStore((state)=>state.addItem)
     const updateQuantity = useStore((state)=> state.updateItemQuantity)
-   
+   const {isLoading,user} = useAuth();
     const router = useRouter()
 
     function changePage() {
@@ -39,8 +40,8 @@ function TransactionDetail({ ticketId }) {
     fetcher
   );
 
-  // Correction 1: Extraction robuste du ticket
-  const ticket = ticketData?.data || ticketData; // ✅ Supporte les deux formats
+ 
+  const ticket = ticketData?.data || ticketData; 
   const eventId = ticket?.eventId;
 
   const { data: eventData, error: eventError } = useSWR(
@@ -48,12 +49,12 @@ function TransactionDetail({ ticketId }) {
     fetcher
   );
 
-  // Correction 2: Vérifications dans le bon ordre
+ 
   if (!ticketData) return <div>Chargement du ticket...</div>;
   if (ticketError) return <div>Erreur ticket</div>;
   if (!ticket) return <div>Ticket invalide</div>;
 
-  // Correction 3: Ne pas utiliser eventData avant vérification
+ 
   if (!eventData && eventId) return <div>Chargement de l'événement...</div>;
   if (eventError) return <div>Erreur événement</div>;
 
@@ -91,7 +92,7 @@ function TransactionDetail({ ticketId }) {
         <div onClick={()=>{
           addToCart(countLimit)
           changePage()
-        }} className={style.buy}>
+        }} className={`${style.buy} ${user == null || user.role == "admin" || user.role == "organizer"?style.disabled:style.enabled}`}>
           <FontAwesomeIcon
             icon={faCartPlus}
             className={style.cartPlus}

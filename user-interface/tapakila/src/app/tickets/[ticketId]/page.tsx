@@ -9,6 +9,7 @@ import TransactionDetail from "../../../../components/dumb/ticket_transaction/tr
 import { usePathname } from "next/navigation";
 import { use } from "react";
 import CartButton from "../../../../components/dumb/cart/cartButton";
+import Footer from "../../../../components/dumb/footer/footer";
 
 const poppins = Poppins({
   weight: ["400", "700"], 
@@ -29,7 +30,7 @@ export default function TransactionPage({
       <Navbar mode="not default"></Navbar>
       <TransactionDetail ticketId={ticketId}></TransactionDetail>
       <CartButton></CartButton>
-
+      <Footer></Footer>
     </div>
   );
 }
