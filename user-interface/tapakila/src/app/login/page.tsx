@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "./login.css";
 import toast from "react-hot-toast";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const ipAddr = "localhost";
 const port = "3333";
@@ -90,7 +91,7 @@ async  function googleConnection() {
                   })}
                 />
                 {/* <i className="bx bxs-envelope"></i> */}
-                {/* <FontAwesomeIcon icon={faEnvelope} className="font-icon "></FontAwesomeIcon> */}
+                <FontAwesomeIcon icon={faEnvelope} className="font-icon "></FontAwesomeIcon> 
                 {errors.email && (
                   <span className="error-message">{errors.email.message}</span>
                 )}
@@ -109,6 +110,7 @@ async  function googleConnection() {
                   })}
                 />
                 {/* <i className="bx bsx-lock-alt"></i> */}
+                <FontAwesomeIcon icon={faLock} className="font-icon "></FontAwesomeIcon> 
                 {errors.password && (
                   <span className="error-message">
                     {errors.password.message}

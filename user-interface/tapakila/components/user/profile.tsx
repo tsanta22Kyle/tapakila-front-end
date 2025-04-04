@@ -122,7 +122,7 @@ export default function Profile() {
                 src={authUser.avatar || "https://via.placeholder.com/50"}
                 alt="Photo de profil"
                 className="profile-pic"
-              /> */}
+              />
               <span>Bonjour, {authUser.fullName}</span>
             </div>
           </header>
@@ -139,7 +139,7 @@ export default function Profile() {
                   <span className="detail-label">Email:</span>
                   <span className="detail-value">{authUser.email}</span>
                 </div>
-                <button className="btn btn-edit">Modifier le profil</button>
+                <button className="btn btn-edit" onClick={()=>{router.push('/userSettings')}}>Modifier le profil</button>
               </div>
             </section>
 

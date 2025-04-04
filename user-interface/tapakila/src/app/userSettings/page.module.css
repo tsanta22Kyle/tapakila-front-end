@@ -1,168 +1,124 @@
-.body{
-    width: 100%;
-    height: 100VH;
-    background: #eee;
+.bodyS{
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.005) 40%,
+      rgb(0, 0, 0)
+    ),
+    url("../../../public/ticket-motif.png");
+  background-size: auto;
+  background-repeat: repeat;
+  display: flex;
 }
-.container {
-    margin-top: 15vh;
-    padding: 2rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    background: #eee;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    color: #1a1a1a;
-  }
-  
-  .settingsContainer {
-    display: flex;
-    gap: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-  }
-  
-  .sidebar {
-    width: 220px;
-    background: #f8f9fa;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .sidebar button {
-    padding: 0.75rem 1rem;
-    border: none;
-    background: none;
-    text-align: left;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .sidebar button:hover {
-    background: #e9ecef;
-  }
-  
-  .activeTab {
-    background: #e9ecef !important;
-    color: #1a1a1a !important;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 2rem;
-  }
-  
-  .section {
-    margin-bottom: 2rem;
-  }
-  
-  .section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
-  }
-  
-  .avatarSection {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #e9ecef;
-    background-image: url('https://i.pravatar.cc/150?img=3');
-    background-size: cover;
-  }
-  
-  .uploadBtn {
-    padding: 0.5rem 1rem;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .uploadBtn:hover {
-    background: #f8f9fa;
-  }
-  
-  .avatarHint {
-    font-size: 0.875rem;
-    color: #666;
-    margin-top: 0.5rem;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .formGroup label {
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .formGroup input,
-  .formGroup textarea {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-  }
-  
-  .formGroup textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .formActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .cancelBtn {
-    padding: 0.75rem 1.5rem;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .saveBtn {
-    padding: 0.75rem 1.5rem;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .saveBtn:hover {
-    background: #1d4ed8;
-  }
+
+.containerS {
+  padding-top: 10dvh;
+  width: 650px;
+  height: 550px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #1db954;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #fde8e8;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #d32f2f;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 500;
+  color: #1db954;
+}
+
+.input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.input:disabled {
+  background-color: #f5f5f5;
+  color: #888;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.saveButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #1db954;
+}
+
+.saveButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #d51616;
+  border: none;
+  color: white;
+}

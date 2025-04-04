@@ -15,6 +15,9 @@ export const UserEdit = () => {
         <TextInput source="id" disabled />
         <TextInput source="fullName" validate={required()} />
         <TextInput source="email" validate={required()} />
+        {permissions.includes("organizer") && (
+          <TextInput source="organizer.name" validate={required()} disabled />
+        )}
         <SelectInput
           source="role"
           choices={[

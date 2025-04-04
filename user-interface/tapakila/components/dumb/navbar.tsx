@@ -266,11 +266,8 @@ function Navbar({ mode }: { mode: string }) {
                 ></FontAwesomeIcon>
                 <p>notification</p>
               </li>
-              <li>
-                <FontAwesomeIcon
-                  icon={faGear}
-                  className="fa-xl green"
-                ></FontAwesomeIcon>
+              <li onClick={()=>{router.push('/userSettings')}}>
+                <FontAwesomeIcon icon={faGear} className="fa-xl green" ></FontAwesomeIcon>
                 <p>paramètres</p>
               </li>
               <li onClick={handleLogout}>

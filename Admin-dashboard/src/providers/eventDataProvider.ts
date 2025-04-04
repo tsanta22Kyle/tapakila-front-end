@@ -1,21 +1,3 @@
-// import { DataProvider, fetchUtils } from 'react-admin';
-// import simpleRestProvider from 'ra-data-simple-rest';
-
-// const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3333/api/v1';
-
-// const httpClient = fetchUtils.fetchJson;
-
-// const baseDataProvider = simpleRestProvider(apiUrl, httpClient);
-
-// export const dataProvider: DataProvider = {
-//   ...baseDataProvider,
-//   getList: baseDataProvider.getList,
-//   getOne: baseDataProvider.getOne,
-//   getMany: baseDataProvider.getMany,
-//   getManyReference: baseDataProvider.getManyReference,
-//   updateMany: baseDataProvider.updateMany,
-//   deleteMany: baseDataProvider.deleteMany,
-// };
 
 import {
   CreateParams,
@@ -50,13 +32,14 @@ export const eventDataProviders: DataProvider = {
     resource = "events",
     params: GetListParams & QueryFunctionContext,
   ): Promise<GetListResult<RecordType>> {
-    const { data: res }: { data: { data: { data: any[] } } } =
+    const { data: res }: { data: { data: { data: any[]; meta: any } } } =
       await apiFetch.get(`${resource.toLowerCase()}`);
 
     // console.log(res.data.data);
     const data: GetListResult = {
       data: res.data.data,
       total: res.data.data.length,
+      meta: res.data.meta,
     };
     return Promise.resolve(data);
   },
@@ -103,8 +86,9 @@ export const eventDataProviders: DataProvider = {
       payload,
     );
     const data: UpdateResult = {
-      data: res.data
+      data: res?.data,
     };
+    console.log(data);
     return Promise.resolve(data);
   },
   updateMany: function <RecordType extends RaRecord = any>(

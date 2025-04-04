@@ -1,16 +1,15 @@
 import {
-  Edit,
   SimpleForm,
   TextInput,
   SelectInput,
   required,
   PasswordInput,
+  Create,
 } from "react-admin";
 
 export const UserCreate = () => (
-  <Edit>
+  <Create>
     <SimpleForm>
-      <TextInput disabled source="id" />
       <TextInput source="fullName" validate={required()} />
       <TextInput source="email" validate={required()} />
       <PasswordInput source="password" validate={required()} />
@@ -24,5 +23,5 @@ export const UserCreate = () => (
         validate={required()}
       />
     </SimpleForm>
-  </Edit>
+  </Create>
 );
