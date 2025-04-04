@@ -17,6 +17,7 @@ import { authProvider } from "./providers/authProvider";
 import { UserCreate } from "./components/user/UserCreate";
 import { EventEdit } from "./components/events/EventEdit";
 import { ReservationList } from "./components/reservations/ReservationsList";
+import { UserShow } from "./components/user/UserShow";
 
 const App = () => (
   <Admin
@@ -45,6 +46,7 @@ const App = () => (
       list={UserList}
       edit={UserEdit}
       create={UserCreate}
+      show={UserShow}
     />
     <Resource
       name="reservations"
