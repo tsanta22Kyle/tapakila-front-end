@@ -2,9 +2,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./OrgEventSection.css";
 import { faPlus, faUsersBetweenLines } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 // import imageSrc from "./image.png"; // Remplace par le bon chemin de ton image
 
 const OrgEventSection = () => {
+  const router = useRouter();
   return (
     <section className="org-container">
       <div className="org-content">
@@ -14,7 +16,9 @@ const OrgEventSection = () => {
           <br />
           Elle permet l’administration et la supervision  de votre événement.
         </p>
-        <button className="org-button">Devenir organisateur</button>
+        <button onClick={()=>{
+router.push("/organizerRegistration")
+        }} className="org-button">Devenir organisateur</button>
       </div>
       <div className="org-image">
         {/* <img src={imageSrc} alt="Aperçu de la plateforme" /> */}
