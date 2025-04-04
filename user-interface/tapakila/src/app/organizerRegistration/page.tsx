@@ -1,6 +1,6 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./signUp.css"
+import "./oRegister.css"
 // import 'boxicons'
 import { useRouter } from "next/navigation";
 import {useForm} from "react-hook-form"
@@ -9,6 +9,7 @@ import { apiTapakila } from "../login/page";
 // import 'boxicons'
 
 type RegisterFormInputs = {
+  name: string;  
   fullName: string;
   email: string;
   password: string;
@@ -30,11 +31,11 @@ export default function Registration() {
 
   const onSubmit = async (data: RegisterFormInputs) => {
     try {
-      const res = await apiTapakila.post(`signup`, {...data,role : "user", avatarUrl:""},{
+      const res = await apiTapakila.post(`signup`, {...data,role : "organizer", avatarUrl:""},{
         withCredentials: false
       });
       console.log(res);
-      router.push("/login");
+      window.location.href = "http://localhost:5173/#/login";
     }
     catch (err) {
       setError("root", { message: "informations non valides veuillez réessayez"})
@@ -47,25 +48,29 @@ export default function Registration() {
     <div className="containerR">
       <div className="form-box register">
         <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <h1>Registration</h1>
-          <div className="input-box">
-            <input type="text" placeholder="Username" required {...register("fullName",{required : true})} />
+          <h1>Organizer Registration</h1>
+          <div className="input-boxx">
+            <input type="text" placeholder="Username" required {...register("name",{required : true})} />
             <FontAwesomeIcon icon={faUser} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
             {/* <i className="bx bxs-user"></i> */}
           </div>
-          <div className="input-box">
+          <div className="input-boxx">
+            <input type="text" placeholder="FullName" required {...register("fullName",{required : true})} />
+            <FontAwesomeIcon icon={faUser} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
+            {/* <i className="bx bxs-user"></i> */}
+          </div>
+          <div className="input-boxx">
             <input type="email" placeholder="Email" required {...register("email", {required: true})} />
             <i className="bx bxs-envelope"></i>
             <FontAwesomeIcon icon={faEnvelope} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
           </div>
-          <div className="input-box">
+          <div className="input-boxx">
             <input type="password" placeholder="Password" required {...register("password", {required: true})} />
             <i className="bx bsx-lock-alt"></i>
             <FontAwesomeIcon icon={faLock} className="bx bxs-envelope font-icon" ></FontAwesomeIcon>
-
           </div>
           <div className="forgot-link">
-            <a onClick={()=>{router.push('/login')}} href="#">Avez-vous déjà un compte? cliquez ici</a>
+            <a href="http://localhost:5173/#/login">Avez-vous déjà un compte? cliquez ici</a>
           </div>
           <button type="submit" className="btn">Register</button>
           <p>ou s'enregistrer avec</p>
