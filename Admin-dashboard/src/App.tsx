@@ -60,7 +60,7 @@ const App = () => (
       name="users"
       list={UserList}
       edit={UserEdit}
-      // create={UserCreate}
+      show={UserShow}
     />
     <Resource
       name="reservations"
