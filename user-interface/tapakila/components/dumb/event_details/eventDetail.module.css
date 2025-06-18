@@ -145,7 +145,7 @@
       rgba(0, 0, 0, 0.632) 10%,
       rgba(0, 0, 0, 0.078)
     ),
-    url("../../../public/ticket-motif.png");
+    url("/ticket-motif.png");
   /* background-color: #fff; */
   background-size: auto;
   /* height: 100dvh; */

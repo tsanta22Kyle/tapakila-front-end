@@ -342,7 +342,7 @@ a {
       rgba(0, 0, 0, 0.005) 40%,
       rgb(0, 0, 0)
     ),
-    url("../../public/ticket-motif.png");
+    url("/ticket-motif.png");
   background-size: auto;
   background-repeat: repeat;
 }
