@@ -1,14 +1,14 @@
 .cartButton{
     position: fixed;
     background: #1db954;
-    bottom: 10dvh;
+    bottom: 10vh;
     color: #ffffff;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     display: grid;
     place-content: center;
-    right: 10dvh;
+    right: 10vh;
     cursor: pointer;
     z-index: 100;
     box-shadow: 0px 0px 20px rgb(68, 68, 68);
@@ -55,18 +55,18 @@
       rgb(0, 0, 0)
     ),
     url("../../../public/ticket-motif.png");
-    padding-top: 5dvh;
-    height: 100dvh;
+    padding-top: 5vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 20px;
 }
 .container h2{
     /* background: #7eb7e6; */
     width: 50%;
-    height: 10dvh;
+    height: 10vh;
     /* border: gray 1px solid; */
     border-bottom: #fefefe solid 1px;
     letter-spacing: 10px;
@@ -81,7 +81,7 @@
 .empty{
     width: 50%;
     /* background: #653333; */
-    height: 40dvh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,7 +104,7 @@
     align-items: center;
     /* justify-content: center; */
     gap: 15px;
-    height: 59.5dvh;
+    height: 59.5vh;
     overflow-y: scroll;
    /* padding-top: 90px; */
    /* padding-bottom: 100px; */
@@ -171,7 +171,7 @@ border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.253);
 }
 .delete{
-    /* background: #eeeeee3c; */
+ 
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -183,7 +183,7 @@ border-radius: 10px;
 .transaction{
     position: fixed;
     bottom: 0;
-    height: 25dvh;
+    height: 25vh;
     width: 100%;
     background: #000;
     display: flex;
@@ -208,7 +208,7 @@ border-radius: 10px;
 }
 
 .buy{
-    width: 15dvw;
+    width: 15vw;
     background: #000;
     height: 60px;
     border-radius: 10px;

@@ -118,7 +118,7 @@ export default function Profile() {
           <header className="dashboard-header">
             <h1>Tableau de Bord</h1>
             <div className="user-profile">
-              {/* <img
+              <img
                 src={authUser.avatar || "https://via.placeholder.com/50"}
                 alt="Photo de profil"
                 className="profile-pic"
