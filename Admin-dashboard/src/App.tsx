@@ -1,4 +1,4 @@
-import { Admin, LoginWithEmail, Resource } from "react-admin";
+import { Admin, defaultDarkTheme, defaultLightTheme, LoginWithEmail, Resource } from "react-admin";
 import EventIcon from "@mui/icons-material/Event";
 import { EventList } from "./components/events/EventList";
 import { EventCreate } from "./components/events/EventCreate";
@@ -14,15 +14,31 @@ import { AppDataprovider } from "./providers/App_DataProvider";
 import { ticketShow } from "./components/tickets/Ticket_show";
 import { TicketEdit } from "./components/tickets/TicketUpdate";
 import { authProvider } from "./providers/authProvider";
-import { UserCreate } from "./components/user/UserCreate";
+// import { UserCreate } from "./components/user/UserCreate";
 import { EventEdit } from "./components/events/EventEdit";
 import { ReservationList } from "./components/reservations/ReservationsList";
+import CustomLayout from "./Layout/MyLayout";
 
+const customDarkTheme = {
+  ...defaultDarkTheme,
+  palette: {
+    ...defaultDarkTheme.palette,
+    background: {
+      default: "#fffff",
+      paper : "#171E2C" 
+    },
+  },
+};
 const App = () => (
   <Admin
+  layout={CustomLayout}
     dataProvider={AppDataprovider}
     authProvider={authProvider} // Add auth provider
     loginPage={LoginWithEmail}
+    darkTheme={customDarkTheme}
+    lightTheme={defaultLightTheme}
+    // layout={MyLayout}
+    
   >
     <Resource
       name="events"

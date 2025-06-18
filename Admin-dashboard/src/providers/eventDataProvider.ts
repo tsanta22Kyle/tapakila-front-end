@@ -32,8 +32,10 @@ export const eventDataProviders: DataProvider = {
     resource = "events",
     params: GetListParams & QueryFunctionContext,
   ): Promise<GetListResult<RecordType>> {
-    const { data: res }: { data: { data: { data: any[]; meta: any } } } =
-      await apiFetch.get(`${resource.toLowerCase()}`);
+    const { page, perPage } = params.pagination;
+    const url = `${resource.toLowerCase()}?page=${page}&pageSize=${perPage}`;
+    const { data: res }: { data: { data: { data: any[] } } } =
+      await apiFetch.get(url);
 
     // console.log(res.data.data);
     const data: GetListResult = {

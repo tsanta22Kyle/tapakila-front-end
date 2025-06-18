@@ -47,7 +47,7 @@ export const authProvider: AuthProvider = {
       const { data: res } = await apiFetch.get("me");
       console.log(res.user)
       const user = res.user;
-      return { id: user.id, fullName: user.fullName || user.email };
+      return { id: user.id, fullName: user.fullName || user.email,avatar : user.avatarUrl };
     } catch (error) {
       return Promise.reject();
     }
