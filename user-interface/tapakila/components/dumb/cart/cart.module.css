@@ -49,12 +49,12 @@
 
     width: 100%;
     /* background: #747474; */
-    background-image: linear-gradient(
+    /* background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.492) 40%,
       rgb(0, 0, 0)
     ),
-    url("../../../public/ticket-motif.png");
+    url("../../../public/ticket-motif.png"); */
     padding-top: 5vh;
     height: 100vh;
     display: flex;
