@@ -54,7 +54,7 @@
       rgba(0, 0, 0, 0.492) 40%,
       rgb(0, 0, 0)
     ),
-    url("../../../public/ticket-motif.png"); */
+    url("/ticket-motif.png"); */
     padding-top: 5vh;
     height: 100vh;
     display: flex;
