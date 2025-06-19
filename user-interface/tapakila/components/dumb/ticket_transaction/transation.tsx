@@ -117,9 +117,13 @@ function TransactionDetail({ ticketId }) {
         <div
           onClick={() => {
 
-             user == null || user.role == "admin" || user.role == "organizer"
-              ? toast("non connecté")
-              : addToCart(countLimit);  
+             if(user == null || user.role == "admin" || user.role == "organizer"){
+               toast("non connecté")
+              }else{
+
+                addToCart(countLimit);  
+              }
+
             changePage();
           }}
           className={`${style.buy} ${
