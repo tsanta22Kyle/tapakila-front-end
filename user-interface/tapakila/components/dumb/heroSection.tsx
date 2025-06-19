@@ -1,10 +1,7 @@
-"use client";
-
+"use client";;
+import { Event } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Event } from "@/app/page";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTicket, faTicketSimple } from "@fortawesome/free-solid-svg-icons";
-import icon from "../../public/ticket (1).png";
+
 function HeroSection({ popularEvents }: { popularEvents: Array<Event> }) {
  
   useEffect(() => {

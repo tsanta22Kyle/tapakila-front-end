@@ -1,30 +1,27 @@
-"use client";
-
+"use client";;
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import axios from "axios";
 import { useMemo, useState } from "react";
 
-import { apiTapakila } from "@/app/login/page"; // Your configured API client
+import { api_url, apiTapakila } from "@/lib/api";
 import LoadingFetch from "../dumb/backend_error/loading";
 import BackendError from "../dumb/backend_error/backend_error";
 import "./profile.css";
 import useAuth from "../../globalStores/useAuth";
-import { apiUrl } from "@/app/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 
-type User = {
-  id: string;
-  fullName: string;
-  email: string;
-  avatar?: string;
-};
+// type User = {
+//   id: string;
+//   fullName: string;
+//   email: string;
+//   avatar?: string;
+// };
 
 type Ticket = {
-  ticket: any;
-  category: any;
+  ticket: object;
+  category: object;
   id: string;
   eventName: string;
   eventDate: string;
@@ -51,7 +48,7 @@ export default function Profile() {
     );
     return res.data;
   });
-
+//@ts-expect-error may be null
   const tickets = ticketsData?.data?.data || [];
   const filteredTickets = useMemo(() => {
     if (filter === "all") return tickets;
@@ -92,6 +89,7 @@ export default function Profile() {
       }
       // Optimistic UI update
       
+    
       mutate(
         tickets.filter((ticket) => ticket.id !== deletedId),
         false
@@ -194,24 +192,27 @@ function TicketCard({
   ticket: Ticket;
   onCancel: (id: string) => void;
 }) {
-
+//@ts-expect-error may be null
   const eventId = ticket?.ticket?.eventId;
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 
   const { data: eventData, error: eventError } = useSWR(
-    eventId ? `${apiUrl}events/${eventId}` : null, 
+    eventId ? `${api_url}events/${eventId}` : null, 
     fetcher
   );
-  if (!eventData && eventId) return <div>Chargement de l'événement...</div>;
+  if (!eventData && eventId) return <div>Chargement de l&apos;événement...</div>;
   if (eventError) return <div>Erreur événement</div>;
 
   console.log("ticket",eventData);
   
   return (
     <div className={`ticket-card ${ new Date(
+      //@ts-expect-error may be null
       ticket.ticket.date.slice(0, 4),
+      //@ts-expect-error may be null
       ticket.ticket.date.slice(5, 7),
+      //@ts-expect-error may be null
       ticket.ticket.date.slice(8, 10)
     ) > new Date() ? "upcoming" : "past"}`}>
       <div className="ticket-header">
@@ -220,7 +221,9 @@ function TicketCard({
       </div>
       <div className="ticket-details">
         <p>
-          <strong> {eventData.data.title} - {ticket.ticket.category}</strong> 
+          <strong> {eventData.data.title} - {
+          //@ts-expect-error may be null
+          ticket.ticket.category}</strong> 
         </p>
         {eventData.data.place && (
           <p className="desc">
@@ -229,13 +232,18 @@ function TicketCard({
         )}
         {ticket.reservationDate && (
           <p>
-            <strong>Réservé le:</strong> {ticket.ticket.date}
+            <strong>Réservé le:</strong> {
+            //@ts-expect-error may be null
+            ticket.ticket.date}
           </p>
         )}
       </div>
       {new Date(
+        //@ts-expect-error may be null
       ticket.ticket.date.slice(0, 4),
+      //@ts-expect-error may be null
       ticket.ticket.date.slice(5, 7),
+      //@ts-expect-error may be null
       ticket.ticket.date.slice(8, 10)
     ) > new Date() && (
         <button className="btn btn-cancel" onClick={() => onCancel(ticket.id)}>

@@ -35,7 +35,7 @@
     display: grid;
     font-weight: 550;
     place-content: center;
-    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+   
     padding: 5px;
     border-radius: 50%;
 }
@@ -45,16 +45,7 @@
     transition: all 1.5s;
 }
 .container{
-    /* margin: auto; */
-
     width: 100%;
-    /* background: #747474; */
-    /* background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.492) 40%,
-      rgb(0, 0, 0)
-    ),
-    url("/ticket-motif.png"); */
     padding-top: 5vh;
     height: 100vh;
     display: flex;
@@ -64,10 +55,8 @@
     gap: 20px;
 }
 .container h2{
-    /* background: #7eb7e6; */
     width: 50%;
     height: 10vh;
-    /* border: gray 1px solid; */
     border-bottom: #fefefe solid 1px;
     letter-spacing: 10px;
     text-align: center;
@@ -76,11 +65,9 @@
     display: grid;
     place-content: center;
     font-size: 1rem;
-    /* justify-self: start; */
 }
 .empty{
     width: 50%;
-    /* background: #653333; */
     height: 40vh;
     display: flex;
     flex-direction: column;
@@ -102,19 +89,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     gap: 15px;
     height: 59.5vh;
     overflow-y: scroll;
-   /* padding-top: 90px; */
-   /* padding-bottom: 100px; */
-    /* background: #925353; */
-    /* z-index: 99; */
     padding: 20px;
 }
 
 .ticket{
-    /* background: #ff7272; */
     width: 75%;
     min-height: 100px;
     display: flex;

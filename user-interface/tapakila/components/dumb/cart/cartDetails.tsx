@@ -1,20 +1,11 @@
-"use client";
+"use client";;
 import { useStore } from "../../../globalStores/globalStores";
 import style from "./cart.module.css";
 import { formatDate } from "../event";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronCircleLeft,
-  faDumbbell,
-  faFaceFlushed,
-  faHourglass,
-  faHourglass3,
-  faTrashCan,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronCircleLeft, faHourglass3, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { apiUrl } from "@/app/page";
-import { apiTapakila } from "@/app/login/page";
+import { apiTapakila } from "@/lib/api";
 import toast from "react-hot-toast";
 
 const formatter = new Intl.NumberFormat("en-GB", {
@@ -44,6 +35,8 @@ function CartDetails() {
             (item = {
               ticketId: item.id,
               quantity: item.quantity,
+              event:item.event,
+              date: item.date
             })
         ),
       ],
@@ -78,11 +71,17 @@ function CartDetails() {
               <p className={style.desc}>
                 {formatDate(
                   new Date(
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(0, 4),
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(5, 7),
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(8, 10),
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(11, 13),
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(14, 16),
+                    // @ts-expect-error event might be undefined during fetch
                     ticket.date.slice(17, 19)
                   )
                 )}
@@ -122,6 +121,7 @@ function CartDetails() {
           <div className={style.total}>
             {formatter.format(
               cartItems.reduce(
+                //@ts-expect-error ilaina
                 (acc, curr) => acc + curr.quantity * curr.price,
                 0
               )

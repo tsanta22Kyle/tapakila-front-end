@@ -1,4 +1,4 @@
-import { apiTapakila } from "@/app/login/page";
+import { apiTapakila } from "@/lib/api";
 import { useEffect, useState } from "react";
 
 export default function useAuth() {

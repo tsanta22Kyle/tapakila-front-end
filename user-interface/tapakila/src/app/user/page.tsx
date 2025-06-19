@@ -13,7 +13,7 @@ const poppins = Poppins({
   subsets: ['latin'],
 });
 
-export default function UserPage({ params }: { params: { slug: string } }) {
+export default function UserPage() {
   const router = useRouter();
   const { user: userInfo, isLoading: isLoadingInfo } = useAuth();
   const [isClient, setIsClient] = useState(false);

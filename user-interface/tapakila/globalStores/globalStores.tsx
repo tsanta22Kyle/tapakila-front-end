@@ -1,6 +1,7 @@
+import { CartStore, Ticket } from '@/lib/types'
 import {create} from 'zustand'
-import { Ticket } from '@/app/page'
-export const useStore = create((set)=>({
+
+export const useStore = create<CartStore>((set)=>({
     cartItems : [],
     addItem : (item: Ticket)=> set((state: { cartItems: Ticket[] })=>({
         cartItems : [...state.cartItems,item] 

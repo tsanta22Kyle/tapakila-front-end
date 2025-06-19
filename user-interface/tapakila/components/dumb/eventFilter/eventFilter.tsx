@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
 import "./EventFilter.css"
-import { apiUrl } from "@/app/page";
 import useSWR from "swr";
 import LoadingFetch from "../backend_error/loading";
 import Backend_error from "../backend_error/backend_error";
 import { useRouter } from "next/navigation";
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  place: string;
-  category: string;
-}
+import { api_url } from "@/lib/api";
+// interface Event {
+//   id: number;
+//   title: string;
+//   date: string;
+//   place: string;
+//   category: string;
+// }
 
 // const events: Event[] = [
 //   { id: 1, title: "Concert Rock", date: "2025-04-10", place: "Paris", category: "Musique" },
@@ -27,7 +27,7 @@ export default function EventFilter() {
   const [filters, setFilters] = useState({ date: "", place: "", category: "" });
   const router = useRouter()
   
-  const {data:eventsData,error,isLoading} = useSWR(apiUrl+'events',fetcher);
+  const {data:eventsData,error,isLoading} = useSWR(api_url+'events',fetcher);
   const events = eventsData.data.data;
   console.log("events",events[0].date.slice(0,10));
   

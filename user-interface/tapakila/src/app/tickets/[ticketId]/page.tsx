@@ -1,8 +1,4 @@
-"use client"
-
-import useSWR from "swr";
-import { apiUrl } from "@/app/page";
-
+"use client";
 import { Poppins } from "next/font/google";
 import Navbar from "../../../../components/dumb/navbar";
 import TransactionDetail from "../../../../components/dumb/ticket_transaction/transation";

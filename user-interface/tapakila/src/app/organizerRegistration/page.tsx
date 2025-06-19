@@ -1,10 +1,8 @@
-"use client";
+"use client";;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./oRegister.css"
-// import 'boxicons'
-import { useRouter } from "next/navigation";
 import {useForm} from "react-hook-form"
-import { apiTapakila } from "../login/page";
+import { apiTapakila } from "@/lib/api";
 
 // import 'boxicons'
 
@@ -16,7 +14,6 @@ type RegisterFormInputs = {
 }
 
 import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 // import 'boxicons'
 
@@ -25,9 +22,7 @@ export default function Registration() {
     register,
     handleSubmit,
     setError,
-    formState: {errors},
   } = useForm<RegisterFormInputs>();
-  const router = useRouter();
 
   const onSubmit = async (data: RegisterFormInputs) => {
     try {
@@ -38,7 +33,7 @@ export default function Registration() {
       window.location.href = "http://localhost:5173/#/login";
     }
     catch (err) {
-      setError("root", { message: "informations non valides veuillez réessayez"})
+      setError("root", { message: "informations non valides veuillez réessayez"+err})
     }
   }
 

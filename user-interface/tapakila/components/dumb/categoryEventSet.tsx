@@ -1,12 +1,13 @@
 "use client"
-import { Event } from "@/app/page";
+
+import { Event } from "@/lib/types";
 import AnEvent from "./event";
 import { useRef, useState } from "react";
 function ByCategoryEvents({
   category,
   eventList,
 }: {
-  category: String;
+  category: string;
   eventList: Array<Event>;
 }) {
   const containerRef = useRef(null);
@@ -54,7 +55,7 @@ function ByCategoryEvents({
             eventTitle={event.title}
             image={event.img}
             location={event.place}
-            price={0}
+           
           ></AnEvent>
         ))}
        

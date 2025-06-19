@@ -1,10 +1,19 @@
 
 
-"use client"
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../src/app/globals.css";
-import { faHeart ,faFootball ,faRunning,faPalette,faBook,faLandmark,faGifts,faMicrophoneAlt,faGuitar,faMask} from "@fortawesome/free-solid-svg-icons";
-import { get } from "http";
+import {
+  faHeart,
+  faFootball,
+  faRunning,
+  faPalette,
+  faBook,
+  faGifts,
+  faMicrophoneAlt,
+  faGuitar,
+  faMask,
+} from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 const days = [
   "dimanche",
@@ -44,11 +53,11 @@ export function AnEvent({
   date,
   category,
   image,
-  price,
+ 
 }: {
   eventId: string;
   eventTitle: string;
-  price: Number;
+
   image: string;
   category: string;
   location: string;

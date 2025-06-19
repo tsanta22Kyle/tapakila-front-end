@@ -1,12 +1,8 @@
 "use client";
-import Image from "next/image";
-import axios from "axios";
-import AnEvent from "../../components/dumb/event";
+
 import ByCategoryEvents from "../../components/dumb/categoryEventSet";
-import { useEffect, useState } from "react";
 import HeroSection from "../../components/dumb/heroSection";
 import Navbar from "../../components/dumb/navbar";
-import { apiTapakila } from "./login/page";
 import { Poppins } from "next/font/google";
 import useSWR from "swr";
 import Backend_error from "../../components/dumb/backend_error/backend_error";
@@ -15,9 +11,8 @@ import CartButton from "../../components/dumb/cart/cartButton";
 import useAuth from "../../globalStores/useAuth";
 import Footer from "../../components/dumb/footer/footer";
 import EventFilter from "../../components/dumb/eventFilter/eventFilter";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import OrgEventSection from "../../components/dumb/org/org_section";
+import { api_url } from "@/lib/api";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const poppins = Poppins({
@@ -25,43 +20,17 @@ const poppins = Poppins({
   subsets: ["latin"], // Choisissez les sous-ensembles
 });
 
-export enum Category {
-  VIP,
-  Standard,
-  EarlyBird,
-}
 
-export type Ticket = {
-  id: string;
-  availability: boolean;
-  category: Category;
-  price: number;
-};
 
-export type Event = {
-  user: any;
-  id: string;
-  title: string;
-  description: string;
-  place: string;
-  date: Date;
-  organisator: string;
-  category: string;
-  img: string;
-  createdAt: Date;
-  updatedAt: Date;
-  tickets: Ticket[];
-};
-
-export const apiUrl = "http://localhost:3333/api/v1/";
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR(apiUrl + "events", fetcher, {
+  const { data, error, isLoading } = useSWR(api_url + "events", fetcher, {
     refreshInterval: 6000,
   });
 
-  const { user, loading } = useAuth();
-
+  const { user, isLoading :loading } = useAuth();
+  console.log(user);
+  
   if (isLoading) return <LoadingFetch></LoadingFetch>;
   if (error) return <Backend_error></Backend_error>;
 

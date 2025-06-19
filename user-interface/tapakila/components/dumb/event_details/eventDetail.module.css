@@ -1,13 +1,13 @@
 .details {
   margin-top: 13dvh;
-  /* background: #fff352; */
+
   width: 100dvw;
   height: 60dvh;
   color: white;
   position: relative;
   display: flex;
   align-items: center;
-  /* padding-left: 20%; */
+
   justify-content: space-around;
   flex-direction: column;
 }
@@ -17,21 +17,15 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  /* width: 390px; */
-  /* background: rosybrown; */
 }
 .info .organizer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  /* width: 70px; */
-
 }
 .details .desc {
   z-index: 70;
-  /* background-image: linear-gradient(to top , rgba(0, 0, 0, 0.005) 40% , rgba(0, 0, 0, 0.382)),url("../../../public/ticket-motif.png"); */
-
   width: 100%;
   position: absolute;
   bottom: -130px;
@@ -44,20 +38,10 @@
 .details .desc h2 {
   font-size: 4rem;
 }
-/* .details::after{
-    content: " ";
-    width: 100%;
-    height: 70%;
-    /* background: linear-gradient(to top , rgba(0, 0, 0, 0.416) 40% , rgba(0, 0, 0, 0.312)),url("../../../public/ticket-motif.png"); */
-/* z-index: 50;
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(180deg, #000000d5 0%, #000000 100%);
-  
-} */
+
 .desc .info {
   display: flex;
-  /* background: #a14545; */
+
   width: 50%;
   align-items: center;
   justify-content: center;
@@ -99,11 +83,10 @@
   height: 100%;
   top: 0;
   left: 0;
-  /* border-radius: 7px; */
+ 
   object-fit: cover;
 
-  /* filter: blur(10px); */
-  /* backdrop-filter: blur(100px); */
+ 
 }
 .details::after {
   content: " ";
@@ -114,17 +97,16 @@
   top: 0;
   left: 0;
   z-index: 10;
-  /* background: linear-gradient(180deg, #000000d5 0%, #000000 100%); */
+
 
   background: linear-gradient(to top, rgb(0, 0, 0) 1%, rgba(0, 0, 0, 0.315));
 }
 
 .thumbnail {
-  /* position: absolute; */
+ 
   right: 10%;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.327);
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
-  /* border: 2px solid #ffffff; */
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 12px;
   bottom: 20%;
@@ -146,15 +128,14 @@
       rgba(0, 0, 0, 0.078)
     ),
     url("/ticket-motif.png");
-  /* background-color: #fff; */
+  
   background-size: auto;
-  /* height: 100dvh; */
+
   background-repeat: repeat;
   font-family: "Poppins", sans-serif;
 }
 
 .tickets {
-  /* background: rosybrown; */
   margin-top: 25dvh;
   display: flex;
   flex-direction: column;
@@ -170,11 +151,10 @@
   width: 100%;
 }
 .title {
-  /* background: #000; */
+
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  /* border: #ffffff solid 1px; */
 }
 .title p:nth-child(1) {
   font-size: 4rem;
@@ -272,7 +252,7 @@
 .active{
   display: flex;
   color: #1db954;
-  /* background-color:linear-gradient(45deg, #32CD32, #1E90FF); */
+ 
   align-items: center;
   width: 65px;
   border-radius: 20px;
@@ -283,7 +263,7 @@
 .inactive{
   display: flex;
   color: #b3b3b3;
-  /* background-color:linear-gradient(45deg, #32CD32, #1E90FF); */
+  
   align-items: center;
   width: 65px;
   border-radius: 20px;

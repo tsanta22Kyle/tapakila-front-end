@@ -8,7 +8,7 @@ export const eventCategory = [
 
     "foires","loisirs","arts","littérature","concerts"
   ]
-function Dropdown({ Array }: { Array: string[] }) {
+function Dropdown() {
 
   const [isVisible ,setIsVisible] = useState(false)
 

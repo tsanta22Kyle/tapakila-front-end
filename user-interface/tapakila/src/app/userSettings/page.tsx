@@ -37,7 +37,7 @@ export default function UserSettings() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       router.refresh(); // Refresh the page to get latest data
     } catch (err) {
-      setError('Failed to save settings. Please try again.');
+      setError('Failed to save settings. Please try again.'+err);
     } finally {
       setIsSaving(false);
     }

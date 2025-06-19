@@ -1,39 +1,32 @@
-"use client";
+"use client";;
 import { ChangeEvent, useEffect, useState } from "react";
-import ticketLogo from "../../public/ticketlogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleUp,
   faArrowRightFromBracket,
   faBars,
-  faBell,
-  faBurger,
   faCalendarDay,
-  faCaretDown,
-  faCaretUp,
   faChevronDown,
   faCircle,
   faCircleUser,
   faGear,
   faSearch,
-  faUpDown,
   faUserGear,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import Dropdown from "./dropdown_nav/nav_dropdown";
 import { io } from "socket.io-client";
-import { title } from "process";
-import SocketTest from "./realtime_search/socket_test";
 import useAuth from "../../globalStores/useAuth";
-import { apiTapakila } from "@/app/login/page";
+import { apiTapakila } from "@/lib/api";
+// import { apiTapakila } from "@/app/login/page";
 
 function Navbar({ mode }: { mode: string }) {
   const socket = io("http://localhost:3333", {
     transports: ["websocket"],
     withCredentials: true,
   });
-  const { isLoading, user } = useAuth();
+  const { user } = useAuth();
   
   const router = useRouter();
   const [isClicked, setisClicked] = useState(false);
@@ -74,7 +67,7 @@ function Navbar({ mode }: { mode: string }) {
   }
 
   function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
-    let value = event.target.value;
+    const value = event.target.value;
     setSearch(value);
     socket.emit("events:index", { title: search });
   }
@@ -319,7 +312,7 @@ function Navbar({ mode }: { mode: string }) {
           ))}
         </div>
       </div>
-      <Dropdown Array={[]}></Dropdown>
+      <Dropdown></Dropdown>
     </nav>
   );
 }

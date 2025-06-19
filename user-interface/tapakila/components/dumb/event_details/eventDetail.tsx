@@ -1,5 +1,4 @@
-"use client"
-import { Category, Event } from "@/app/page";
+"use client";
 import style from "./eventDetail.module.css";
 import useSWR from "swr";
 import { formatDate } from "../event";
@@ -15,18 +14,16 @@ import {
   faFaceSadTear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter ,usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
+import { Event } from "@/lib/types";
 // import { useRouter } from "next/navigation";
-
-
 
 function EventDetail({ id }: { id: string }) {
   const pathname = usePathname();
-  const router = useRouter();
   // Hook de récupération des données via SWR
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "http://localhost:3333/api/v1/events/"+id,
+    "http://localhost:3333/api/v1/events/" + id,
     fetcher
   );
   if (isLoading) return <div>Chargement...</div>;
@@ -34,14 +31,11 @@ function EventDetail({ id }: { id: string }) {
   const event: Event = data.data;
   const tickets = event.tickets;
   // console.log("events : ",event);
-  
+
   // console.log("tickets : ",tickets)
 
-  const imageUrl =
-    "https://img.freepik.com/vecteurs-libre/chef-orchestre-musiciens-debout-modele-flyer-plat-scene-theatre_74855-13485.jpg?t=st=1742387630~exp=1742391230~hmac=0714c3d3cf71f01223231b263310e04c62f1726bd57912c508323e99fe040d55&w=740";
   const imageUrl2 =
     "https://img.freepik.com/vecteurs-premium/foule-fete-cocktail-buvant-martini-vacances-boite-nuit-affiche-bar-restaurant-celebration_353502-742.jpg?w=996";
-  const proxyUrl = `http://localhost:8080/` + imageUrl2;
   return (
     <div key={pathname} className={style.container}>
       <div className={style.details}>
@@ -70,7 +64,13 @@ function EventDetail({ id }: { id: string }) {
                 icon={faUserGroup}
                 className="fas green"
               ></FontAwesomeIcon>
-              <p>{event.user.fullName}</p>
+
+              <p>
+                {
+                  //@ts-expect-error may be null
+                  event.user.fullName
+                }
+              </p>
             </div>
           </div>
           <div className={style.actions}>
@@ -79,7 +79,7 @@ function EventDetail({ id }: { id: string }) {
                 icon={faHeartCirclePlus}
                 className="fas "
               ></FontAwesomeIcon>
-              <p>ça m'intéresse</p>
+              <p>ça m&apos;intéresse</p>
             </div>
             <div>
               <p>partager</p>
@@ -106,7 +106,8 @@ function EventDetail({ id }: { id: string }) {
             <div className={style.alert}>
               <p>Alertes</p>
               <p>
-                Reçois des notifications lorsqu'un billet devient disponible
+                Reçois des notifications lorsqu&apos;un billet devient
+                disponible
               </p>
             </div>
             <div className={style.disabled}>
@@ -120,30 +121,43 @@ function EventDetail({ id }: { id: string }) {
           </div>
         </div>
         <div className={style.list}>
-          <h2>Billets d'entrée</h2>
-          <ul className={ `${tickets.length == 0 ?style.none:style.display}`} >
-            {
-              
-              tickets.map((ticket,index)=>
-            <TicketItem
-            key={index}
-              id={ticket.id}
-              title={ticket.category}
-              eventId={event.id}
-              stock={
-                ticket.quantity
-              }
-              date={formatDate(new Date(ticket.date.slice(0,4),ticket.date.slice(5,7),ticket.date.slice(8,10),ticket.date.slice(11,13),ticket.date.slice(14,16),ticket.date.slice(17,19)))}
+          <h2>Billets d&apos;entrée</h2>
+          <ul className={`${tickets.length == 0 ? style.none : style.display}`}>
+            {tickets.map((ticket, index) => (
+              <TicketItem
+                key={index}
+                id={ticket.id}
+                title={ticket.category}
+                //@ts-expect-error may be null
+                eventId={event.id}
+                stock={ticket.quantity}
+                date={formatDate(
+                  new Date(
+                    //@ts-expect-error may be null
+                    ticket.date.slice(0, 4),
+                    //@ts-expect-error may be null
+                    ticket.date.slice(5, 7),
+                    //@ts-expect-error may be null
+                    ticket.date.slice(8, 10),
+                    //@ts-expect-error may be null
+                    ticket.date.slice(11, 13),
+                    //@ts-expect-error may be null
+                    ticket.date.slice(14, 16),
+                    //@ts-expect-error may be null
+                    ticket.date.slice(17, 19)
+                  )
+                )}
               ></TicketItem>
-            )
-          }
-            
-          
+            ))}
           </ul>
-          <div className={`${tickets.length == 0 ?style.notFound:style.none}`} >
+          <div
+            className={`${tickets.length == 0 ? style.notFound : style.none}`}
+          >
             <p>pas de tickets disponibles</p>
-            <FontAwesomeIcon icon={faFaceSadTear} className={`fas ${style.big}`}></FontAwesomeIcon>
-
+            <FontAwesomeIcon
+              icon={faFaceSadTear}
+              className={`fas ${style.big}`}
+            ></FontAwesomeIcon>
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import CartDetails from "../../../components/dumb/cart/cartDetails";
-import Navbar from "../../../components/dumb/navbar";
 
 export default function Cart() {
     return (

@@ -1,6 +1,6 @@
 import style from "../eventDetail.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faT, faTicket, faTicketSimple } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 
 

@@ -1,12 +1,10 @@
-"use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-import { ReactNode, use } from "react";
+"use client";;
+import { use } from "react";
 import "./../../globals.css";
 import EventDetail from "../../../../components/dumb/event_details/eventDetail";
 import Navbar from "../../../../components/dumb/navbar";
 import { Poppins } from "next/font/google";
-import { useRouter,usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import CartButton from "../../../../components/dumb/cart/cartButton";
 
 const poppins = Poppins({
@@ -19,6 +17,7 @@ export default function Home({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  //@ts-expect-error may be null
   const { eventId } = use(params);
   const pathname = usePathname()
 
