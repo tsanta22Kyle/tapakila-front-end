@@ -44,7 +44,7 @@ export default function Profile() {
     mutate,
   } = useSWR<Ticket[]>("userTickets/all", async () => {
     const res = await apiTapakila.get(
-      "http://localhost:3333/api/v1/userTickets/all"
+      api_url+"api/v1/userTickets/all"
     );
     return res.data;
   });

@@ -16,6 +16,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { usePathname } from "next/navigation";
 import { Event } from "@/lib/types";
+import { api_url } from "@/lib/api";
 // import { useRouter } from "next/navigation";
 
 function EventDetail({ id }: { id: string }) {
@@ -23,7 +24,7 @@ function EventDetail({ id }: { id: string }) {
   // Hook de récupération des données via SWR
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "http://localhost:3333/api/v1/events/" + id,
+    api_url+"api/v1/events/" + id,
     fetcher
   );
   if (isLoading) return <div>Chargement...</div>;

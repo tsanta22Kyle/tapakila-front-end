@@ -27,7 +27,7 @@ export default function EventFilter() {
   const [filters, setFilters] = useState({ date: "", place: "", category: "" });
   const router = useRouter()
   
-  const {data:eventsData,error,isLoading} = useSWR(api_url+'events',fetcher);
+  const {data:eventsData,error,isLoading} = useSWR(api_url+'api/v1/events',fetcher);
   const events = eventsData.data.data;
   console.log("events",events[0].date.slice(0,10));
   

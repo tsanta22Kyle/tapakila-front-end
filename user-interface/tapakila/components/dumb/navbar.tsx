@@ -18,11 +18,11 @@ import { useRouter } from "next/navigation";
 import Dropdown from "./dropdown_nav/nav_dropdown";
 import { io } from "socket.io-client";
 import useAuth from "../../globalStores/useAuth";
-import { apiTapakila } from "@/lib/api";
+import { api_url, apiTapakila } from "@/lib/api";
 // import { apiTapakila } from "@/app/login/page";
 
 function Navbar({ mode }: { mode: string }) {
-  const socket = io("http://localhost:3333", {
+  const socket = io(api_url, {
     transports: ["websocket"],
     withCredentials: true,
   });

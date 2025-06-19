@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import useAuth from "../../../globalStores/useAuth";
 import { api_url } from "@/lib/api";
 import { Ticket } from "@/lib/types";
+import toast from "react-hot-toast";
 // import { fetchEvent,  } from "../../../globalStores/ticketStore";
 
 function TransactionDetail({ ticketId }) {
@@ -37,7 +38,7 @@ function TransactionDetail({ ticketId }) {
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data: ticketData, error: ticketError } = useSWR(
-    ticketId ? `${api_url}tickets/${ticketId}` : null,
+    ticketId ? `${api_url}api/v1/tickets/${ticketId}` : null,
     fetcher
   );
 
@@ -45,7 +46,7 @@ function TransactionDetail({ ticketId }) {
   const eventId = ticket?.eventId;
 
   const { data: eventData, error: eventError } = useSWR(
-    eventId ? `${api_url}events/${eventId}` : null,
+    eventId ? `${api_url}api/v1/events/${eventId}` : null,
     fetcher
   );
 
@@ -115,7 +116,10 @@ function TransactionDetail({ ticketId }) {
         <p className={style.price}>{ticket.price * countLimit} MGA</p>
         <div
           onClick={() => {
-            addToCart(countLimit);
+
+             user == null || user.role == "admin" || user.role == "organizer"
+              ? toast("non connecté")
+              : addToCart(countLimit);  
             changePage();
           }}
           className={`${style.buy} ${

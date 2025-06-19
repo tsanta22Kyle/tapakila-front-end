@@ -24,7 +24,7 @@ const poppins = Poppins({
 
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR(api_url + "events", fetcher, {
+  const { data, error, isLoading } = useSWR(api_url + "api/v1/events", fetcher, {
     refreshInterval: 6000,
   });
 
