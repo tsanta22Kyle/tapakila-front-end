@@ -18,6 +18,7 @@ import { authProvider } from "./providers/authProvider";
 import { EventEdit } from "./components/events/EventEdit";
 import { ReservationList } from "./components/reservations/ReservationsList";
 import CustomLayout from "./Layout/MyLayout";
+import { UserShow } from "./components/user/UserShow";
 
 const customDarkTheme = {
   ...defaultDarkTheme,
